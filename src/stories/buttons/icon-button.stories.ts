@@ -13,6 +13,17 @@ type IconButtonProps = {
   iconSize?: string;
   sizeBy: 'height' | 'width';
   onClick?: () => void;
+  showTag?: boolean;
+  tagText?: string;
+  tagWidth?: string;
+  tagPadX?: string;
+  tagTextFontSize?: string;
+  tagTextFontWeight?: string;
+  tagTextFontFamily?: string;
+  tagTextColor?: string;
+  tagTextShadow?: string;
+  tagTextTransform?: string;
+  tagTextAlign?: string;
 };
 
 const meta: Meta<IconButtonProps> = {
@@ -24,27 +35,35 @@ const meta: Meta<IconButtonProps> = {
         component: `
 ### \`<icon-button>\`
 
-A square button web component with an optional icon.
+A flexible icon button with optional tag label.
 
 #### CSS Custom Properties
 
-| Variable                          | Description                                  |
-|----------------------------------|----------------------------------------------|
-| \`--icon-button-comp-height\`      | Height of the component container            |
-| \`--icon-button-comp-width\`       | Width of the component container             |
-| \`--icon-button-size\`             | Size applied based on \`sizeBy\` prop         |
-| \`--icon-button-bg-color\`         | Background color of the button               |
-| \`--icon-button-hover-bg-color\`   | Background color on hover                    |
-| \`--icon-button-icon-size\`        | Size of the icon image inside the button    |
+| Variable                              | Description                                      |
+|--------------------------------------|--------------------------------------------------|
+| \`--icon-button-comp-height\`          | Container height                                |
+| \`--icon-button-comp-width\`           | Container width                                 |
+| \`--icon-button-size\`                 | Button size (based on \`sizeBy\`)                |
+| \`--icon-button-bg-color\`             | Button background color                          |
+| \`--icon-button-hover-bg-color\`       | Button hover background color                    |
+| \`--icon-button-icon-size\`            | Icon image size inside the button                |
+| \`--icon-button-tag-width\`            | Width of the tag                                 |
+| \`--icon-button-tag-padx\`             | Horizontal padding of the tag text               |
+| \`--icon-button-tag-font-size\`        | Font size of the tag text                        |
+| \`--icon-button-tag-font-weight\`      | Font weight of the tag text                      |
+| \`--icon-button-tag-font-family\`      | Font family of the tag text                      |
+| \`--icon-button-tag-color\`            | Tag text color                                   |
+| \`--icon-button-tag-text-shadow\`      | Tag text shadow                                  |
+| \`--icon-button-tag-text-transform\`   | Tag text transform (e.g., uppercase)             |
+| \`--icon-button-tag-text-align\`       | Tag text alignment                               |
 
 #### Shadow DOM Parts
 
-This component exposes the following Shadow DOM parts for external styling (use predefined props instead of styling parts):
-
-| Part Name | Element               | Description                     |
-|-----------|-----------------------|---------------------------------|
-| \`button\` | Inner \`<button>\`       | The clickable button element     |
-| \`icon\`   | \`<img>\` inside button | The icon image inside the button |
+| Part Name | Element         | Description                   |
+|-----------|------------------|-------------------------------|
+| \`button\` | \`<button>\`      | The button element            |
+| \`icon\`   | \`<img>\`         | The icon image inside button  |
+| \`tag-text\` | \`<span>\`     | The tag/label element         |
         `,
       },
     },
@@ -53,96 +72,95 @@ This component exposes the following Shadow DOM parts for external styling (use 
   argTypes: {
     compHeight: {
       control: 'text',
-      name: 'compHeight',
-      description: 'Height of the component container',
-      table: {
-        defaultValue: { summary: 'fit-content' },
-        category: 'Props',
-      },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
     },
     compWidth: {
       control: 'text',
-      name: 'compWidth',
-      description: 'Width of the component container',
-      table: {
-        defaultValue: { summary: 'fit-content' },
-        category: 'Props',
-      },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
     },
     buttonSize: {
       control: 'text',
-      name: 'buttonSize',
-      description: 'Size of the button (applied to height or width)',
-      table: {
-        defaultValue: { summary: '30px' },
-        category: 'Props',
-      },
+      table: { defaultValue: { summary: '30px' }, category: 'Props' },
     },
     sizeBy: {
       control: 'radio',
       options: ['height', 'width'],
-      name: 'sizeBy',
-      description:
-        'Controls whether buttonSize is applied to height or width',
-      table: {
-        defaultValue: { summary: 'height' },
-        category: 'Props',
-      },
+      table: { defaultValue: { summary: 'height' }, category: 'Props' },
     },
     buttonColor: {
       control: 'color',
-      name: 'buttonColor',
-      description: 'Background color of the button',
-      table: {
-        defaultValue: { summary: '#eceff1' },
-        category: 'Props',
-      },
+      table: { defaultValue: { summary: '#eceff1' }, category: 'Props' },
     },
     buttonHoverColor: {
       control: 'color',
-      name: 'buttonHoverColor',
-      description: 'Background color on hover',
-      table: {
-        defaultValue: { summary: '#cfd8dc' },
-        category: 'Props',
-      },
+      table: { defaultValue: { summary: '#cfd8dc' }, category: 'Props' },
     },
     iconSrc: {
       control: 'text',
-      name: 'iconSrc',
-      description: 'Path to the icon image (SVG or PNG recommended)',
-      table: {
-        defaultValue: { summary: '' },
-        category: 'Props',
-      },
+      table: { defaultValue: { summary: '' }, category: 'Props' },
     },
     iconAlt: {
       control: 'text',
-      name: 'iconAlt',
-      description: 'Alternative text for the icon image',
-      table: {
-        defaultValue: { summary: 'icon' },
-        category: 'Props',
-      },
+      table: { defaultValue: { summary: 'icon' }, category: 'Props' },
     },
     iconSize: {
       control: 'text',
-      name: 'iconSize',
-      description: 'Size of the icon image inside the button',
+      table: { defaultValue: { summary: '70%' }, category: 'Props' },
+    },
+    showTag: {
+      control: 'boolean',
+      table: { defaultValue: { summary: 'false' }, category: 'Props' },
+    },
+    tagText: {
+      control: 'text',
+      table: { defaultValue: { summary: '' }, category: 'Props' },
+    },
+    tagWidth: {
+      control: 'text',
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+    },
+    tagPadX: {
+      control: 'text',
+      table: { defaultValue: { summary: '10px' }, category: 'Props' },
+    },
+    tagTextFontSize: {
+      control: 'text',
+      table: { defaultValue: { summary: '1rem' }, category: 'Props' },
+    },
+    tagTextFontWeight: {
+      control: 'text',
+      table: { defaultValue: { summary: 'bold' }, category: 'Props' },
+    },
+    tagTextFontFamily: {
+      control: 'text',
       table: {
-        defaultValue: { summary: '70%' },
+        defaultValue: { summary: 'Helvetica, Arial, sans-serif' },
         category: 'Props',
       },
     },
+    tagTextColor: {
+      control: 'color',
+      table: { defaultValue: { summary: 'black' }, category: 'Props' },
+    },
+    tagTextShadow: {
+      control: 'text',
+      table: {
+        defaultValue: { summary: '0px 2px 5px #d0d0d0' },
+        category: 'Props',
+      },
+    },
+    tagTextTransform: {
+      control: 'text',
+      table: { defaultValue: { summary: 'none' }, category: 'Props' },
+    },
+    tagTextAlign: {
+      control: 'text',
+      table: { defaultValue: { summary: 'center' }, category: 'Props' },
+    },
+
     onClick: {
       action: 'clicked',
-      name: 'onClick',
-      description: 'Event fired when the button is clicked',
-      table: {
-        type: { summary: '() => void' },
-        defaultValue: { summary: 'undefined' },
-        category: 'Events',
-      },
+      table: { type: { summary: '() => void' }, category: 'Events' },
       control: false,
     },
   },
@@ -161,6 +179,18 @@ export const Default: StoryFn<IconButtonProps> = (args) => html`
     .iconAlt=${args.iconAlt}
     .iconSize=${args.iconSize}
     .sizeBy=${args.sizeBy}
+    .showTag=${args.showTag}
+    .tagText=${args.tagText}
+    .tagWidth=${args.tagWidth}
+    .tagPadX=${args.tagPadX}
+    .tagTextFontSize=${args.tagTextFontSize}
+    .tagTextFontWeight=${args.tagTextFontWeight}
+    .tagTextFontFamily=${args.tagTextFontFamily}
+    .tagTextColor=${args.tagTextColor}
+    .tagTextShadow=${args.tagTextShadow}
+    .tagTextTransform=${args.tagTextTransform}
+    .tagTextAlign=${args.tagTextAlign}
+    .onClick=${args.onClick}
   ></icon-button>
 `;
 
@@ -174,4 +204,15 @@ Default.args = {
   iconSrc: '/assets/file_copy-48px.svg',
   iconAlt: 'file icon',
   iconSize: '70%',
+  showTag: true,
+  tagText: 'Copy',
+  tagWidth: 'fit-content',
+  tagPadX: '10px',
+  tagTextFontSize: '0.9rem',
+  tagTextFontWeight: '600',
+  tagTextFontFamily: 'Arial, sans-serif',
+  tagTextColor: '#222',
+  tagTextShadow: '0px 2px 5px #bbb',
+  tagTextTransform: 'uppercase',
+  tagTextAlign: 'center',
 };
