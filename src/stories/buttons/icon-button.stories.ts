@@ -205,7 +205,7 @@ Default.args = {
   iconAlt: 'file icon',
   iconSize: '70%',
   showTag: true,
-  tagText: 'Copy',
+  tagText: 'Import/Export',
   tagWidth: 'fit-content',
   tagPadX: '10px',
   tagTextFontSize: '0.9rem',
@@ -213,6 +213,6 @@ Default.args = {
   tagTextFontFamily: 'Arial, sans-serif',
   tagTextColor: '#222',
   tagTextShadow: '0px 2px 5px #bbb',
-  tagTextTransform: 'uppercase',
+  tagTextTransform: 'none',
   tagTextAlign: 'center',
 };
