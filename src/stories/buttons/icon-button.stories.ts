@@ -24,6 +24,7 @@ type IconButtonProps = {
   tagTextShadow?: string;
   tagTextTransform?: string;
   tagTextAlign?: string;
+  tagTextDelay?: string;
 };
 
 const meta: Meta<IconButtonProps> = {
@@ -59,77 +60,91 @@ A flexible icon button with optional tag label.
 
 #### Shadow DOM Parts
 
-| Part Name | Element         | Description                   |
-|-----------|------------------|-------------------------------|
-| \`button\` | \`<button>\`      | The button element            |
-| \`icon\`   | \`<img>\`         | The icon image inside button  |
-| \`tag-text\` | \`<span>\`     | The tag/label element         |
+| Part Name  | Element   | Description                  |
+|------------|-----------|------------------------------|
+| \`button\` | \`<button>\` | The button element          |
+| \`icon\`   | \`<img>\`    | The icon image inside button |
+| \`tag-text\` | \`<span>\` | The tag/label element       |
         `,
       },
     },
   },
-
   argTypes: {
     compHeight: {
       control: 'text',
       table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      description: 'Height of the component container',
     },
     compWidth: {
       control: 'text',
       table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      description: 'Width of the component container',
     },
     buttonSize: {
       control: 'text',
       table: { defaultValue: { summary: '30px' }, category: 'Props' },
+      description: 'Size of the button (height or width depending on sizeBy)',
     },
     sizeBy: {
       control: 'radio',
       options: ['height', 'width'],
       table: { defaultValue: { summary: 'height' }, category: 'Props' },
+      description: 'Whether the button size is controlled by height or width',
     },
     buttonColor: {
       control: 'color',
       table: { defaultValue: { summary: '#eceff1' }, category: 'Props' },
+      description: 'Background color of the button',
     },
     buttonHoverColor: {
       control: 'color',
       table: { defaultValue: { summary: '#cfd8dc' }, category: 'Props' },
+      description: 'Background color of the button on hover',
     },
     iconSrc: {
       control: 'text',
       table: { defaultValue: { summary: '' }, category: 'Props' },
+      description: 'Source URL of the icon image',
     },
     iconAlt: {
       control: 'text',
       table: { defaultValue: { summary: 'icon' }, category: 'Props' },
+      description: 'Alt text for the icon image',
     },
     iconSize: {
       control: 'text',
       table: { defaultValue: { summary: '70%' }, category: 'Props' },
+      description: 'Size of the icon relative to the button',
     },
     showTag: {
       control: 'boolean',
       table: { defaultValue: { summary: 'false' }, category: 'Props' },
+      description: 'Whether to show the tag label',
     },
     tagText: {
       control: 'text',
       table: { defaultValue: { summary: '' }, category: 'Props' },
+      description: 'Text content of the tag label',
     },
     tagWidth: {
       control: 'text',
       table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      description: 'Width of the tag label',
     },
     tagPadX: {
       control: 'text',
       table: { defaultValue: { summary: '10px' }, category: 'Props' },
+      description: 'Horizontal padding inside the tag label',
     },
     tagTextFontSize: {
       control: 'text',
-      table: { defaultValue: { summary: '1rem' }, category: 'Props' },
+      table: { defaultValue: { summary: '90%' }, category: 'Props' },
+      description: 'Font size of the tag label text',
     },
     tagTextFontWeight: {
       control: 'text',
       table: { defaultValue: { summary: 'bold' }, category: 'Props' },
+      description: 'Font weight of the tag label text',
     },
     tagTextFontFamily: {
       control: 'text',
@@ -137,10 +152,12 @@ A flexible icon button with optional tag label.
         defaultValue: { summary: 'Helvetica, Arial, sans-serif' },
         category: 'Props',
       },
+      description: 'Font family of the tag label text',
     },
     tagTextColor: {
       control: 'color',
       table: { defaultValue: { summary: 'black' }, category: 'Props' },
+      description: 'Color of the tag label text',
     },
     tagTextShadow: {
       control: 'text',
@@ -148,20 +165,28 @@ A flexible icon button with optional tag label.
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
         category: 'Props',
       },
+      description: 'Text shadow of the tag label',
     },
     tagTextTransform: {
       control: 'text',
       table: { defaultValue: { summary: 'none' }, category: 'Props' },
+      description: 'CSS text-transform of the tag label text',
     },
     tagTextAlign: {
       control: 'text',
       table: { defaultValue: { summary: 'center' }, category: 'Props' },
+      description: 'Text alignment inside the tag label',
     },
-
+    tagTextDelay: {
+      control: 'text',
+      table: { defaultValue: { summary: '0.1s' }, category: 'Props' },
+      description: 'Delay before tag text fade-in (e.g. "0.1s")',
+    },
     onClick: {
       action: 'clicked',
       table: { type: { summary: '() => void' }, category: 'Events' },
       control: false,
+      description: 'Click event handler',
     },
   },
 };
@@ -190,6 +215,7 @@ export const Default: StoryFn<IconButtonProps> = (args) => html`
     .tagTextShadow=${args.tagTextShadow}
     .tagTextTransform=${args.tagTextTransform}
     .tagTextAlign=${args.tagTextAlign}
+    .tagTextDelay=${args.tagTextDelay}
     .onClick=${args.onClick}
   ></icon-button>
 `;
@@ -208,11 +234,12 @@ Default.args = {
   tagText: 'Import/Export',
   tagWidth: 'fit-content',
   tagPadX: '10px',
-  tagTextFontSize: '0.9rem',
+  tagTextFontSize: '90%',
   tagTextFontWeight: '600',
   tagTextFontFamily: 'Arial, sans-serif',
   tagTextColor: '#222',
   tagTextShadow: '0px 2px 5px #bbb',
   tagTextTransform: 'none',
   tagTextAlign: 'center',
+  tagTextDelay: '0.1s',
 };
