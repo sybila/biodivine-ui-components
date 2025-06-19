@@ -27,6 +27,7 @@ export class IconButton extends LitElement {
   @property({ type: String }) declare tagTextShadow?: string;
   @property({ type: String }) declare tagTextTransform?: string;
   @property({ type: String }) declare tagTextAlign?: string;
+  @property({ type: String }) declare tagTextDelay?: string;
 
   static styles = css`
     :host {
@@ -109,7 +110,7 @@ export class IconButton extends LitElement {
     button:hover + span {
       opacity: 1;
       transition: opacity 0.3s ease;
-      transition-delay: 0.05s;
+      transition-delay: var(--icon-button-tag-text-delay, 0.1s);
       pointer-events: none;
     }
   `;
@@ -138,7 +139,7 @@ export class IconButton extends LitElement {
     update('tagPadX', '--icon-button-tag-padx', '10px');
     update('tagWidth', '--icon-button-tag-width', 'fit-content');
 
-    update('tagTextFontSize', '--icon-button-tag-font-size', '1rem');
+    update('tagTextFontSize', '--icon-button-tag-font-size', '90%');
     update('tagTextFontWeight', '--icon-button-tag-font-weight', 'bold');
     update(
       'tagTextFontFamily',
@@ -153,6 +154,7 @@ export class IconButton extends LitElement {
     );
     update('tagTextTransform', '--icon-button-tag-text-transform', 'none');
     update('tagTextAlign', '--icon-button-tag-text-align', 'center');
+    update('tagTextDelay', '--icon-button-tag-text-delay', '0.1s');
   }
 
   render() {
