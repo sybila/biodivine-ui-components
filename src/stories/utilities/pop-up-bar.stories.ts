@@ -47,6 +47,17 @@ A configurable button that reveals a horizontal bar of slot content (e.g., icons
 | \`--pop-up-bar-icon-height\`        | Icon height                        |
 | \`--pop-up-bar-icon-width\`         | Icon width                         |
 | \`--pop-up-bar-gap\`                | Gap between bar and button         |
+
+#### Shadow DOM Parts
+
+| Part Name      | Element          | Description                       |
+|----------------|------------------|---------------------------------|
+| \`container\`   | \`<div id="container">\`  | Main wrapper container            |
+| \`button\`      | \`<div id="display-button">\` | The toggle button                  |
+| \`icon\`        | \`<img>\` inside button | The icon image inside the button  |
+| \`arrow\`       | \`<span id="arrow-up">\` | The fallback arrow icon (if no image) |
+| \`bar-container\` | \`<div id="bar-container">\` | Container wrapping the pop-up bar |
+| \`bar\`        | \`<div id="bar">\`      | The pop-up bar that holds slotted content |
         `,
       },
     },
