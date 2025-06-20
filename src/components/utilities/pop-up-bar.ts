@@ -150,7 +150,7 @@ export class PopUpBar extends LitElement {
 
   render() {
     return html`
-      <div id="container">
+      <div id="container" part="container">
         <div id="display-button" part="button">
           ${this.iconSrc
             ? html`<img
@@ -160,7 +160,7 @@ export class PopUpBar extends LitElement {
               />`
             : html`<span id="arrow-up" part="arrow">^</span>`}
         </div>
-        <div id="bar-container">
+        <div id="bar-container" part=bar-container">
           <div id="bar" part="bar">
             <slot></slot>
           </div>
