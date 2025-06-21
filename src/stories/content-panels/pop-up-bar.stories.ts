@@ -1,4 +1,4 @@
-import '../../components/utilities/pop-up-bar';
+import '../../components/content-panels/pop-up-bar';
 import '../../components/buttons/icon-button';
 import { html } from 'lit';
 import type { Meta, StoryFn } from '@storybook/web-components';
@@ -21,7 +21,7 @@ type PopUpBarProps = {
 };
 
 const meta: Meta<PopUpBarProps> = {
-  title: 'Components/Utilities/Pop-Up Bar',
+  title: 'Components/Content Panels/Pop-Up Bar',
   tags: ['autodocs'],
   parameters: {
     docs: {
