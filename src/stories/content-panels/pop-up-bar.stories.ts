@@ -9,10 +9,12 @@ type PopUpBarProps = {
   barHeight?: string;
   barWidth?: string;
   barColor?: string;
+  barShadow?: string;
   butHeight?: string;
   butWidth?: string;
   butColor?: string;
   butHoverColor?: string;
+  butShadow?: string;
   iconHeight?: string;
   iconWidth?: string;
   iconSrc?: string;
@@ -29,35 +31,37 @@ const meta: Meta<PopUpBarProps> = {
         component: `
 ### \`<pop-up-bar>\`
 
-A configurable button that reveals a horizontal bar of slot content (e.g., icons) when hovered.
+Button that reveals a horizontal bar of slot content (e.g., icons) when hovered.
 
 #### CSS Custom Properties
 
-| Variable                             | Description                        |
-|-------------------------------------|------------------------------------|
-| \`--pop-up-bar-comp-height\`        | Component container height         |
-| \`--pop-up-bar-comp-width\`         | Component container width          |
-| \`--pop-up-bar-height\`             | Pop-up bar height                  |
-| \`--pop-up-bar-width\`              | Pop-up bar width                   |
-| \`--pop-up-bar-color\`              | Pop-up bar background color        |
-| \`--pop-up-bar-button-height\`      | Toggle button height               |
-| \`--pop-up-bar-button-width\`       | Toggle button width                |
-| \`--pop-up-bar-button-color\`       | Button background color            |
-| \`--pop-up-bar-button-hover-color\` | Button background color on hover   |
-| \`--pop-up-bar-icon-height\`        | Icon height                        |
-| \`--pop-up-bar-icon-width\`         | Icon width                         |
-| \`--pop-up-bar-gap\`                | Gap between bar and button         |
+| Variable                             | Description                          |
+|-------------------------------------|--------------------------------------|
+| \`--pop-up-bar-comp-height\`        | Component container height           |
+| \`--pop-up-bar-comp-width\`         | Component container width            |
+| \`--pop-up-bar-height\`             | Pop-up bar height                    |
+| \`--pop-up-bar-width\`              | Pop-up bar width                     |
+| \`--pop-up-bar-color\`              | Pop-up bar background color          |
+| \`--pop-up-bar-shadow\`             | Pop-up bar box-shadow                |
+| \`--pop-up-bar-button-height\`      | Toggle button height                 |
+| \`--pop-up-bar-button-width\`       | Toggle button width                  |
+| \`--pop-up-bar-button-color\`       | Button background color              |
+| \`--pop-up-bar-button-hover-color\` | Button background color on hover     |
+| \`--pop-up-bar-button-shadow\`      | Button box-shadow                    |
+| \`--pop-up-bar-icon-height\`        | Icon height                          |
+| \`--pop-up-bar-icon-width\`         | Icon width                           |
+| \`--pop-up-bar-gap\`                | Gap between bar and button           |
 
 #### Shadow DOM Parts
 
-| Part Name      | Element          | Description                       |
-|----------------|------------------|---------------------------------|
-| \`container\`   | \`<div id="container">\`  | Main wrapper container            |
-| \`button\`      | \`<div id="display-button">\` | The toggle button                  |
-| \`icon\`        | \`<img>\` inside button | The icon image inside the button  |
-| \`arrow\`       | \`<span id="arrow-up">\` | The fallback arrow icon (if no image) |
-| \`bar-container\` | \`<div id="bar-container">\` | Container wrapping the pop-up bar |
-| \`bar\`        | \`<div id="bar">\`      | The pop-up bar that holds slotted content |
+| Part Name        | Element                       | Description                              |
+|------------------|-------------------------------|------------------------------------------|
+| \`container\`     | \`<div id="container">\`       | Main wrapper container                   |
+| \`button\`        | \`<div id="display-button">\`  | The toggle button                        |
+| \`icon\`          | \`<img>\` inside button        | The icon image inside the button         |
+| \`arrow\`         | \`<span id="arrow-up">\`       | The fallback arrow icon (if no image)    |
+| \`bar-container\` | \`<div id="bar-container">\`   | Container wrapping the pop-up bar        |
+| \`bar\`           | \`<div id="bar">\`             | The pop-up bar that holds slotted content |
         `,
       },
     },
@@ -88,6 +92,14 @@ A configurable button that reveals a horizontal bar of slot content (e.g., icons
       description: 'Background color of the pop-up bar',
       table: { defaultValue: { summary: '#eceff1' }, category: 'Props' },
     },
+    barShadow: {
+      control: 'text',
+      description: 'CSS box-shadow applied to the pop-up bar',
+      table: {
+        defaultValue: { summary: '0px 2px 5px #d0d0d0' },
+        category: 'Props',
+      },
+    },
     butHeight: {
       control: 'text',
       description: 'Height of the toggle button',
@@ -107,6 +119,14 @@ A configurable button that reveals a horizontal bar of slot content (e.g., icons
       control: 'color',
       description: 'Background color on button hover',
       table: { defaultValue: { summary: '#cfd8dc' }, category: 'Props' },
+    },
+    butShadow: {
+      control: 'text',
+      description: 'CSS box-shadow applied to the toggle button',
+      table: {
+        defaultValue: { summary: '0px 2px 5px #d0d0d0' },
+        category: 'Props',
+      },
     },
     iconHeight: {
       control: 'text',
@@ -145,10 +165,12 @@ export const Default: StoryFn<PopUpBarProps> = (args) => html`
     .barHeight=${args.barHeight}
     .barWidth=${args.barWidth}
     .barColor=${args.barColor}
+    .barShadow=${args.barShadow}
     .butHeight=${args.butHeight}
     .butWidth=${args.butWidth}
     .butColor=${args.butColor}
     .butHoverColor=${args.butHoverColor}
+    .butShadow=${args.butShadow}
     .iconHeight=${args.iconHeight}
     .iconWidth=${args.iconWidth}
     .iconSrc=${args.iconSrc}
@@ -167,10 +189,12 @@ Default.args = {
   barHeight: '40px',
   barWidth: '100%',
   barColor: '#cfd8dc',
+  barShadow: '0px 2px 5px #d0d0d0',
   butHeight: '40px',
   butWidth: '100%',
   butColor: '#eceff1',
   butHoverColor: '#b0bec5',
+  butShadow: '0px 2px 5px #d0d0d0',
   iconHeight: '80%',
   iconWidth: '80%',
   iconAlt: 'Arrow up',
