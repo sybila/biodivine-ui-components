@@ -9,11 +9,13 @@ export class PopUpBar extends LitElement {
   @property({ type: String }) declare barHeight?: string;
   @property({ type: String }) declare barWidth?: string;
   @property({ type: String }) declare barColor?: string;
+  @property({ type: String }) declare barShadow?: string;
 
   @property({ type: String }) declare butHeight?: string;
   @property({ type: String }) declare butWidth?: string;
   @property({ type: String }) declare butColor?: string;
   @property({ type: String }) declare butHoverColor?: string;
+  @property({ type: String }) declare butShadow?: string;
 
   @property({ type: String }) declare iconHeight?: string;
   @property({ type: String }) declare iconWidth?: string;
@@ -49,6 +51,7 @@ export class PopUpBar extends LitElement {
       padding: 0 10px;
       border: none;
       border-radius: 10px;
+      box-shadow: var(--pop-up-bar-shadow, 0px 2px 5px #d0d0d0);
       background-color: var(--pop-up-bar-color, #eceff1);
     }
 
@@ -84,6 +87,7 @@ export class PopUpBar extends LitElement {
       height: var(--pop-up-bar-button-height, 30px);
       width: var(--pop-up-bar-button-width, 200px);
       border-radius: 10px;
+      box-shadow: var(--pop-up-bar-button-shadow, 0px 2px 5px #d0d0d0);
       background-color: var(--pop-up-bar-button-color, #eceff1);
       cursor: pointer;
     }
@@ -136,11 +140,13 @@ export class PopUpBar extends LitElement {
     update('barHeight', '--pop-up-bar-height', '30px');
     update('barWidth', '--pop-up-bar-width', '200px');
     update('barColor', '--pop-up-bar-color', '#eceff1');
+    update('barShadow', '--pop-up-bar-shadow', '0px 2px 5px #d0d0d0');
 
     update('butHeight', '--pop-up-bar-button-height', '30px');
     update('butWidth', '--pop-up-bar-button-width', '200px');
     update('butColor', '--pop-up-bar-button-color', '#eceff1');
     update('butHoverColor', '--pop-up-bar-button-hover-color', '#cfd8dc');
+    update('butShadow', '--pop-up-bar-button-shadow', '0px 2px 5px #d0d0d0');
 
     update('gapSize', '--pop-up-bar-gap', '4px');
 
@@ -152,13 +158,15 @@ export class PopUpBar extends LitElement {
     return html`
       <div id="container" part="container">
         <div id="display-button" part="button">
-          ${this.iconSrc
-            ? html`<img
-                part="icon"
-                src="${this.iconSrc}"
-                alt="${this.iconAlt ?? 'icon'}"
-              />`
-            : html`<span id="arrow-up" part="arrow">^</span>`}
+          ${
+            this.iconSrc
+              ? html`<img
+                  part="icon"
+                  src="${this.iconSrc}"
+                  alt="${this.iconAlt ?? 'icon'}"
+                />`
+              : html`<span id="arrow-up" part="arrow">^</span>`
+          }
         </div>
         <div id="bar-container" part=bar-container">
           <div id="bar" part="bar">
