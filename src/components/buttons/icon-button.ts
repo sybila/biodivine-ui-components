@@ -10,6 +10,7 @@ export class IconButton extends LitElement {
   @property({ type: String }) declare sizeBy?: 'height' | 'width';
   @property({ type: String }) declare buttonColor?: string;
   @property({ type: String }) declare buttonHoverColor?: string;
+  @property({ type: String }) declare buttonShadow?: string;
   @property({ type: String }) declare iconSize?: string;
   @property({ type: Function }) declare onClick?: () => void;
   @property({ type: String }) declare iconSrc?: string;
@@ -44,6 +45,7 @@ export class IconButton extends LitElement {
       height: var(--icon-button-size, 30px);
       width: var(--icon-button-size, 30px);
       border: none;
+      box-shadow: var(--icon-button-shadow, 0px 2px 5px #d0d0d0);
       border-radius: calc(var(--icon-button-size, 30px) * 0.4);
       background-color: var(--icon-button-bg-color, #eceff1);
       transition: width 0.5s ease;
@@ -134,6 +136,7 @@ export class IconButton extends LitElement {
     update('buttonSize', '--icon-button-size', '30px');
     update('buttonColor', '--icon-button-bg-color', '#eceff1');
     update('buttonHoverColor', '--icon-button-hover-bg-color', '#cfd8dc');
+    update('buttonShadow', '--icon-button-shadow', '0px 2px 5px #d0d0d0');
     update('iconSize', '--icon-button-icon-size', '70%');
 
     update('tagPadX', '--icon-button-tag-padx', '10px');
