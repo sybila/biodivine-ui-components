@@ -8,6 +8,7 @@ type IconButtonProps = {
   buttonSize?: string;
   buttonColor?: string;
   buttonHoverColor?: string;
+  buttonShadow?: string;
   iconSrc?: string;
   iconAlt?: string;
   iconSize?: string;
@@ -47,6 +48,7 @@ A flexible icon button with optional tag label.
 | \`--icon-button-size\`                 | Button size (based on \`sizeBy\`)                |
 | \`--icon-button-bg-color\`             | Button background color                          |
 | \`--icon-button-hover-bg-color\`       | Button hover background color                    |
+| \`--icon-button-shadow\`               | Button and tag shadow                                    |
 | \`--icon-button-icon-size\`            | Icon image size inside the button                |
 | \`--icon-button-tag-width\`            | Width of the tag                                 |
 | \`--icon-button-tag-padx\`             | Horizontal padding of the tag text               |
@@ -100,6 +102,14 @@ A flexible icon button with optional tag label.
       control: 'color',
       table: { defaultValue: { summary: '#cfd8dc' }, category: 'Props' },
       description: 'Background color of the button on hover',
+    },
+    buttonShadow: {
+      control: 'text',
+      table: {
+        defaultValue: { summary: '0px 2px 5px #d0d0d0' },
+        category: 'Props',
+      },
+      description: 'Button and tag shadow',
     },
     iconSrc: {
       control: 'text',
@@ -200,6 +210,7 @@ export const Default: StoryFn<IconButtonProps> = (args) => html`
     .buttonSize=${args.buttonSize}
     .buttonColor=${args.buttonColor}
     .buttonHoverColor=${args.buttonHoverColor}
+    .buttonShadow=${args.buttonShadow}
     .iconSrc=${args.iconSrc}
     .iconAlt=${args.iconAlt}
     .iconSize=${args.iconSize}
@@ -227,6 +238,7 @@ Default.args = {
   sizeBy: 'height',
   buttonColor: '#90caf9',
   buttonHoverColor: '#64b5f6',
+  buttonShadow: '0px 2px 5px #d0d0d0',
   iconSrc: '/assets/file_copy-48px.svg',
   iconAlt: 'file icon',
   iconSize: '70%',
