@@ -186,7 +186,7 @@ export const Default: StoryFn<TextButtonProps> = (args) => html`
     .tagTextShadow=${args.tagTextShadow}
     .tagTextTransform=${args.tagTextTransform}
     .tagTextAlign=${args.tagTextAlign}
-    .onClick=${args.onClick}
+    .onClick=${() => console.log('button clicked')}
   ></text-button>
 `;
 
