@@ -31,7 +31,7 @@ const meta: Meta<PopUpBarProps> = {
         component: `
 ### \`<pop-up-bar>\`
 
-Button that reveals a horizontal bar of slot content (e.g., icons) when hovered.
+A button that reveals a horizontal bar of slot content (e.g., icons) when hovered.
 
 #### CSS Custom Properties
 
@@ -80,12 +80,12 @@ Button that reveals a horizontal bar of slot content (e.g., icons) when hovered.
     barHeight: {
       control: 'text',
       description: 'Height of the pop-up bar',
-      table: { defaultValue: { summary: '30px' }, category: 'Props' },
+      table: { defaultValue: { summary: '100px' }, category: 'Props' },
     },
     barWidth: {
       control: 'text',
       description: 'Width of the pop-up bar',
-      table: { defaultValue: { summary: '200px' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
     },
     barColor: {
       control: 'color',
@@ -151,7 +151,7 @@ Button that reveals a horizontal bar of slot content (e.g., icons) when hovered.
     gapSize: {
       control: 'text',
       description: 'Gap between the toggle button and the bar',
-      table: { defaultValue: { summary: '4px' }, category: 'Props' },
+      table: { defaultValue: { summary: '10px' }, category: 'Props' },
     },
   },
 };
@@ -177,26 +177,30 @@ export const Default: StoryFn<PopUpBarProps> = (args) => html`
     .iconAlt=${args.iconAlt}
     .gapSize=${args.gapSize}
   >
-    <icon-button buttonSize="30px"></icon-button>
-    <icon-button buttonSize="30px"></icon-button>
-    <icon-button buttonSize="30px"></icon-button>
+    <div
+      style="height: 100%; display: flex; justify-content: center; align-items: center; gap: 10px"
+    >
+      <icon-button compHeight="80%"></icon-button>
+      <icon-button compHeight="80%"></icon-button>
+      <icon-button compHeight="80%"></icon-button>
+    </div>
   </pop-up-bar>
 `;
 
 Default.args = {
-  compHeight: '60px',
-  compWidth: '100%',
-  barHeight: '40px',
-  barWidth: '100%',
-  barColor: '#cfd8dc',
+  compHeight: 'fit-content',
+  compWidth: 'fit-content',
+  barHeight: '100px',
+  barWidth: 'fit-content',
+  barColor: '#eceff1',
   barShadow: '0px 2px 5px #d0d0d0',
-  butHeight: '40px',
-  butWidth: '100%',
+  butHeight: '30px',
+  butWidth: '200px',
   butColor: '#eceff1',
-  butHoverColor: '#b0bec5',
+  butHoverColor: '#cfd8dc',
   butShadow: '0px 2px 5px #d0d0d0',
-  iconHeight: '80%',
-  iconWidth: '80%',
+  iconHeight: '70%',
+  iconWidth: '70%',
   iconAlt: 'Arrow up',
-  gapSize: '6px',
+  gapSize: '10px',
 };
