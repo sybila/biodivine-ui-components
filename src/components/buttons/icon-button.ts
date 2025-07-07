@@ -1,13 +1,14 @@
-import { LitElement, html, css } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { LitElement, html, css } from "lit";
+import { customElement, property } from "lit/decorators.js";
 
-@customElement('icon-button')
+@customElement("icon-button")
 export class IconButton extends LitElement {
   @property({ type: String }) declare compHeight?: string;
   @property({ type: String }) declare compWidth?: string;
 
   @property({ type: String }) declare buttonSize?: string;
-  @property({ type: String }) declare sizeBy?: 'height' | 'width';
+  @property({ type: String }) declare sizeBy?: "height" | "width";
+  @property({ type: String }) declare buttonBorderRadius?: string;
   @property({ type: String }) declare buttonColor?: string;
   @property({ type: String }) declare buttonHoverColor?: string;
   @property({ type: String }) declare buttonShadow?: string;
@@ -33,26 +34,36 @@ export class IconButton extends LitElement {
   static styles = css`
     :host {
       display: inline-block;
-      height: var(--icon-button-comp-height, fit-content);
+      height: var(--icon-button-comp-height, 60px);
       width: var(--icon-button-comp-width, fit-content);
-      max-height: var(--icon-button-comp-height, fit-content);
+      max-height: var(--icon-button-comp-height, 60px);
       max-width: var(--icon-button-comp-width, fit-content);
     }
 
     div {
       display: flex;
       align-items: center;
-      height: var(--icon-button-size, 30px);
-      width: var(--icon-button-size, 30px);
+      aspect-ratio: 1 / 1;
       border: none;
       box-shadow: var(--icon-button-shadow, 0px 2px 5px #d0d0d0);
-      border-radius: calc(var(--icon-button-size, 30px) * 0.4);
+      border-radius: var(--icon-button-border-radius, 24px); 
       background-color: var(--icon-button-bg-color, #eceff1);
       transition: width 0.5s ease;
+      overflow: hidden;
+    }
+
+    div.size-by-height {
+      height: var(--icon-button-size, 100%);
+      max-height: var(--icon-button-size, 100%);
+    }
+
+    div.size-by-width {
+      width: var(--icon-button-size, 100%);
     }
 
     div.has-tag:has(button:hover) {
-      width: var(--icon-button-tag-width, fit-content);
+      aspect-ratio: none;
+      width: var(--icon-button-tag-width, 300px);
     }
 
     button {
@@ -61,18 +72,18 @@ export class IconButton extends LitElement {
       align-items: center;
       aspect-ratio: 1 / 1;
       border: none;
-      border-radius: 40%;
+      border-radius: var(--icon-button-border-radius, 24px);
       background-color: var(--icon-button-bg-color, #eceff1);
       transition: background-color 0.3s;
       cursor: pointer;
     }
 
     button.size-by-height {
-      height: var(--icon-button-size, 30px);
+      height: 100%;
     }
 
     button.size-by-width {
-      width: var(--icon-button-size, 30px);
+      width: 100%;
     }
 
     button:hover {
@@ -92,16 +103,16 @@ export class IconButton extends LitElement {
       box-sizing: border-box;
       opacity: 0;
       height: 100%;
-      width: var(--icon-button-tag-width, fit-content);
+      width: var(--icon-button-tag-width, 300px);
       padding-left: var(--icon-button-tag-padx, 10px);
       padding-right: var(--icon-button-tag-padx, 10px);
       pointer-events: none;
-      font-size: var(--icon-button-tag-font-size, 90%);
+      font-size: var(--icon-button-tag-font-size, 20px);
       font-weight: var(--icon-button-tag-font-weight, bold);
       font-family: var(
         --icon-button-tag-font-family,
-        'Helvetica',
-        'Arial',
+        "Helvetica",
+        "Arial",
         sans-serif
       );
       text-shadow: var(--icon-button-tag-text-shadow, 0px 2px 5px #d0d0d0);
@@ -130,55 +141,56 @@ export class IconButton extends LitElement {
     const update = (prop: string, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
-    update('compHeight', '--icon-button-comp-height', 'fit-content');
-    update('compWidth', '--icon-button-comp-width', 'fit-content');
+    update("compHeight", "--icon-button-comp-height", "60px");
+    update("compWidth", "--icon-button-comp-width", "fit-content");
 
-    update('buttonSize', '--icon-button-size', '30px');
-    update('buttonColor', '--icon-button-bg-color', '#eceff1');
-    update('buttonHoverColor', '--icon-button-hover-bg-color', '#cfd8dc');
-    update('buttonShadow', '--icon-button-shadow', '0px 2px 5px #d0d0d0');
-    update('iconSize', '--icon-button-icon-size', '70%');
+    update("buttonSize", "--icon-button-size", "100%");
+    update("buttonBorderRadius", "--icon-button-border-radius", "24px");
+    update("buttonColor", "--icon-button-bg-color", "#eceff1");
+    update("buttonHoverColor", "--icon-button-hover-bg-color", "#cfd8dc");
+    update("buttonShadow", "--icon-button-shadow", "0px 2px 5px #d0d0d0");
+    update("iconSize", "--icon-button-icon-size", "70%");
 
-    update('tagPadX', '--icon-button-tag-padx', '10px');
-    update('tagWidth', '--icon-button-tag-width', 'fit-content');
+    update("tagPadX", "--icon-button-tag-padx", "10px");
+    update("tagWidth", "--icon-button-tag-width", "300px");
 
-    update('tagTextFontSize', '--icon-button-tag-font-size', '90%');
-    update('tagTextFontWeight', '--icon-button-tag-font-weight', 'bold');
+    update("tagTextFontSize", "--icon-button-tag-font-size", "20px");
+    update("tagTextFontWeight", "--icon-button-tag-font-weight", "bold");
     update(
-      'tagTextFontFamily',
-      '--icon-button-tag-font-family',
+      "tagTextFontFamily",
+      "--icon-button-tag-font-family",
       `'Helvetica', 'Arial', sans-serif`
     );
-    update('tagTextColor', '--icon-button-tag-color', 'black');
+    update("tagTextColor", "--icon-button-tag-color", "black");
     update(
-      'tagTextShadow',
-      '--icon-button-tag-text-shadow',
-      '0px 2px 5px #d0d0d0'
+      "tagTextShadow",
+      "--icon-button-tag-text-shadow",
+      "0px 2px 5px #d0d0d0"
     );
-    update('tagTextTransform', '--icon-button-tag-text-transform', 'none');
-    update('tagTextAlign', '--icon-button-tag-text-align', 'center');
-    update('tagTextDelay', '--icon-button-tag-text-delay', '0.1s');
+    update("tagTextTransform", "--icon-button-tag-text-transform", "none");
+    update("tagTextAlign", "--icon-button-tag-text-align", "center");
+    update("tagTextDelay", "--icon-button-tag-text-delay", "0.1s");
   }
 
   render() {
     const sizeClass =
-      this.sizeBy === 'width' ? 'size-by-width' : 'size-by-height';
-    const hasTagClass = this.showTag ? 'has-tag' : '';
+      this.sizeBy === "width" ? "size-by-width" : "size-by-height";
+    const hasTagClass = this.showTag ? "has-tag" : "";
 
     return html`
-      <div class="${hasTagClass}">
+      <div class="${hasTagClass} ${sizeClass}">
         <button part="button" class="${sizeClass}" @click=${this.onClick}>
           ${this.iconSrc
             ? html`<img
                 part="icon"
                 src="${this.iconSrc}"
-                alt="${this.iconAlt ?? 'icon'}"
+                alt="${this.iconAlt ?? "icon"}"
               />`
-            : ''}
+            : ""}
         </button>
         ${this.showTag
-          ? html`<span part="tag-text">${this.tagText ?? ''}</span>`
-          : ''}
+          ? html`<span part="tag-text">${this.tagText ?? ""}</span>`
+          : ""}
       </div>
     `;
   }
