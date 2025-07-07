@@ -211,7 +211,7 @@ Content container component with optional header and close button.
     headerTextFontSize: {
       control: 'text',
       description: 'Font size of the header text.',
-      table: { category: 'Header', defaultValue: { summary: '40px' } },
+      table: { category: 'Header', defaultValue: { summary: '20px' } },
     },
     headerTextFontWeight: {
       control: 'text',
