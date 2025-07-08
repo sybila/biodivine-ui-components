@@ -9,6 +9,8 @@ type IconButtonProps = {
   compWidth?: string;
   /** Size of the button (applies to height or width depending on sizeBy) */
   buttonSize?: string;
+  /** Whether to size the button by height or width */
+  sizeBy?: 'height' | 'width';
   /** Border radius of the button */
   buttonBorderRadius?: string;
   /** Background color of the button */
@@ -19,16 +21,15 @@ type IconButtonProps = {
   buttonActiveColor?: string;
   /** Box shadow of the button */
   buttonShadow?: string;
+  /** Size of the icon inside the button */
+  iconSize?: string;
+  /** Click event handler */
+  onClick?: () => void;
   /** Source URL for the icon image */
   iconSrc?: string;
   /** Alt text for the icon image */
   iconAlt?: string;
-  /** Size of the icon inside the button */
-  iconSize?: string;
-  /** Whether to size the button by height or width */
-  sizeBy: 'height' | 'width';
-  /** Click event handler */
-  onClick?: () => void;
+
   /** Whether to show the tag/label */
   showTag?: boolean;
   /** Text content of the tag/label */
@@ -37,6 +38,8 @@ type IconButtonProps = {
   tagWidth?: string;
   /** Horizontal padding of the tag/label */
   tagPadX?: string;
+  /** Line height of the tag text */
+  tagLineHeight?: string;
   /** Font size of the tag text */
   tagTextFontSize?: string;
   /** Font weight of the tag text */
@@ -79,26 +82,27 @@ A customizable icon button with optional expanding tag text on hover.
 #### CSS Variables (Configurable via props)
 
 | Variable                                  | Description                              |
-|------------------------------------------|------------------------------------------|
-| \`--icon-button-comp-height\`              | Container height                          |
-| \`--icon-button-comp-width\`               | Container width                           |
+|--------------------------------------------|------------------------------------------|
+| \`--icon-button-comp-height\`              | Container height                         |
+| \`--icon-button-comp-width\`               | Container width                          |
 | \`--icon-button-size\`                     | Button size (based on \`sizeBy\`)         |
-| \`--icon-button-border-radius\`            | Border radius of the button               |
-| \`--icon-button-bg-color\`                 | Button background color                   |
-| \`--icon-button-hover-bg-color\`           | Background on hover                       |
-| \`--icon-button-active-bg-color\`          | Background when \`isActive\` is true       |
-| \`--icon-button-shadow\`                   | Button and container shadow               |
-| \`--icon-button-icon-size\`                | Icon size inside button                   |
-| \`--icon-button-tag-width\`                | Width of tag label                        |
-| \`--icon-button-tag-padx\`                 | Horizontal padding inside tag             |
-| \`--icon-button-tag-font-size\`            | Font size of tag text                     |
-| \`--icon-button-tag-font-weight\`          | Font weight of tag text                   |
-| \`--icon-button-tag-font-family\`          | Font family of tag text                   |
-| \`--icon-button-tag-color\`                | Text color of tag                         |
-| \`--icon-button-tag-text-shadow\`          | Shadow applied to tag text                |
-| \`--icon-button-tag-text-transform\`       | Text transform for tag                    |
-| \`--icon-button-tag-text-align\`           | Text alignment in tag                     |
-| \`--icon-button-tag-text-delay\`           | Fade-in delay of tag on hover             |
+| \`--icon-button-border-radius\`            | Border radius of the button              |
+| \`--icon-button-bg-color\`                 | Button background color                  |
+| \`--icon-button-hover-bg-color\`           | Background on hover                      |
+| \`--icon-button-active-bg-color\`          | Background when \`isActive\` is true      |
+| \`--icon-button-shadow\`                   | Button and container shadow              |
+| \`--icon-button-icon-size\`                | Icon size inside button                  |
+| \`--icon-button-tag-width\`                | Width of tag label                       |
+| \`--icon-button-tag-padx\`                 | Horizontal padding inside tag            |
+| \`--icon-button-tag-line-height\`          | Line height of tag text                  |
+| \`--icon-button-tag-font-size\`            | Font size of tag text                    |
+| \`--icon-button-tag-font-weight\`          | Font weight of tag text                  |
+| \`--icon-button-tag-font-family\`          | Font family of tag text                  |
+| \`--icon-button-tag-color\`                | Text color of tag                        |
+| \`--icon-button-tag-text-shadow\`          | Shadow applied to tag text               |
+| \`--icon-button-tag-text-transform\`       | Text transform for tag                   |
+| \`--icon-button-tag-text-align\`           | Text alignment in tag                    |
+| \`--icon-button-tag-text-delay\`           | Fade-in delay of tag on hover            |
         `,
       },
     },
@@ -154,6 +158,17 @@ A customizable icon button with optional expanding tag text on hover.
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
       },
     },
+    iconSize: {
+      control: 'text',
+      description: 'Size of the icon inside the button',
+      table: { category: 'Props', defaultValue: { summary: '70%' } },
+    },
+    onClick: {
+      action: 'clicked',
+      description: 'Click event handler',
+      table: { type: { summary: '() => void' }, category: 'Events' },
+      control: false,
+    },
     iconSrc: {
       control: 'text',
       description: 'Source URL for the icon image',
@@ -163,11 +178,6 @@ A customizable icon button with optional expanding tag text on hover.
       control: 'text',
       description: 'Alt text for the icon image',
       table: { category: 'Props', defaultValue: { summary: 'icon' } },
-    },
-    iconSize: {
-      control: 'text',
-      description: 'Size of the icon inside the button',
-      table: { category: 'Props', defaultValue: { summary: '70%' } },
     },
     showTag: {
       control: 'boolean',
@@ -182,12 +192,17 @@ A customizable icon button with optional expanding tag text on hover.
     tagWidth: {
       control: 'text',
       description: 'Width of the tag/label',
-      table: { category: 'Props', defaultValue: { summary: '300px' } },
+      table: { category: 'Props', defaultValue: { summary: '272px' } },
     },
     tagPadX: {
       control: 'text',
       description: 'Horizontal padding of the tag/label',
       table: { category: 'Props', defaultValue: { summary: '10px' } },
+    },
+    tagLineHeight: {
+      control: 'text',
+      description: 'Line height of the tag text',
+      table: { category: 'Props', defaultValue: { summary: '25px' } },
     },
     tagTextFontSize: {
       control: 'text',
@@ -241,12 +256,6 @@ A customizable icon button with optional expanding tag text on hover.
       description: 'Whether the button is in the active state',
       table: { category: 'Props', defaultValue: { summary: 'false' } },
     },
-    onClick: {
-      action: 'clicked',
-      description: 'Click event handler',
-      table: { type: { summary: '() => void' }, category: 'Events' },
-      control: false,
-    },
   },
 };
 
@@ -257,19 +266,21 @@ export const Default: StoryFn<IconButtonProps> = (args) => html`
     .compHeight=${args.compHeight}
     .compWidth=${args.compWidth}
     .buttonSize=${args.buttonSize}
+    .sizeBy=${args.sizeBy}
     .buttonBorderRadius=${args.buttonBorderRadius}
     .buttonColor=${args.buttonColor}
     .buttonHoverColor=${args.buttonHoverColor}
     .buttonActiveColor=${args.buttonActiveColor}
     .buttonShadow=${args.buttonShadow}
+    .iconSize=${args.iconSize}
+    .onClick=${args.onClick}
     .iconSrc=${args.iconSrc}
     .iconAlt=${args.iconAlt}
-    .iconSize=${args.iconSize}
-    .sizeBy=${args.sizeBy}
     .showTag=${args.showTag}
     .tagText=${args.tagText}
     .tagWidth=${args.tagWidth}
     .tagPadX=${args.tagPadX}
+    .tagLineHeight=${args.tagLineHeight}
     .tagTextFontSize=${args.tagTextFontSize}
     .tagTextFontWeight=${args.tagTextFontWeight}
     .tagTextFontFamily=${args.tagTextFontFamily}
@@ -279,7 +290,6 @@ export const Default: StoryFn<IconButtonProps> = (args) => html`
     .tagTextAlign=${args.tagTextAlign}
     .tagTextDelay=${args.tagTextDelay}
     .isActive=${args.isActive}
-    .onClick=${args.onClick}
   ></icon-button>
 `;
 
@@ -287,19 +297,20 @@ Default.args = {
   compHeight: '60px',
   compWidth: 'fit-content',
   buttonSize: '100%',
+  sizeBy: 'height',
   buttonBorderRadius: '24px',
   buttonColor: '#eceff1',
   buttonHoverColor: '#b0bec5',
   buttonActiveColor: '#cfd8dc',
   buttonShadow: '0px 2px 5px #d0d0d0',
+  iconSize: '70%',
   iconSrc: '/assets/file_copy-48px.svg',
   iconAlt: 'file icon',
-  iconSize: '70%',
-  sizeBy: 'height',
   showTag: true,
   tagText: 'Import/Export',
-  tagWidth: '300px',
+  tagWidth: '272px',
   tagPadX: '10px',
+  tagLineHeight: '25px',
   tagTextFontSize: '20px',
   tagTextFontWeight: 'bold',
   tagTextFontFamily: "'Helvetica', 'Arial', sans-serif",
