@@ -42,6 +42,8 @@ type DoubleTextButtonProps = {
   leftTextTransform?: string;
   /** Text alignment within the left section */
   leftTextAlign?: string;
+  /** Line height of the left section text */
+  leftLineHeight?: string;
 
   /** Background color of the right section */
   rightColor?: string;
@@ -67,6 +69,8 @@ type DoubleTextButtonProps = {
   rightTextTransform?: string;
   /** Text alignment within the right section */
   rightTextAlign?: string;
+  /** Line height of the right section text */
+  rightLineHeight?: string;
 };
 
 const meta: Meta<DoubleTextButtonProps> = {
@@ -222,13 +226,19 @@ A button with two customizable text sections (left and right).
     },
     leftTextTransform: {
       control: 'text',
-      description: 'Text transformation (e.g., uppercase, lowercase) for the left section',
+      description:
+        'Text transformation (e.g., uppercase, lowercase) for the left section',
       table: { category: 'Props', defaultValue: { summary: 'none' } },
     },
     leftTextAlign: {
       control: 'text',
       description: 'Text alignment within the left section',
       table: { category: 'Props', defaultValue: { summary: 'center' } },
+    },
+    leftLineHeight: {
+      control: 'text',
+      description: 'Line height of the left section text',
+      table: { category: 'Props', defaultValue: { summary: '21px' } },
     },
     rightColor: {
       control: 'color',
@@ -288,13 +298,19 @@ A button with two customizable text sections (left and right).
     },
     rightTextTransform: {
       control: 'text',
-      description: 'Text transformation (e.g., uppercase, lowercase) for the right section',
+      description:
+        'Text transformation (e.g., uppercase, lowercase) for the right section',
       table: { category: 'Props', defaultValue: { summary: 'none' } },
     },
     rightTextAlign: {
       control: 'text',
       description: 'Text alignment within the right section',
       table: { category: 'Props', defaultValue: { summary: 'center' } },
+    },
+    rightLineHeight: {
+      control: 'text',
+      description: 'Line height of the right section text',
+      table: { category: 'Props', defaultValue: { summary: '21px' } },
     },
   },
 };
@@ -322,6 +338,7 @@ export const Default: StoryFn<DoubleTextButtonProps> = (args) => html`
     .leftTextShadow=${args.leftTextShadow}
     .leftTextTransform=${args.leftTextTransform}
     .leftTextAlign=${args.leftTextAlign}
+    .leftLineHeight=${args.leftLineHeight}
     .rightColor=${args.rightColor}
     .rightHoverColor=${args.rightHoverColor}
     .rightText=${args.rightText}
@@ -334,6 +351,7 @@ export const Default: StoryFn<DoubleTextButtonProps> = (args) => html`
     .rightTextShadow=${args.rightTextShadow}
     .rightTextTransform=${args.rightTextTransform}
     .rightTextAlign=${args.rightTextAlign}
+    .rightLineHeight=${args.rightLineHeight}
   ></double-text-button>
 `;
 
@@ -356,6 +374,7 @@ Default.args = {
   leftTextShadow: '0px 2px 5px #d0d0d0',
   leftTextTransform: 'none',
   leftTextAlign: 'center',
+  leftLineHeight: '21px',
   rightColor: '#cfd8dc',
   rightHoverColor: '#B0BEC5',
   rightText: 'Right',
@@ -368,4 +387,5 @@ Default.args = {
   rightTextShadow: '0px 2px 5px #d0d0d0',
   rightTextTransform: 'none',
   rightTextAlign: 'center',
+  rightLineHeight: '21px',
 };
