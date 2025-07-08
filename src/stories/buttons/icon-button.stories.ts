@@ -3,31 +3,57 @@ import { html } from 'lit';
 import type { Meta, StoryFn } from '@storybook/web-components';
 
 type IconButtonProps = {
+  /** Height of the outer component container */
   compHeight?: string;
+  /** Width of the outer component container */
   compWidth?: string;
+  /** Size of the button (applies to height or width depending on sizeBy) */
   buttonSize?: string;
+  /** Border radius of the button */
   buttonBorderRadius?: string;
+  /** Background color of the button */
   buttonColor?: string;
+  /** Background color of the button on hover */
   buttonHoverColor?: string;
+  /** Background color of the button when active */
   buttonActiveColor?: string;
+  /** Box shadow of the button */
   buttonShadow?: string;
+  /** Source URL for the icon image */
   iconSrc?: string;
+  /** Alt text for the icon image */
   iconAlt?: string;
+  /** Size of the icon inside the button */
   iconSize?: string;
+  /** Whether to size the button by height or width */
   sizeBy: 'height' | 'width';
+  /** Click event handler */
   onClick?: () => void;
+  /** Whether to show the tag/label */
   showTag?: boolean;
+  /** Text content of the tag/label */
   tagText?: string;
+  /** Width of the tag/label */
   tagWidth?: string;
+  /** Horizontal padding of the tag/label */
   tagPadX?: string;
+  /** Font size of the tag text */
   tagTextFontSize?: string;
+  /** Font weight of the tag text */
   tagTextFontWeight?: string;
+  /** Font family of the tag text */
   tagTextFontFamily?: string;
+  /** Color of the tag text */
   tagTextColor?: string;
+  /** Text shadow for the tag text */
   tagTextShadow?: string;
+  /** Text transformation (e.g., uppercase, lowercase) for the tag text */
   tagTextTransform?: string;
+  /** Text alignment within the tag */
   tagTextAlign?: string;
+  /** Fade-in delay for the tag text on hover */
   tagTextDelay?: string;
+  /** Whether the button is in the active state */
   isActive?: boolean;
 };
 
@@ -41,11 +67,6 @@ const meta: Meta<IconButtonProps> = {
 ### \`<icon-button>\`
 
 A customizable icon button with optional expanding tag text on hover.
-
-#### Features
-- Flexible sizing (by height or width)
-- Hover-triggered label expansion
-- Customizable styling through props or CSS variables
 
 #### Shadow DOM Parts
 
@@ -85,76 +106,102 @@ A customizable icon button with optional expanding tag text on hover.
   argTypes: {
     compHeight: {
       control: 'text',
+      description: 'Height of the outer component container',
       table: { category: 'Props', defaultValue: { summary: '60px' } },
     },
     compWidth: {
       control: 'text',
+      description: 'Width of the outer component container',
       table: { category: 'Props', defaultValue: { summary: 'fit-content' } },
     },
     buttonSize: {
       control: 'text',
+      description:
+        'Size of the button (applies to height or width depending on sizeBy)',
       table: { category: 'Props', defaultValue: { summary: '100%' } },
     },
     sizeBy: {
       control: 'radio',
       options: ['height', 'width'],
+      description: 'Whether to size the button by height or width',
       table: { category: 'Props', defaultValue: { summary: 'height' } },
     },
     buttonBorderRadius: {
       control: 'text',
+      description: 'Border radius of the button',
       table: { category: 'Props', defaultValue: { summary: '24px' } },
     },
     buttonColor: {
       control: 'color',
+      description: 'Background color of the button',
       table: { category: 'Props', defaultValue: { summary: '#eceff1' } },
     },
     buttonHoverColor: {
       control: 'color',
+      description: 'Background color of the button on hover',
       table: { category: 'Props', defaultValue: { summary: '#b0bec5' } },
     },
     buttonActiveColor: {
       control: 'color',
+      description: 'Background color of the button when active',
       table: { category: 'Props', defaultValue: { summary: '#cfd8dc' } },
     },
     buttonShadow: {
       control: 'text',
+      description: 'Box shadow of the button',
       table: {
         category: 'Props',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
       },
     },
-    iconSrc: { control: 'text', table: { category: 'Props' } },
+    iconSrc: {
+      control: 'text',
+      description: 'Source URL for the icon image',
+      table: { category: 'Props' },
+    },
     iconAlt: {
       control: 'text',
+      description: 'Alt text for the icon image',
       table: { category: 'Props', defaultValue: { summary: 'icon' } },
     },
     iconSize: {
       control: 'text',
+      description: 'Size of the icon inside the button',
       table: { category: 'Props', defaultValue: { summary: '70%' } },
     },
     showTag: {
       control: 'boolean',
+      description: 'Whether to show the tag/label',
       table: { category: 'Props', defaultValue: { summary: 'false' } },
     },
-    tagText: { control: 'text', table: { category: 'Props' } },
+    tagText: {
+      control: 'text',
+      description: 'Text content of the tag/label',
+      table: { category: 'Props' },
+    },
     tagWidth: {
       control: 'text',
+      description: 'Width of the tag/label',
       table: { category: 'Props', defaultValue: { summary: '300px' } },
     },
     tagPadX: {
       control: 'text',
+      description: 'Horizontal padding of the tag/label',
       table: { category: 'Props', defaultValue: { summary: '10px' } },
     },
     tagTextFontSize: {
       control: 'text',
+      description: 'Font size of the tag text',
       table: { category: 'Props', defaultValue: { summary: '20px' } },
     },
     tagTextFontWeight: {
       control: 'text',
+      description: 'Font weight of the tag text',
       table: { category: 'Props', defaultValue: { summary: 'bold' } },
     },
     tagTextFontFamily: {
       control: 'text',
+      description: 'Font family of the tag text',
       table: {
         category: 'Props',
         defaultValue: { summary: "'Helvetica', 'Arial', sans-serif" },
@@ -162,10 +209,12 @@ A customizable icon button with optional expanding tag text on hover.
     },
     tagTextColor: {
       control: 'color',
+      description: 'Color of the tag text',
       table: { category: 'Props', defaultValue: { summary: 'black' } },
     },
     tagTextShadow: {
       control: 'text',
+      description: 'Text shadow for the tag text',
       table: {
         category: 'Props',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
@@ -173,23 +222,29 @@ A customizable icon button with optional expanding tag text on hover.
     },
     tagTextTransform: {
       control: 'text',
+      description:
+        'Text transformation (e.g., uppercase, lowercase) for the tag text',
       table: { category: 'Props', defaultValue: { summary: 'none' } },
     },
     tagTextAlign: {
       control: 'text',
+      description: 'Text alignment within the tag',
       table: { category: 'Props', defaultValue: { summary: 'center' } },
     },
     tagTextDelay: {
       control: 'text',
+      description: 'Fade-in delay for the tag text on hover',
       table: { category: 'Props', defaultValue: { summary: '0.1s' } },
     },
     isActive: {
       control: 'boolean',
+      description: 'Whether the button is in the active state',
       table: { category: 'Props', defaultValue: { summary: 'false' } },
     },
     onClick: {
       action: 'clicked',
-      table: { category: 'Events' },
+      description: 'Click event handler',
+      table: { type: { summary: '() => void' }, category: 'Events' },
       control: false,
     },
   },
@@ -233,8 +288,8 @@ Default.args = {
   compWidth: 'fit-content',
   buttonSize: '100%',
   buttonBorderRadius: '24px',
-  buttonColor: '#90caf9',
-  buttonHoverColor: '#64b5f6',
+  buttonColor: '#eceff1',
+  buttonHoverColor: '#b0bec5',
   buttonActiveColor: '#cfd8dc',
   buttonShadow: '0px 2px 5px #d0d0d0',
   iconSrc: '/assets/file_copy-48px.svg',
@@ -248,8 +303,8 @@ Default.args = {
   tagTextFontSize: '20px',
   tagTextFontWeight: 'bold',
   tagTextFontFamily: "'Helvetica', 'Arial', sans-serif",
-  tagTextColor: '#222',
-  tagTextShadow: '0px 2px 5px #bbb',
+  tagTextColor: 'black',
+  tagTextShadow: '0px 2px 5px #d0d0d0',
   tagTextTransform: 'none',
   tagTextAlign: 'center',
   tagTextDelay: '0.1s',
