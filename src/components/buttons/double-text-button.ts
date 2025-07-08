@@ -25,6 +25,7 @@ export class DoubleTextButton extends LitElement {
   @property({ type: String }) declare leftTextShadow?: string;
   @property({ type: String }) declare leftTextTransform?: string;
   @property({ type: String }) declare leftTextAlign?: string;
+  @property({ type: String }) declare leftLineHeight?: string;
 
   @property({ type: String }) declare rightColor?: string;
   @property({ type: String }) declare rightHoverColor?: string;
@@ -38,6 +39,7 @@ export class DoubleTextButton extends LitElement {
   @property({ type: String }) declare rightTextShadow?: string;
   @property({ type: String }) declare rightTextTransform?: string;
   @property({ type: String }) declare rightTextAlign?: string;
+  @property({ type: String }) declare rightLineHeight?: string;
 
   static styles = css`
     :host {
@@ -73,6 +75,7 @@ export class DoubleTextButton extends LitElement {
     span {
       display: flex;
       align-items: center;
+      justify-content: center;
       height: 100%;
       box-sizing: border-box;
       overflow: hidden;
@@ -98,7 +101,8 @@ export class DoubleTextButton extends LitElement {
       );
       color: var(--double-text-button-left-color, black);
       text-transform: var(--double-text-button-left-text-transform, none);
-      justify-content: var(--double-text-button-left-text-align, center);
+      text-align: var(--double-text-button-left-text-align, center);
+      line-height: var(--double-text-button-left-line-height, 21px);
     }
 
     #right-section {
@@ -120,7 +124,8 @@ export class DoubleTextButton extends LitElement {
       );
       color: var(--double-text-button-right-color, black);
       text-transform: var(--double-text-button-right-text-transform, none);
-      justify-content: var(--double-text-button-right-text-align, center);
+      text-align: var(--double-text-button-right-text-align, center);
+      line-height: var(--double-text-button-right-line-height, 21px);
     }
   `;
 
@@ -180,6 +185,7 @@ export class DoubleTextButton extends LitElement {
       'none'
     );
     update('leftTextAlign', '--double-text-button-left-text-align', 'center');
+    update('leftLineHeight', '--double-text-button-left-line-height', '21px');
 
     update('rightColor', '--double-text-button-right-bg-color', '#cfd8dc');
     update(
@@ -212,6 +218,7 @@ export class DoubleTextButton extends LitElement {
       'none'
     );
     update('rightTextAlign', '--double-text-button-right-text-align', 'center');
+    update('rightLineHeight', '--double-text-button-right-line-height', '21px');
   }
 
   render() {
