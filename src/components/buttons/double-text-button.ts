@@ -58,6 +58,7 @@ export class DoubleTextButton extends LitElement {
       width: var(--double-text-button-width, 100%);
       box-shadow: var(--double-text-button-shadow, 0px 2px 5px #d0d0d0);
       padding: 0;
+      background-color: transparent;
       border: none;
       border-radius: var(--double-text-button-border-radius, 12px);
       cursor: pointer;
