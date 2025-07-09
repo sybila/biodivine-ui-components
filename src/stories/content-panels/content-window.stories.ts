@@ -121,7 +121,7 @@ Content container component with optional header and close button.
     compWidth: {
       control: 'text',
       description: 'Width of the outer wrapper of the content window.',
-      table: { category: 'Layout', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Layout', defaultValue: { summary: '505px' } },
     },
     windHeight: {
       control: 'text',
@@ -131,17 +131,17 @@ Content container component with optional header and close button.
     windWidth: {
       control: 'text',
       description: 'Width of the main content window.',
-      table: { category: 'Window', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Window', defaultValue: { summary: '100%' } },
     },
     windMaxHeight: {
       control: 'text',
       description: 'Maximum height allowed for the content window.',
-      table: { category: 'Window', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Window', defaultValue: { summary: '100%' } },
     },
     windMaxWidth: {
       control: 'text',
       description: 'Maximum width allowed for the content window.',
-      table: { category: 'Window', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Window', defaultValue: { summary: '100%' } },
     },
     windPad: {
       control: 'text',
@@ -186,7 +186,7 @@ Content container component with optional header and close button.
     showHeader: {
       control: 'boolean',
       description: 'Whether to show the header bar.',
-      table: { category: 'Header', defaultValue: { summary: 'false' } },
+      table: { category: 'Header', defaultValue: { summary: 'true' } },
     },
     headerHeight: {
       control: 'text',
@@ -196,7 +196,7 @@ Content container component with optional header and close button.
     headerWidth: {
       control: 'text',
       description: 'Width of the header.',
-      table: { category: 'Header', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Header', defaultValue: { summary: '100%' } },
     },
     headerGap: {
       control: 'text',
@@ -206,12 +206,12 @@ Content container component with optional header and close button.
     headerText: {
       control: 'text',
       description: 'Text displayed in the header.',
-      table: { category: 'Header', defaultValue: { summary: '' } },
+      table: { category: 'Header', defaultValue: { summary: 'Header Text' } },
     },
     headerTextFontSize: {
       control: 'text',
       description: 'Font size of the header text.',
-      table: { category: 'Header', defaultValue: { summary: '20px' } },
+      table: { category: 'Header', defaultValue: { summary: '24px' } },
     },
     headerTextFontWeight: {
       control: 'text',
@@ -248,14 +248,14 @@ Content container component with optional header and close button.
     showCloseButton: {
       control: 'boolean',
       description: 'Whether to show the close button in the header.',
-      table: { category: 'Close Button', defaultValue: { summary: 'false' } },
+      table: { category: 'Close Button', defaultValue: { summary: 'true' } },
     },
     closeButtonSrc: {
       control: 'text',
       description: 'Source URL for the close button icon image.',
       table: {
         category: 'Close Button',
-        defaultValue: { summary: 'default base64 svg' },
+        defaultValue: { summary: undefined },
       },
     },
     closeHeight: {
@@ -311,17 +311,17 @@ Content container component with optional header and close button.
     contentWidth: {
       control: 'text',
       description: 'Width of the content area.',
-      table: { category: 'Content', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Content', defaultValue: { summary: '100%' } },
     },
     contentMaxHeight: {
       control: 'text',
       description: 'Maximum height of the content area.',
-      table: { category: 'Content', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Content', defaultValue: { summary: '100%' } },
     },
     contentMaxWidth: {
       control: 'text',
       description: 'Maximum width of the content area.',
-      table: { category: 'Content', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Content', defaultValue: { summary: '100%' } },
     },
     contentJustifyC: {
       control: 'text',
@@ -391,11 +391,11 @@ export const Default: StoryFn<ContentWindowProps> = (args) => html`
 
 Default.args = {
   compHeight: 'fit-content',
-  compWidth: 'fit-content',
-  windHeight: '500px',
-  windWidth: '400px',
-  windMaxHeight: '400px',
-  windMaxWidth: '600px',
+  compWidth: '505px',
+  windHeight: 'fit-content',
+  windWidth: '100%',
+  windMaxHeight: '100%',
+  windMaxWidth: '100%',
   windPad: '8px',
   windColor: '#f5f5f5',
   windShadow: '0px 2px 5px #d0d0d0',
@@ -409,8 +409,8 @@ Default.args = {
   headerWidth: '100%',
   headerGap: '5px',
   headerText: 'Header Text',
-  headerTextFontSize: '20px',
-  headerTextFontWeight: '600',
+  headerTextFontSize: '24px',
+  headerTextFontWeight: 'bold',
   headerTextFontFamily: `'Helvetica', 'Arial', sans-serif`,
   headerTextColor: 'black',
   headerTextShadow: '0px 2px 5px #d0d0d0',
@@ -418,16 +418,16 @@ Default.args = {
 
   showCloseButton: true,
   closeButtonSrc: undefined,
-  closeHeight: '20px',
-  closeWidth: '20px',
+  closeHeight: 'fit-content',
+  closeWidth: 'fit-content',
   closeHoverColor: '#cfd8dc',
-  closeIconHeight: '16px',
-  closeIconWidth: '16px',
+  closeIconHeight: 'fit-content',
+  closeIconWidth: 'fit-content',
 
   contentHeight: 'fit-content',
-  contentWidth: 'fit-content',
-  contentMaxHeight: 'fit-content',
-  contentMaxWidth: 'fit-content',
+  contentWidth: '100%',
+  contentMaxHeight: '100%',
+  contentMaxWidth: '100%',
   contentJustifyC: 'start',
   contentAlignI: 'center',
   contentGap: '5px',
