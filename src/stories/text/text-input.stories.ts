@@ -26,7 +26,7 @@ type TextInputProps = {
   /** Font family */
   textFontFamily?: string;
   /** Function to handle keyup event. Receives input value as string. */
-  onKeyup?: (value: string) => void;
+  onWrite?: (value: string) => void;
 };
 
 const meta: Meta<TextInputProps> = {
@@ -117,7 +117,7 @@ A customizable input component built with Lit.
         defaultValue: { summary: "'Helvetica', 'Arial', sans-serif" },
       },
     },
-    onKeyup: {
+    onWrite: {
       action: 'keyup',
       description:
         'Function to handle keyup event. Receives input value as string.',
@@ -141,7 +141,7 @@ export const Default: StoryFn<TextInputProps> = (args) => html`
     .textFontSize=${args.textFontSize}
     .textFontWeight=${args.textFontWeight}
     .textFontFamily=${args.textFontFamily}
-    .onKeyup=${args.onKeyup}
+    .onWrite=${args.onWrite}
   ></text-input>
 `;
 
@@ -157,5 +157,5 @@ Default.args = {
   textFontSize: '14px',
   textFontWeight: 'normal',
   textFontFamily: "'Helvetica', 'Arial', sans-serif",
-  onKeyup: (val: string) => console.log('Keyup:', val),
+  onWrite: (val: string) => console.log('Write:', val),
 };
