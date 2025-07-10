@@ -91,7 +91,6 @@ export class MessageWrapper extends LitElement {
       width: var(--message-wrapper-comp-width, 100%);
       max-height: var(--message-wrapper-comp-height, 100%);
       max-width: var(--message-wrapper-comp-width, 100%);
-      z-index: var(--message-wrapper-z-index, 1000000000);
     }
 
     #outer-wrapper {
@@ -124,6 +123,7 @@ export class MessageWrapper extends LitElement {
       transform: translateY(-10px);
       pointer-events: none;
       transform: translate(-50%, -50%);
+      z-index: var(--message-wrapper-z-index, 1000000000);
     }
 
     #message-container.visible {
@@ -146,6 +146,7 @@ export class MessageWrapper extends LitElement {
       );
       color: black;
       text-transform: var(--message-wrapper-message-text-transform, none);
+      cursor: default;
     }
 
     #message.info {
