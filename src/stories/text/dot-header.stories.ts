@@ -85,12 +85,12 @@ A header component that displays a dot followed by customizable text.
     lineHeight: {
       control: 'text',
       description: 'Line height of the header text',
-      table: { category: 'Text', defaultValue: { summary: '20px' } },
+      table: { category: 'Text', defaultValue: { summary: '22px' } },
     },
     textFontSize: {
       control: 'text',
       description: 'Font size of the header text',
-      table: { category: 'Text', defaultValue: { summary: '19px' } },
+      table: { category: 'Text', defaultValue: { summary: '21px' } },
     },
     textFontWeight: {
       control: 'text',
@@ -160,8 +160,8 @@ Default.args = {
   alignHeader: 'center',
   dotTextGap: '7px',
   headerText: 'Dot Header',
-  lineHeight: '20px',
-  textFontSize: '19px',
+  lineHeight: '22px',
+  textFontSize: '21px',
   textFontWeight: 'normal',
   textFontFamily: "'FiraMono', sans-serif",
   textColor: 'black',
