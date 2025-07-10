@@ -98,6 +98,7 @@ export class ContentWindow extends LitElement {
       text-shadow: var(--content-window-tag-text-shadow, 0px 2px 5px #d0d0d0);
       color: var(--content-window-tag-color, black);
       text-transform: var(--content-window-tag-text-transform, none);
+      cursor: default;
     }
 
     #close-button {
