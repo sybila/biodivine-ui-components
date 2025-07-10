@@ -8,7 +8,7 @@ type TextInputProps = {
   /** Width of the outer component container */
   compWidth?: string;
   /** Placeholder text inside the input */
-  placeholder?: string;
+  inputPlaceholder?: string;
   /** Height of the <input> element */
   inputHeight?: string;
   /** Width of the <input> element */
@@ -69,7 +69,7 @@ A customizable input component built with Lit.
       description: 'Width of the outer component container',
       table: { category: 'Props', defaultValue: { summary: '500px' } },
     },
-    placeholder: {
+    inputPlaceholder: {
       control: 'text',
       description: 'Placeholder text inside the input',
       table: { category: 'Props', defaultValue: { summary: '' } },
@@ -132,7 +132,7 @@ export const Default: StoryFn<TextInputProps> = (args) => html`
   <text-input
     .compHeight=${args.compHeight}
     .compWidth=${args.compWidth}
-    .placeholder=${args.placeholder}
+    .inputPlaceholder=${args.inputPlaceholder}
     .inputHeight=${args.inputHeight}
     .inputWidth=${args.inputWidth}
     .inputBorderRadius=${args.inputBorderRadius}
@@ -148,7 +148,7 @@ export const Default: StoryFn<TextInputProps> = (args) => html`
 Default.args = {
   compHeight: '26px',
   compWidth: '500px',
-  placeholder: 'Enter text...',
+  inputPlaceholder: 'Enter text...',
   inputHeight: '100%',
   inputWidth: '100%',
   inputBorderRadius: '8px',
