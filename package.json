@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --ext .ts,.js",
+    "lint:fix": "eslint ./src --ext .ts,.js --fix",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src",
     "storybook": "storybook dev -p 6006",
