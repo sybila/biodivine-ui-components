@@ -2,7 +2,7 @@
 
 console.log('Foo');
 
-function bar() 
+function bar(): boolean 
 {
-  console.log('Bar');
+  console.log('Bar');  
 }
