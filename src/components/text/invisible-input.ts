@@ -123,8 +123,8 @@ export class InvisibleInput extends LitElement {
       background: none;
       border: none;
       color: var(--invisible-input-singleline-text-color, black);
-      line-height: var(--invisible-input-singleline-line-height, 21px);
-      font-size: var(--invisible-input-singleline-font-size, 20px);
+      line-height: var(--invisible-input-singleline-line-height, 100%);
+      font-size: var(--invisible-input-singleline-font-size, 100%);
       font-weight: var(--invisible-input-singleline-font-weight, normal);
       overflow-x: var(--invisible-input-cont-overflow-x, auto);
       overflow-y: var(--invisible-input-cont-overflow-y, auto);
@@ -190,19 +190,25 @@ export class InvisibleInput extends LitElement {
     }
   `;
 
-  private changeHandler(event: KeyboardEvent) {
+  private changeHandler(event: Event) {
     if (this.handleChange)
-      this.handleChange((event.target as HTMLInputElement).value);
+      this.handleChange(
+        (event.target as HTMLInputElement | HTMLTextAreaElement).value
+      );
   }
 
-  private blurHandler(event: KeyboardEvent) {
+  private blurHandler(event: Event) {
     if (this.handleBlur)
-      this.handleBlur((event.target as HTMLInputElement).value);
+      this.handleBlur(
+        (event.target as HTMLInputElement | HTMLTextAreaElement).value
+      );
   }
 
-  private keyUpHandler(event: KeyboardEvent) {
+  private keyUpHandler(event: Event) {
     if (this.handleKeyUp)
-      this.handleKeyUp((event.target as HTMLInputElement).value);
+      this.handleKeyUp(
+        (event.target as HTMLInputElement | HTMLTextAreaElement).value
+      );
   }
 
   private updateStyleVariable(
@@ -236,7 +242,7 @@ export class InvisibleInput extends LitElement {
     update(
       'singleLineHeight',
       '--invisible-input-singleline-line-height',
-      '21px'
+      '100%'
     );
     update(
       'singleFontFamily',
@@ -248,7 +254,7 @@ export class InvisibleInput extends LitElement {
       '--invisible-input-singleline-font-weight',
       'normal'
     );
-    update('singleFontSize', '--invisible-input-singleline-font-size', '20px');
+    update('singleFontSize', '--invisible-input-singleline-font-size', '100%');
     update(
       'singleTextColor',
       '--invisible-input-singleline-text-color',
@@ -272,16 +278,8 @@ export class InvisibleInput extends LitElement {
 
     update('multiHeight', '--invisible-input-multiline-height', '100%');
     update('multiWidth', '--invisible-input-multiline-width', '100%');
-    update(
-      'multiMaxHeight',
-      '--invisible-input-multiline-max-height',
-      '100%'
-    );
-    update(
-      'multiMaxWidth',
-      '--invisible-input-multiline-max-width',
-      '100%'
-    );
+    update('multiMaxHeight', '--invisible-input-multiline-max-height', '100%');
+    update('multiMaxWidth', '--invisible-input-multiline-max-width', '100%');
     update(
       'multiLineHeight',
       '--invisible-input-multiline-line-height',
