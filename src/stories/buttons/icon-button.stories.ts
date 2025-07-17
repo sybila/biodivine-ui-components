@@ -24,7 +24,7 @@ type IconButtonProps = {
   /** Size of the icon inside the button */
   iconSize?: string;
   /** Click event handler */
-  onClick?: () => void;
+  handleClick?: () => void;
   /** Source URL for the icon image */
   iconSrc?: string;
   /** Alt text for the icon image */
@@ -163,7 +163,7 @@ A customizable icon button with optional expanding tag text on hover.
       description: 'Size of the icon inside the button',
       table: { category: 'Props', defaultValue: { summary: '70%' } },
     },
-    onClick: {
+    handleClick: {
       action: 'clicked',
       description: 'Click event handler',
       table: { type: { summary: '() => void' }, category: 'Events' },
@@ -273,7 +273,7 @@ export const Default: StoryFn<IconButtonProps> = (args) => html`
     .buttonActiveColor=${args.buttonActiveColor}
     .buttonShadow=${args.buttonShadow}
     .iconSize=${args.iconSize}
-    .onClick=${args.onClick}
+    .handleClick=${args.handleClick}
     .iconSrc=${args.iconSrc}
     .iconAlt=${args.iconAlt}
     .showTag=${args.showTag}
