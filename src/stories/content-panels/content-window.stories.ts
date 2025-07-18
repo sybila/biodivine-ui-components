@@ -5,6 +5,8 @@ import type { Meta, StoryFn } from '@storybook/web-components';
 type ContentWindowProps = {
   compHeight?: string;
   compWidth?: string;
+  compMaxHeight?: string;
+  compMaxWidth?: string;
   windHeight?: string;
   windWidth?: string;
   windMaxHeight?: string;
@@ -63,6 +65,8 @@ Content container component with optional header and close button.
 |----------------------------------------------|-------------------------------------------|
 | \`--content-window-comp-height\`               | Height of the outer wrapper               |
 | \`--content-window-comp-width\`                | Width of the outer wrapper                |
+| \`--content-window-comp-max-height\`           | Maximum height of the outer wrapper               |
+| \`--content-window-comp-max-width\`            | Maximum width of the outer wrapper                |
 | \`--content-window-height\`                    | Height of the main container              |
 | \`--content-window-width\`                     | Width of the main container               |
 | \`--content-window-max-height\`                | Maximum height of the window              |
@@ -116,11 +120,21 @@ Content container component with optional header and close button.
     compHeight: {
       control: 'text',
       description: 'Height of the outer wrapper of the content window.',
-      table: { category: 'Layout', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Layout', defaultValue: { summary: '100%' } },
     },
     compWidth: {
       control: 'text',
       description: 'Width of the outer wrapper of the content window.',
+      table: { category: 'Layout', defaultValue: { summary: '505px' } },
+    },
+    compMaxHeight: {
+      control: 'text',
+      description: 'Maximum height of the outer wrapper of the content window.',
+      table: { category: 'Layout', defaultValue: { summary: '100%' } },
+    },
+    compMaxWidth: {
+      control: 'text',
+      description: 'Maximum width of the outer wrapper of the content window.',
       table: { category: 'Layout', defaultValue: { summary: '505px' } },
     },
     windHeight: {
@@ -347,6 +361,8 @@ export const Default: StoryFn<ContentWindowProps> = (args) => html`
   <content-window
     .compHeight=${args.compHeight}
     .compWidth=${args.compWidth}
+    .compMaxHeight=${args.compMaxHeight}
+    .compMaxWidth=${args.compMaxWidth}
     .windHeight=${args.windHeight}
     .windWidth=${args.windWidth}
     .windMaxHeight=${args.windMaxHeight}
@@ -390,8 +406,10 @@ export const Default: StoryFn<ContentWindowProps> = (args) => html`
 `;
 
 Default.args = {
-  compHeight: 'fit-content',
+  compHeight: '100%',
   compWidth: '505px',
+  compMaxHeight: '100%',
+  compMaxWidth: '100%',
   windHeight: 'fit-content',
   windWidth: '100%',
   windMaxHeight: '100%',
