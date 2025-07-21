@@ -116,7 +116,7 @@ export class LoadingIndicator extends LitElement {
     update(
       'loadingMessageFontSize',
       '--loading-indicator-tag-font-size',
-      '16Fpx'
+      '16px'
     );
     update(
       'loadingMessageFontWeight',
@@ -149,11 +149,12 @@ export class LoadingIndicator extends LitElement {
       <div id="loading-indicator" part="box">
         <img
           id="loading-spinner"
-          part="loadingSpinner"
+          part="loading-spinner"
           src="${this.loadingSpinnerSrc || LoadingIndicator.loadingGif}"
+          alt="Loading Spinner"
         />
         ${this.loadingMessage
-          ? html`<p id="loading-message" part="loadingMessage">
+          ? html`<p id="loading-message" part="loading-message">
               ${this.loadingMessage}
             </p>`
           : ''}

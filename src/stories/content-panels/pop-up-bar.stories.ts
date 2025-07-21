@@ -36,122 +36,131 @@ A button that reveals a horizontal bar of slot content (e.g., icons) when hovere
 #### CSS Custom Properties
 
 | Variable                             | Description                          |
-|-------------------------------------|--------------------------------------|
-| \`--pop-up-bar-comp-height\`        | Component container height           |
-| \`--pop-up-bar-comp-width\`         | Component container width            |
-| \`--pop-up-bar-height\`             | Pop-up bar height                    |
-| \`--pop-up-bar-width\`              | Pop-up bar width                     |
-| \`--pop-up-bar-color\`              | Pop-up bar background color          |
-| \`--pop-up-bar-shadow\`             | Pop-up bar box-shadow                |
-| \`--pop-up-bar-button-height\`      | Toggle button height                 |
-| \`--pop-up-bar-button-width\`       | Toggle button width                  |
-| \`--pop-up-bar-button-color\`       | Button background color              |
-| \`--pop-up-bar-button-hover-color\` | Button background color on hover     |
-| \`--pop-up-bar-button-shadow\`      | Button box-shadow                    |
-| \`--pop-up-bar-icon-height\`        | Icon height                          |
-| \`--pop-up-bar-icon-width\`         | Icon width                           |
-| \`--pop-up-bar-gap\`                | Gap between bar and button           |
+|--------------------------------------|--------------------------------------|
+| \`--pop-up-bar-comp-height\`         | Component container height           |
+| \`--pop-up-bar-comp-width\`          | Component container width            |
+| \`--pop-up-bar-height\`              | Pop-up bar height                    |
+| \`--pop-up-bar-width\`               | Pop-up bar width                     |
+| \`--pop-up-bar-color\`               | Pop-up bar background color          |
+| \`--pop-up-bar-shadow\`              | Pop-up bar box-shadow                |
+| \`--pop-up-bar-button-height\`       | Toggle button height                 |
+| \`--pop-up-bar-button-width\`        | Toggle button width                  |
+| \`--pop-up-bar-button-color\`        | Button background color              |
+| \`--pop-up-bar-button-hover-color\`  | Button background color on hover     |
+| \`--pop-up-bar-button-shadow\`       | Button box-shadow                    |
+| \`--pop-up-bar-icon-height\`         | Icon height                          |
+| \`--pop-up-bar-icon-width\`          | Icon width                           |
+| \`--pop-up-bar-gap\`                 | Gap between bar and button           |
 
 #### Shadow DOM Parts
 
-| Part Name        | Element                       | Description                              |
-|------------------|-------------------------------|------------------------------------------|
-| \`container\`     | \`<div id="container">\`       | Main wrapper container                   |
-| \`button\`        | \`<div id="display-button">\`  | The toggle button                        |
-| \`icon\`          | \`<img>\` inside button        | The icon image inside the button         |
-| \`arrow\`         | \`<span id="arrow-up">\`       | The fallback arrow icon (if no image)    |
-| \`bar-container\` | \`<div id="bar-container">\`   | Container wrapping the pop-up bar        |
-| \`bar\`           | \`<div id="bar">\`             | The pop-up bar that holds slotted content |
+| Part Name        | Description                              |
+|------------------|------------------------------------------|
+| \`container\`     | Main wrapper container                   |
+| \`button\`        | The toggle button                        |
+| \`icon\`          | The icon image inside the button         |
+| \`arrow\`         | The fallback arrow icon (if no image)    |
+| \`bar-container\` | Container wrapping the pop-up bar        |
+| \`bar\`           | The pop-up bar that holds slotted content|
         `,
       },
     },
   },
   argTypes: {
+    // Layout
     compHeight: {
       control: 'text',
       description: 'Height of the entire component container',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Layout' },
     },
     compWidth: {
       control: 'text',
       description: 'Width of the entire component container',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Layout' },
     },
+
+    // Bar
     barHeight: {
       control: 'text',
       description: 'Height of the pop-up bar',
-      table: { defaultValue: { summary: '100px' }, category: 'Props' },
+      table: { defaultValue: { summary: '100px' }, category: 'Bar' },
     },
     barWidth: {
       control: 'text',
       description: 'Width of the pop-up bar',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Bar' },
     },
     barColor: {
       control: 'color',
       description: 'Background color of the pop-up bar',
-      table: { defaultValue: { summary: '#eceff1' }, category: 'Props' },
+      table: { defaultValue: { summary: '#eceff1' }, category: 'Bar' },
     },
     barShadow: {
       control: 'text',
       description: 'CSS box-shadow applied to the pop-up bar',
       table: {
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
-        category: 'Props',
+        category: 'Bar',
       },
     },
+
+    // Button
     butHeight: {
       control: 'text',
       description: 'Height of the toggle button',
-      table: { defaultValue: { summary: '30px' }, category: 'Props' },
+      table: { defaultValue: { summary: '30px' }, category: 'Button' },
     },
     butWidth: {
       control: 'text',
       description: 'Width of the toggle button',
-      table: { defaultValue: { summary: '200px' }, category: 'Props' },
+      table: { defaultValue: { summary: '200px' }, category: 'Button' },
     },
     butColor: {
       control: 'color',
       description: 'Background color of the toggle button',
-      table: { defaultValue: { summary: '#eceff1' }, category: 'Props' },
+      table: { defaultValue: { summary: '#eceff1' }, category: 'Button' },
     },
     butHoverColor: {
       control: 'color',
       description: 'Background color on button hover',
-      table: { defaultValue: { summary: '#cfd8dc' }, category: 'Props' },
+      table: { defaultValue: { summary: '#cfd8dc' }, category: 'Button' },
     },
     butShadow: {
       control: 'text',
       description: 'CSS box-shadow applied to the toggle button',
       table: {
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
-        category: 'Props',
+        category: 'Button',
       },
     },
+
+    // Icon
     iconHeight: {
       control: 'text',
       description: 'Height of the icon inside the button',
-      table: { defaultValue: { summary: '70%' }, category: 'Props' },
+      table: { defaultValue: { summary: '70%' }, category: 'Icon' },
     },
     iconWidth: {
       control: 'text',
       description: 'Width of the icon inside the button',
-      table: { defaultValue: { summary: '70%' }, category: 'Props' },
+      table: { defaultValue: { summary: '70%' }, category: 'Icon' },
     },
     iconSrc: {
       control: 'text',
       description: 'Source URL or path of the icon image',
-      table: { category: 'Props' },
+      table: { category: 'Icon' },
     },
     iconAlt: {
       control: 'text',
       description: 'Alternative text for the icon image',
-      table: { category: 'Props' },
+      table: { category: 'Icon' },
     },
+
+    // Gap
     gapSize: {
       control: 'text',
       description: 'Gap between the toggle button and the bar',
-      table: { defaultValue: { summary: '10px' }, category: 'Props' },
+      table: { defaultValue: { summary: '10px' }, category: 'Layout' },
     },
   },
 };

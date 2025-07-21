@@ -30,28 +30,36 @@ const meta: Meta<DotHeaderProps> = {
 
 A header component that displays a dot followed by customizable text.
 
-#### CSS Variables (Configurable via props)
+#### CSS Custom Properties
 
 | Variable                             | Description                |
-|-------------------------------------|----------------------------|
-| \`--dot-header-comp-height\`        | Container height           |
-| \`--dot-header-comp-width\`         | Container width            |
-| \`--dot-header-justify-content\`    | Flexbox justify-content    |
-| \`--dot-header-align-items\`        | Flexbox align-items        |
-| \`--dot-header-dot-text-gap\`       | Gap between dot and text   |
-| \`--dot-header-line-height\`        | Line height of text        |
-| \`--dot-header-font-size\`          | Font size of text          |
-| \`--dot-header-font-weight\`        | Font weight of text        |
-| \`--dot-header-font-family\`        | Font family of text        |
-| \`--dot-header-color\`              | Text color                 |
-| \`--dot-header-text-shadow\`        | Text shadow                |
-| \`--dot-header-text-transform\`     | Text transform             |
-| \`--dot-header-text-align\`         | Text alignment             |
+|---------------------------------------|----------------------------|
+| \`--dot-header-comp-height\`          | Container height           |
+| \`--dot-header-comp-width\`           | Container width            |
+| \`--dot-header-justify-content\`      | Flexbox justify-content    |
+| \`--dot-header-align-items\`          | Flexbox align-items        |
+| \`--dot-header-dot-text-gap\`         | Gap between dot and text   |
+| \`--dot-header-line-height\`          | Line height of text        |
+| \`--dot-header-font-size\`            | Font size of text          |
+| \`--dot-header-font-weight\`          | Font weight of text        |
+| \`--dot-header-font-family\`          | Font family of text        |
+| \`--dot-header-color\`                | Text color                 |
+| \`--dot-header-text-shadow\`          | Text shadow                |
+| \`--dot-header-text-transform\`       | Text transform             |
+| \`--dot-header-text-align\`           | Text alignment             |
+
+#### Shadow DOM Parts
+
+| Part Name | Element | Description         |
+|-----------|---------|---------------------|
+| \`dot\`    | \`span\`  | The dot character    |
+| \`text\`   | \`span\`  | The header text span |
         `,
       },
     },
   },
   argTypes: {
+    // Layout
     compHeight: {
       control: 'text',
       description: 'Height of the outer component container',
@@ -77,6 +85,8 @@ A header component that displays a dot followed by customizable text.
       description: 'Gap between the dot and the text',
       table: { category: 'Layout', defaultValue: { summary: '7px' } },
     },
+
+    // Text
     headerText: {
       control: 'text',
       description: 'Header text content',
@@ -100,10 +110,7 @@ A header component that displays a dot followed by customizable text.
     textFontFamily: {
       control: 'text',
       description: 'Font family of the header text',
-      table: {
-        category: 'Text',
-        defaultValue: { summary: "'FiraMono', sans-serif" },
-      },
+      table: { category: 'Text', defaultValue: { summary: "'FiraMono', sans-serif" } },
     },
     textColor: {
       control: 'color',
@@ -113,15 +120,11 @@ A header component that displays a dot followed by customizable text.
     textShadow: {
       control: 'text',
       description: 'Text shadow for the header text',
-      table: {
-        category: 'Text',
-        defaultValue: { summary: '0px 2px 5px #d0d0d0' },
-      },
+      table: { category: 'Text', defaultValue: { summary: '0px 2px 5px #d0d0d0' } },
     },
     textTransform: {
       control: 'text',
-      description:
-        'Text transformation (e.g., uppercase, lowercase) for the header text',
+      description: 'Text transformation (e.g., uppercase, lowercase) for the header text',
       table: { category: 'Text', defaultValue: { summary: 'uppercase' } },
     },
     textAlign: {

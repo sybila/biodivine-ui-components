@@ -71,15 +71,7 @@ const meta: Meta<IconButtonProps> = {
 
 A customizable icon button with optional expanding tag text on hover.
 
-#### Shadow DOM Parts
-
-| Part Name   | Element    | Description                  |
-|-------------|------------|------------------------------|
-| \`button\`    | \`<button>\`  | The clickable button area    |
-| \`icon\`      | \`<img>\`     | The icon inside the button   |
-| \`tag-text\`  | \`<span>\`    | The expanding tag/label text |
-
-#### CSS Variables (Configurable via props)
+#### CSS Custom Properties
 
 | Variable                                  | Description                              |
 |--------------------------------------------|------------------------------------------|
@@ -103,135 +95,153 @@ A customizable icon button with optional expanding tag text on hover.
 | \`--icon-button-tag-text-transform\`       | Text transform for tag                   |
 | \`--icon-button-tag-text-align\`           | Text alignment in tag                    |
 | \`--icon-button-tag-text-delay\`           | Fade-in delay of tag on hover            |
-        `,
+       
+#### Shadow DOM Parts
+
+| Part Name   | Element    | Description                  |
+|-------------|------------|------------------------------|
+| \`button\`    | \`<button>\`  | The clickable button area    |
+| \`icon\`      | \`<img>\`     | The icon inside the button   |
+| \`tag-text\`  | \`<span>\`    | The expanding tag/label text |
+
+`,
       },
     },
   },
   argTypes: {
+    // Layout
     compHeight: {
       control: 'text',
       description: 'Height of the outer component container',
-      table: { category: 'Props', defaultValue: { summary: '60px' } },
+      table: { category: 'Layout', defaultValue: { summary: '60px' } },
     },
     compWidth: {
       control: 'text',
       description: 'Width of the outer component container',
-      table: { category: 'Props', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Layout', defaultValue: { summary: 'fit-content' } },
     },
+
+    // Button
     buttonSize: {
       control: 'text',
       description:
         'Size of the button (applies to height or width depending on sizeBy)',
-      table: { category: 'Props', defaultValue: { summary: '100%' } },
+      table: { category: 'Button', defaultValue: { summary: '100%' } },
     },
     sizeBy: {
       control: 'radio',
       options: ['height', 'width'],
       description: 'Whether to size the button by height or width',
-      table: { category: 'Props', defaultValue: { summary: 'height' } },
+      table: { category: 'Button', defaultValue: { summary: 'height' } },
     },
     buttonBorderRadius: {
       control: 'text',
       description: 'Border radius of the button',
-      table: { category: 'Props', defaultValue: { summary: '24px' } },
+      table: { category: 'Button', defaultValue: { summary: '24px' } },
     },
     buttonColor: {
       control: 'color',
       description: 'Background color of the button',
-      table: { category: 'Props', defaultValue: { summary: '#eceff1' } },
+      table: { category: 'Button', defaultValue: { summary: '#eceff1' } },
     },
     buttonHoverColor: {
       control: 'color',
       description: 'Background color of the button on hover',
-      table: { category: 'Props', defaultValue: { summary: '#b0bec5' } },
+      table: { category: 'Button', defaultValue: { summary: '#b0bec5' } },
     },
     buttonActiveColor: {
       control: 'color',
       description: 'Background color of the button when active',
-      table: { category: 'Props', defaultValue: { summary: '#cfd8dc' } },
+      table: { category: 'Button', defaultValue: { summary: '#cfd8dc' } },
     },
     buttonShadow: {
       control: 'text',
       description: 'Box shadow of the button',
       table: {
-        category: 'Props',
+        category: 'Button',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
       },
     },
+
+    // Icon
     iconSize: {
       control: 'text',
       description: 'Size of the icon inside the button',
-      table: { category: 'Props', defaultValue: { summary: '70%' } },
+      table: { category: 'Icon', defaultValue: { summary: '70%' } },
     },
+    iconSrc: {
+      control: 'text',
+      description: 'Source URL for the icon image',
+      table: { category: 'Icon' },
+    },
+    iconAlt: {
+      control: 'text',
+      description: 'Alt text for the icon image',
+      table: { category: 'Icon', defaultValue: { summary: 'icon' } },
+    },
+
+    // Events
     handleClick: {
       action: 'clicked',
       description: 'Click event handler',
       table: { type: { summary: '() => void' }, category: 'Events' },
       control: false,
     },
-    iconSrc: {
-      control: 'text',
-      description: 'Source URL for the icon image',
-      table: { category: 'Props' },
-    },
-    iconAlt: {
-      control: 'text',
-      description: 'Alt text for the icon image',
-      table: { category: 'Props', defaultValue: { summary: 'icon' } },
-    },
+
+    // Tag/Label
     showTag: {
       control: 'boolean',
       description: 'Whether to show the tag/label',
-      table: { category: 'Props', defaultValue: { summary: 'false' } },
+      table: { category: 'Tag', defaultValue: { summary: 'false' } },
     },
     tagText: {
       control: 'text',
       description: 'Text content of the tag/label',
-      table: { category: 'Props' },
+      table: { category: 'Tag' },
     },
     tagWidth: {
       control: 'text',
       description: 'Width of the tag/label',
-      table: { category: 'Props', defaultValue: { summary: '272px' } },
+      table: { category: 'Tag', defaultValue: { summary: '272px' } },
     },
     tagPadX: {
       control: 'text',
       description: 'Horizontal padding of the tag/label',
-      table: { category: 'Props', defaultValue: { summary: '10px' } },
+      table: { category: 'Tag', defaultValue: { summary: '10px' } },
     },
     tagLineHeight: {
       control: 'text',
       description: 'Line height of the tag text',
-      table: { category: 'Props', defaultValue: { summary: '25px' } },
+      table: { category: 'Tag', defaultValue: { summary: '25px' } },
     },
     tagTextFontSize: {
       control: 'text',
       description: 'Font size of the tag text',
-      table: { category: 'Props', defaultValue: { summary: '20px' } },
+      table: { category: 'Tag', defaultValue: { summary: '20px' } },
     },
     tagTextFontWeight: {
       control: 'text',
       description: 'Font weight of the tag text',
-      table: { category: 'Props', defaultValue: { summary: 'bold' } },
+      table: { category: 'Tag', defaultValue: { summary: 'bold' } },
     },
     tagTextFontFamily: {
       control: 'text',
       description: 'Font family of the tag text',
       table: {
-        category: 'Props',
+        category: 'Tag',
         defaultValue: { summary: "'Helvetica', 'Arial', sans-serif" },
       },
     },
     tagTextColor: {
       control: 'color',
       description: 'Color of the tag text',
-      table: { category: 'Props', defaultValue: { summary: 'black' } },
+      table: { category: 'Tag', defaultValue: { summary: 'black' } },
     },
     tagTextShadow: {
       control: 'text',
       description: 'Text shadow for the tag text',
       table: {
-        category: 'Props',
+        category: 'Tag',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
       },
     },
@@ -239,22 +249,24 @@ A customizable icon button with optional expanding tag text on hover.
       control: 'text',
       description:
         'Text transformation (e.g., uppercase, lowercase) for the tag text',
-      table: { category: 'Props', defaultValue: { summary: 'none' } },
+      table: { category: 'Tag', defaultValue: { summary: 'none' } },
     },
     tagTextAlign: {
       control: 'text',
       description: 'Text alignment within the tag',
-      table: { category: 'Props', defaultValue: { summary: 'center' } },
+      table: { category: 'Tag', defaultValue: { summary: 'center' } },
     },
     tagTextDelay: {
       control: 'text',
       description: 'Fade-in delay for the tag text on hover',
-      table: { category: 'Props', defaultValue: { summary: '0.1s' } },
+      table: { category: 'Tag', defaultValue: { summary: '0.1s' } },
     },
+
+    // State
     isActive: {
       control: 'boolean',
       description: 'Whether the button is in the active state',
-      table: { category: 'Props', defaultValue: { summary: 'false' } },
+      table: { category: 'State', defaultValue: { summary: 'false' } },
     },
   },
 };
