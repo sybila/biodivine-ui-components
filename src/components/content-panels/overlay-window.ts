@@ -58,7 +58,7 @@ export class OverlayWindow extends LitElement {
 
   static styles = css`
     :host {
-      display: inline-block;
+      display: block;
       position: fixed;
       top: 0;
       left: 0;
