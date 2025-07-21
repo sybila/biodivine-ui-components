@@ -3,31 +3,18 @@ import { html } from 'lit';
 import type { Meta, StoryFn } from '@storybook/web-components';
 
 type SimpleHeaderProps = {
-  /** Height of the outer component container */
   compHeight?: string;
-  /** Width of the outer component container */
   compWidth?: string;
-  /** Justify content of the header container */
   justifyHeader?: string;
-  /** Align items of the header container */
   alignHeader?: string;
-  /** Header text content */
   headerText?: string;
-  /** Line height of the header text */
   lineHeight?: string;
-  /** Font size of the header text */
   textFontSize?: string;
-  /** Font weight of the header text */
   textFontWeight?: string;
-  /** Font family of the header text */
   textFontFamily?: string;
-  /** Color of the header text */
   textColor?: string;
-  /** Text shadow for the header text */
   textShadow?: string;
-  /** Text transformation (e.g., uppercase, lowercase) for the header text */
   textTransform?: string;
-  /** Text alignment within the header */
   textAlign?: string;
 };
 
@@ -40,87 +27,96 @@ const meta: Meta<SimpleHeaderProps> = {
         component: `
 ### \`<simple-header>\`
 
-A simple customizable header component.
+Simple header component.
 
-#### CSS Variables (Configurable via props)
+#### CSS Custom Properties
 
-| Variable                        | Description                |
-|----------------------------------|----------------------------|
-| \`--simple-header-comp-height\`  | Container height           |
-| \`--simple-header-comp-width\`   | Container width            |
-| \`--simple-header-justify-content\` | Flexbox justify-content |
-| \`--simple-header-align-items\`      | Flexbox align-items      |
-| \`--simple-header-line-height\`  | Line height of text        |
-| \`--simple-header-font-size\`    | Font size of text          |
-| \`--simple-header-font-weight\`  | Font weight of text        |
-| \`--simple-header-font-family\`  | Font family of text        |
-| \`--simple-header-color\`        | Text color                 |
-| \`--simple-header-text-shadow\`  | Text shadow                |
-| \`--simple-header-text-transform\`| Text transform             |
-| \`--simple-header-text-align\`   | Text alignment             |
+| Variable                              | Description                |
+|----------------------------------------|----------------------------|
+| \`--simple-header-comp-height\`        | Container height           |
+| \`--simple-header-comp-width\`         | Container width            |
+| \`--simple-header-justify-content\`    | Flexbox justify-content    |
+| \`--simple-header-align-items\`        | Flexbox align-items        |
+| \`--simple-header-line-height\`        | Line height of text        |
+| \`--simple-header-font-size\`          | Font size of text          |
+| \`--simple-header-font-weight\`        | Font weight of text        |
+| \`--simple-header-font-family\`        | Font family of text        |
+| \`--simple-header-color\`              | Text color                 |
+| \`--simple-header-text-shadow\`        | Text shadow                |
+| \`--simple-header-text-transform\`     | Text transform             |
+| \`--simple-header-text-align\`         | Text alignment             |
+
+#### Shadow DOM Parts
+
+| Part Name    | Element | Description           |
+|--------------|---------|-----------------------|
+| \`header-text\` | \`span\`  | The header text span   |
         `,
       },
     },
   },
   argTypes: {
+    // Layout
     compHeight: {
       control: 'text',
       description: 'Height of the outer component container',
-      table: { category: 'Props', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Layout', defaultValue: { summary: 'fit-content' } },
     },
     compWidth: {
       control: 'text',
       description: 'Width of the outer component container',
-      table: { category: 'Props', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Layout', defaultValue: { summary: 'fit-content' } },
     },
     justifyHeader: {
       control: 'text',
       description: 'Justify content of the header container',
-      table: { category: 'Props', defaultValue: { summary: 'center' } },
+      table: { category: 'Layout', defaultValue: { summary: 'center' } },
     },
     alignHeader: {
       control: 'text',
       description: 'Align items of the header container',
-      table: { category: 'Props', defaultValue: { summary: 'center' } },
+      table: { category: 'Layout', defaultValue: { summary: 'center' } },
     },
+
+    // Text
     headerText: {
       control: 'text',
       description: 'Header text content',
-      table: { category: 'Props', defaultValue: { summary: 'Simple Header' } },
+      table: { category: 'Text', defaultValue: { summary: 'Simple Header' } },
     },
     lineHeight: {
       control: 'text',
       description: 'Line height of the header text',
-      table: { category: 'Props', defaultValue: { summary: '22px' } },
+      table: { category: 'Text', defaultValue: { summary: '22px' } },
     },
     textFontSize: {
       control: 'text',
       description: 'Font size of the header text',
-      table: { category: 'Props', defaultValue: { summary: '21px' } },
+      table: { category: 'Text', defaultValue: { summary: '21px' } },
     },
     textFontWeight: {
       control: 'text',
       description: 'Font weight of the header text',
-      table: { category: 'Props', defaultValue: { summary: 'bold' } },
+      table: { category: 'Text', defaultValue: { summary: 'bold' } },
     },
     textFontFamily: {
       control: 'text',
       description: 'Font family of the header text',
       table: {
-        category: 'Props',
+        category: 'Text',
         defaultValue: { summary: "'Helvetica', 'Arial', sans-serif" },
       },
     },
     textColor: {
       control: 'color',
       description: 'Color of the header text',
-      table: { category: 'Props', defaultValue: { summary: 'black' } },
+      table: { category: 'Text', defaultValue: { summary: 'black' } },
     },
     textShadow: {
       control: 'text',
       description: 'Text shadow for the header text',
       table: {
-        category: 'Props',
+        category: 'Text',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
       },
     },
@@ -128,12 +124,12 @@ A simple customizable header component.
       control: 'text',
       description:
         'Text transformation (e.g., uppercase, lowercase) for the header text',
-      table: { category: 'Props', defaultValue: { summary: 'none' } },
+      table: { category: 'Text', defaultValue: { summary: 'none' } },
     },
     textAlign: {
       control: 'text',
       description: 'Text alignment within the header',
-      table: { category: 'Props', defaultValue: { summary: 'center' } },
+      table: { category: 'Text', defaultValue: { summary: 'center' } },
     },
   },
 };

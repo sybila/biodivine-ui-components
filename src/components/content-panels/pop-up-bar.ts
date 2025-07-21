@@ -1,7 +1,7 @@
-import { LitElement, html, css } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { LitElement, html, css } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
 
-@customElement("pop-up-bar")
+@customElement('pop-up-bar')
 export class PopUpBar extends LitElement {
   @property({ type: String }) declare compHeight?: string;
   @property({ type: String }) declare compWidth?: string;
@@ -31,6 +31,7 @@ export class PopUpBar extends LitElement {
       width: var(--pop-up-bar-comp-width, fit-content);
       max-height: var(--pop-up-bar-comp-height, fit-content);
       max-width: var(--pop-up-bar-comp-width, fit-content);
+      pointer-events: none;
     }
 
     #container {
@@ -38,6 +39,7 @@ export class PopUpBar extends LitElement {
       flex-direction: column-reverse;
       justify-content: end;
       align-items: center;
+      pointer-events: none;
     }
 
     #bar {
@@ -54,6 +56,7 @@ export class PopUpBar extends LitElement {
       border-radius: 10px;
       box-shadow: var(--pop-up-bar-shadow, 0px 2px 5px #d0d0d0);
       background-color: var(--pop-up-bar-color, #eceff1);
+      pointer-events: auto;
     }
 
     #bar-container {
@@ -63,7 +66,9 @@ export class PopUpBar extends LitElement {
       );
       width: var(--pop-up-bar-width, fit-content);
       visibility: hidden;
-      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      transition:
+        opacity 0.3s ease-in-out,
+        visibility 0.3s ease-in-out;
       pointer-events: none;
     }
 
@@ -91,6 +96,7 @@ export class PopUpBar extends LitElement {
       box-shadow: var(--pop-up-bar-button-shadow, 0px 2px 5px #d0d0d0);
       background-color: var(--pop-up-bar-button-color, #eceff1);
       cursor: pointer;
+      pointer-events: auto;
     }
 
     #display-button:hover {
@@ -112,7 +118,7 @@ export class PopUpBar extends LitElement {
       font-size: 1.5rem;
       font-weight: 600;
       color: #333;
-      font-family: "Segoe UI", "Helvetica", "Arial", sans-serif;
+      font-family: 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
       line-height: 1;
       display: flex;
       justify-content: center;
@@ -135,24 +141,24 @@ export class PopUpBar extends LitElement {
     const update = (prop: string, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
-    update("compHeight", "--pop-up-bar-comp-height", "fit-content");
-    update("compWidth", "--pop-up-bar-comp-width", "fit-content");
+    update('compHeight', '--pop-up-bar-comp-height', 'fit-content');
+    update('compWidth', '--pop-up-bar-comp-width', 'fit-content');
 
-    update("barHeight", "--pop-up-bar-height", "100px");
-    update("barWidth", "--pop-up-bar-width", "fit-content");
-    update("barColor", "--pop-up-bar-color", "#eceff1");
-    update("barShadow", "--pop-up-bar-shadow", "0px 2px 5px #d0d0d0");
+    update('barHeight', '--pop-up-bar-height', '100px');
+    update('barWidth', '--pop-up-bar-width', 'fit-content');
+    update('barColor', '--pop-up-bar-color', '#eceff1');
+    update('barShadow', '--pop-up-bar-shadow', '0px 2px 5px #d0d0d0');
 
-    update("butHeight", "--pop-up-bar-button-height", "30px");
-    update("butWidth", "--pop-up-bar-button-width", "200px");
-    update("butColor", "--pop-up-bar-button-color", "#eceff1");
-    update("butHoverColor", "--pop-up-bar-button-hover-color", "#cfd8dc");
-    update("butShadow", "--pop-up-bar-button-shadow", "0px 2px 5px #d0d0d0");
+    update('butHeight', '--pop-up-bar-button-height', '30px');
+    update('butWidth', '--pop-up-bar-button-width', '200px');
+    update('butColor', '--pop-up-bar-button-color', '#eceff1');
+    update('butHoverColor', '--pop-up-bar-button-hover-color', '#cfd8dc');
+    update('butShadow', '--pop-up-bar-button-shadow', '0px 2px 5px #d0d0d0');
 
-    update("gapSize", "--pop-up-bar-gap", "10px");
+    update('gapSize', '--pop-up-bar-gap', '10px');
 
-    update("iconHeight", "--pop-up-bar-icon-height", "70%");
-    update("iconWidth", "--pop-up-bar-icon-width", "70%");
+    update('iconHeight', '--pop-up-bar-icon-height', '70%');
+    update('iconWidth', '--pop-up-bar-icon-width', '70%');
   }
 
   render() {
@@ -163,7 +169,7 @@ export class PopUpBar extends LitElement {
             ? html`<img
                 part="icon"
                 src="${this.iconSrc}"
-                alt="${this.iconAlt ?? "icon"}"
+                alt="${this.iconAlt ?? 'icon'}"
               />`
             : html`<span id="arrow-up" part="arrow">^</span>`}
         </div>

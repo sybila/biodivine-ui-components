@@ -162,7 +162,7 @@ export class DoubleTextButton extends LitElement {
       '#CFD8DC'
     );
     update('leftPadX', '--double-text-button-left-padx', '10px');
-    update('leftWidth', '--double-text-button-left-width', '300px');
+    update('leftWidth', '--double-text-button-left-width', '50%');
     update('leftTextFontSize', '--double-text-button-left-font-size', '16px');
     update(
       'leftTextFontWeight',
@@ -195,7 +195,7 @@ export class DoubleTextButton extends LitElement {
       '#B0BEC5'
     );
     update('rightPadX', '--double-text-button-right-padx', '10px');
-    update('rightWidth', '--double-text-button-right-width', '300px');
+    update('rightWidth', '--double-text-button-right-width', '50%');
     update('rightTextFontSize', '--double-text-button-right-font-size', '16px');
     update(
       'rightTextFontWeight',

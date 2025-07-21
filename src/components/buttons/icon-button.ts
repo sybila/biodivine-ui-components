@@ -190,7 +190,7 @@ export class IconButton extends LitElement {
     const active = this.isActive ? 'active' : '';
 
     return html`
-      <div class="${hasTagClass} ${sizeClass} ">
+      <div part="container/tag" class="${hasTagClass} ${sizeClass} ">
         <button
           part="button"
           class="${sizeClass} ${active}"

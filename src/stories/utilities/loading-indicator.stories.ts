@@ -1,6 +1,6 @@
-import '../../components/utilities/loading-indicator';
 import { html } from 'lit';
 import type { Meta, StoryFn } from '@storybook/web-components';
+import '../../components/utilities/loading-indicator';
 
 type LoadingIndicatorProps = {
   compHeight?: string;
@@ -34,8 +34,6 @@ const meta: Meta<LoadingIndicatorProps> = {
 
 Animated component used to show a loading state.
 
----
-
 #### CSS Custom Properties
 
 | Variable | Description |
@@ -57,15 +55,13 @@ Animated component used to show a loading state.
 | \`--loading-indicator-tag-text-shadow\` | Message text shadow |
 | \`--loading-indicator-tag-text-transform\` | Message text transform |
 
----
-
 #### Shadow DOM Parts
 
-| Part Name        | Description                            |
-|------------------|----------------------------------------|
-| \`box\`           | Wrapper div around spinner and message |
-| \`loadingSpinner\` | The \`<img>\` element for spinner         |
-| \`loadingMessage\` | The \`<p>\` element for loading message    |
+| Part Name         | Description                                 |
+|-------------------|---------------------------------------------|
+| \`box\`           | Wrapper div around spinner and message       |
+| \`loading-spinner\` | The \`<img>\` element for spinner           |
+| \`loading-message\` | The \`<p>\` element for loading message      |
         `,
       },
     },
@@ -74,104 +70,104 @@ Animated component used to show a loading state.
     compHeight: {
       control: 'text',
       description: 'Height of outer component',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Layout' },
     },
     compWidth: {
       control: 'text',
       description: 'Width of outer component',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Layout' },
     },
     loadBoxHeight: {
       control: 'text',
       description: 'Height of spinner box',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Box' },
     },
     loadBoxWidth: {
       control: 'text',
       description: 'Width of spinner box',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Box' },
     },
     loadBoxColor: {
       control: 'color',
       description: 'Background color of spinner box',
-      table: { defaultValue: { summary: '#fff' }, category: 'Props' },
+      table: { defaultValue: { summary: '#fff' }, category: 'Box' },
     },
     loadBoxShadow: {
       control: 'text',
       description: 'Box shadow',
       table: {
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
-        category: 'Props',
+        category: 'Box',
       },
     },
     loadBoxPad: {
       control: 'text',
       description: 'Padding inside box',
-      table: { defaultValue: { summary: '15px' }, category: 'Props' },
+      table: { defaultValue: { summary: '15px' }, category: 'Box' },
     },
     loadBoxGap: {
       control: 'text',
       description: 'Gap between spinner and message',
-      table: { defaultValue: { summary: '10px' }, category: 'Props' },
+      table: { defaultValue: { summary: '10px' }, category: 'Box' },
     },
     loadingSpinnerSrc: {
       control: 'text',
       description: 'URL for spinner image',
       table: {
         defaultValue: { summary: 'default base64 gif' },
-        category: 'Props',
+        category: 'Spinner',
       },
     },
     loadingSpinnerHeight: {
       control: 'text',
       description: 'Height of spinner image',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Spinner' },
     },
     loadingSpinnerWidth: {
       control: 'text',
       description: 'Width of spinner image',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { defaultValue: { summary: 'fit-content' }, category: 'Spinner' },
     },
     loadingMessage: {
       control: 'text',
       description: 'Message below spinner',
-      table: { defaultValue: { summary: '' }, category: 'Props' },
+      table: { defaultValue: { summary: '' }, category: 'Message' },
     },
     loadingMessageFontSize: {
       control: 'text',
       description: 'Font size of message',
-      table: { defaultValue: { summary: '16px' }, category: 'Props' },
+      table: { defaultValue: { summary: '16px' }, category: 'Message' },
     },
     loadingMessageFontWeight: {
       control: 'text',
       description: 'Font weight of message',
-      table: { defaultValue: { summary: '400' }, category: 'Props' },
+      table: { defaultValue: { summary: '400' }, category: 'Message' },
     },
     tagTextFontFamily: {
       control: 'text',
       description: 'Font family of message',
       table: {
         defaultValue: { summary: "'Helvetica', 'Arial', sans-serif" },
-        category: 'Props',
+        category: 'Message',
       },
     },
     tagTextColor: {
       control: 'color',
       description: 'Text color',
-      table: { defaultValue: { summary: 'black' }, category: 'Props' },
+      table: { defaultValue: { summary: 'black' }, category: 'Message' },
     },
     tagTextShadow: {
       control: 'text',
       description: 'Text shadow of message',
       table: {
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
-        category: 'Props',
+        category: 'Message',
       },
     },
     tagTextTransform: {
       control: 'text',
       description: 'Text transform (e.g., uppercase)',
-      table: { defaultValue: { summary: 'none' }, category: 'Props' },
+      table: { defaultValue: { summary: 'none' }, category: 'Message' },
     },
   },
 };

@@ -5,20 +5,35 @@ import type { Meta, StoryFn } from '@storybook/web-components';
 type StatEntryProps = {
   compHeight?: string;
   compWidth?: string;
-  justifyContent?: string;
-  alignItems?: string;
+
+  contHeight?: string;
+  contWidth?: string;
+  contJustify?: string;
+  contAlign?: string;
+  contPadX?: string;
+  contBgColor?: string;
+  contBorderRadius?: string;
+
   valNameGap?: string;
   statName?: string;
   statValue?: string;
+
   nameHeight?: string;
+  nameMaxHeight?: string;
   nameWidth?: string;
+  nameMaxWidth?: string;
   nameAlign?: string;
   nameOverflowX?: string;
+
   addColon?: boolean;
+
   valueHeight?: string;
+  valueMaxHeight?: string;
   valueWidth?: string;
+  valueMaxWidth?: string;
   valueAlign?: string;
   valueOverflowX?: string;
+
   lineHeight?: string;
   textFontSize?: string;
   textFontWeight?: string;
@@ -39,120 +54,236 @@ const meta: Meta<StatEntryProps> = {
 
 Component for displaying a labeled statistic (like "HP: 45").
 
-#### CSS Variables
+#### CSS Custom Properties
 
 | Variable                              | Description                    |
-|---------------------------------------|--------------------------------|
-| \`--stat-entry-comp-height\`          | Component height               |
-| \`--stat-entry-comp-width\`           | Component width                |
-| \`--stat-entry-justify-content\`      | Flex container justify         |
-| \`--stat-entry-align-items\`          | Flex container align           |
-| \`--stat-entry-name-value-gap\`       | Gap between name and value     |
-| \`--stat-entry-name-height\`          | Name section height            |
-| \`--stat-entry-name-width\`           | Name section width             |
-| \`--stat-entry-name-align\`           | Name text-align                |
-| \`--stat-entry-name-overflow-x\`      | Name overflow-x                |
-| \`--stat-entry-value-height\`         | Value section height           |
-| \`--stat-entry-value-width\`          | Value section width            |
-| \`--stat-entry-value-align\`          | Value text-align               |
-| \`--stat-entry-value-overflow-x\`     | Value overflow-x               |
-| \`--stat-entry-line-height\`          | Line height of text            |
-| \`--stat-entry-font-size\`            | Font size                      |
-| \`--stat-entry-font-weight\`          | Font weight                    |
-| \`--stat-entry-font-family\`          | Font family                    |
-| \`--stat-entry-color\`                | Text color                     |
-| \`--stat-entry-text-shadow\`          | Text shadow                    |
-| \`--stat-entry-text-transform\`       | Text transform                 |
+|----------------------------------------|--------------------------------|
+| \`--stat-entry-comp-height\`           | Component height               |
+| \`--stat-entry-comp-width\`            | Component width                |
+| \`--stat-entry-cont-height\`           | Container height               |
+| \`--stat-entry-cont-width\`            | Container width                |
+| \`--stat-entry-justify-content\`       | Flex container justify         |
+| \`--stat-entry-align-items\`           | Flex container align           |
+| \`--stat-entry-name-value-gap\`        | Gap between name and value     |
+| \`--stat-entry-padding-x\`             | Horizontal container padding   |
+| \`--stat-entry-bg-color\`              | Container background color     |
+| \`--stat-entry-border-radius\`         | Container border radius        |
+| \`--stat-entry-name-height\`           | Name section height            |
+| \`--stat-entry-name-max-height\`       | Name section max height        |
+| \`--stat-entry-name-width\`            | Name section width             |
+| \`--stat-entry-name-max-width\`        | Name section max width         |
+| \`--stat-entry-name-align\`            | Name text-align                |
+| \`--stat-entry-name-overflow-x\`       | Name overflow-x                |
+| \`--stat-entry-value-height\`          | Value section height           |
+| \`--stat-entry-value-max-height\`      | Value section max height       |
+| \`--stat-entry-value-width\`           | Value section width            |
+| \`--stat-entry-value-max-width\`       | Value section max width        |
+| \`--stat-entry-value-align\`           | Value text-align               |
+| \`--stat-entry-value-overflow-x\`      | Value overflow-x               |
+| \`--stat-entry-line-height\`           | Line height of text            |
+| \`--stat-entry-font-size\`             | Font size                      |
+| \`--stat-entry-font-weight\`           | Font weight                    |
+| \`--stat-entry-font-family\`           | Font family                    |
+| \`--stat-entry-color\`                 | Text color                     |
+| \`--stat-entry-text-shadow\`           | Text shadow                    |
+| \`--stat-entry-text-transform\`        | Text transform                 |
+
+#### Shadow DOM Parts
+
+| Part Name | Element | Description         |
+|-----------|---------|---------------------|
+| \`container\` | \`div\`   | The main container  |
+| \`name\`   | \`span\`  | The stat name span   |
+| \`value\`  | \`span\`  | The stat value span  |
         `,
       },
     },
   },
   argTypes: {
+    // Layout
     compHeight: {
       control: 'text',
-      table: { defaultValue: { summary: 'fit-content' } },
+      description: 'Component height',
+      table: { category: 'Layout', defaultValue: { summary: 'fit-content' } },
     },
     compWidth: {
       control: 'text',
-      table: { defaultValue: { summary: 'fit-content' } },
+      description: 'Component width',
+      table: { category: 'Layout', defaultValue: { summary: 'fit-content' } },
     },
-    justifyContent: {
+
+    // Container
+    contHeight: {
       control: 'text',
-      table: { defaultValue: { summary: 'center' } },
+      description: 'Container height',
+      table: {
+        category: 'Container',
+        defaultValue: { summary: 'fit-content' },
+      },
     },
-    alignItems: {
+    contWidth: {
       control: 'text',
-      table: { defaultValue: { summary: 'center' } },
+      description: 'Container width',
+      table: { category: 'Container', defaultValue: { summary: '100%' } },
     },
+    contJustify: {
+      control: 'text',
+      description: 'Container justify-content',
+      table: {
+        category: 'Container',
+        defaultValue: { summary: 'space-between' },
+      },
+    },
+    contAlign: {
+      control: 'text',
+      description: 'Container align-items',
+      table: { category: 'Container', defaultValue: { summary: 'center' } },
+    },
+    contPadX: {
+      control: 'text',
+      description: 'Horizontal container padding',
+      table: { category: 'Container', defaultValue: { summary: '5px' } },
+    },
+    contBgColor: {
+      control: 'color',
+      description: 'Container background color',
+      table: { category: 'Container', defaultValue: { summary: '#cfd8dc' } },
+    },
+    contBorderRadius: {
+      control: 'text',
+      description: 'Container border radius',
+      table: { category: 'Container', defaultValue: { summary: '3px' } },
+    },
+
+    // Stat Name/Value
     valNameGap: {
       control: 'text',
-      table: { defaultValue: { summary: '15px' } },
+      description: 'Gap between name and value',
+      table: { category: 'Content', defaultValue: { summary: '15px' } },
     },
-    statName: { control: 'text', table: { defaultValue: { summary: '' } } },
-    statValue: { control: 'text', table: { defaultValue: { summary: '–' } } },
+    statName: {
+      control: 'text',
+      description: 'Stat name label',
+      table: { category: 'Content', defaultValue: { summary: '' } },
+    },
+    statValue: {
+      control: 'text',
+      description: 'Stat value',
+      table: { category: 'Content', defaultValue: { summary: '–' } },
+    },
+
+    // Name section
     nameHeight: {
       control: 'text',
-      table: { defaultValue: { summary: 'fit-content' } },
+      description: 'Name section height',
+      table: { category: 'Name', defaultValue: { summary: 'fit-content' } },
+    },
+    nameMaxHeight: {
+      control: 'text',
+      description: 'Name section max height',
+      table: { category: 'Name', defaultValue: { summary: 'fit-content' } },
     },
     nameWidth: {
       control: 'text',
-      table: { defaultValue: { summary: 'fit-content' } },
+      description: 'Name section width',
+      table: { category: 'Name', defaultValue: { summary: 'fit-content' } },
+    },
+    nameMaxWidth: {
+      control: 'text',
+      description: 'Name section max width',
+      table: { category: 'Name', defaultValue: { summary: '50%' } },
     },
     nameAlign: {
       control: 'text',
-      table: { defaultValue: { summary: 'center' } },
+      description: 'Name text alignment',
+      table: { category: 'Name', defaultValue: { summary: 'center' } },
     },
     nameOverflowX: {
       control: 'text',
-      table: { defaultValue: { summary: 'hidden' } },
+      description: 'Name overflow-x',
+      table: { category: 'Name', defaultValue: { summary: 'hidden' } },
     },
+
+    // Colon
     addColon: {
       control: 'boolean',
-      table: { defaultValue: { summary: 'false' } },
+      description: 'Add colon after stat name',
+      table: { category: 'Content', defaultValue: { summary: 'false' } },
     },
+
+    // Value section
     valueHeight: {
       control: 'text',
-      table: { defaultValue: { summary: 'fit-content' } },
+      description: 'Value section height',
+      table: { category: 'Value', defaultValue: { summary: 'fit-content' } },
+    },
+    valueMaxHeight: {
+      control: 'text',
+      description: 'Value section max height',
+      table: { category: 'Value', defaultValue: { summary: 'fit-content' } },
     },
     valueWidth: {
       control: 'text',
-      table: { defaultValue: { summary: 'fit-content' } },
+      description: 'Value section width',
+      table: { category: 'Value', defaultValue: { summary: 'fit-content' } },
+    },
+    valueMaxWidth: {
+      control: 'text',
+      description: 'Value section max width',
+      table: { category: 'Value', defaultValue: { summary: '50%' } },
     },
     valueAlign: {
       control: 'text',
-      table: { defaultValue: { summary: 'center' } },
+      description: 'Value text alignment',
+      table: { category: 'Value', defaultValue: { summary: 'center' } },
     },
     valueOverflowX: {
       control: 'text',
-      table: { defaultValue: { summary: 'auto' } },
+      description: 'Value overflow-x',
+      table: { category: 'Value', defaultValue: { summary: 'auto' } },
     },
+
+    // Text
     lineHeight: {
       control: 'text',
-      table: { defaultValue: { summary: '18px' } },
+      description: 'Line height of text',
+      table: { category: 'Text', defaultValue: { summary: '20px' } },
     },
     textFontSize: {
       control: 'text',
-      table: { defaultValue: { summary: '17px' } },
+      description: 'Font size',
+      table: { category: 'Text', defaultValue: { summary: '17px' } },
     },
     textFontWeight: {
       control: 'text',
-      table: { defaultValue: { summary: 'normal' } },
+      description: 'Font weight',
+      table: { category: 'Text', defaultValue: { summary: 'normal' } },
     },
     textFontFamily: {
       control: 'text',
-      table: { defaultValue: { summary: "'FiraMono', sans-serif" } },
+      description: 'Font family',
+      table: {
+        category: 'Text',
+        defaultValue: { summary: "'FiraMono', sans-serif" },
+      },
     },
     textColor: {
       control: 'color',
-      table: { defaultValue: { summary: 'black' } },
+      description: 'Text color',
+      table: { category: 'Text', defaultValue: { summary: 'black' } },
     },
     textShadow: {
       control: 'text',
-      table: { defaultValue: { summary: '0px 2px 5px #d0d0d0' } },
+      description: 'Text shadow',
+      table: {
+        category: 'Text',
+        defaultValue: { summary: '0px 2px 5px #d0d0d0' },
+      },
     },
     textTransform: {
       control: 'text',
-      table: { defaultValue: { summary: 'none' } },
+      description: 'Text transformation (e.g., uppercase, lowercase)',
+      table: { category: 'Text', defaultValue: { summary: 'none' } },
     },
   },
 };
@@ -163,18 +294,27 @@ export const Default: StoryFn<StatEntryProps> = (args) => html`
   <stat-entry
     .compHeight=${args.compHeight}
     .compWidth=${args.compWidth}
-    .justifyContent=${args.justifyContent}
-    .alignItems=${args.alignItems}
+    .contHeight=${args.contHeight}
+    .contWidth=${args.contWidth}
+    .contJustify=${args.contJustify}
+    .contAlign=${args.contAlign}
+    .contPadX=${args.contPadX}
+    .contBgColor=${args.contBgColor}
+    .contBorderRadius=${args.contBorderRadius}
     .valNameGap=${args.valNameGap}
     .statName=${args.statName}
     .statValue=${args.statValue}
     .nameHeight=${args.nameHeight}
+    .nameMaxHeight=${args.nameMaxHeight}
     .nameWidth=${args.nameWidth}
+    .nameMaxWidth=${args.nameMaxWidth}
     .nameAlign=${args.nameAlign}
     .nameOverflowX=${args.nameOverflowX}
     .addColon=${args.addColon}
     .valueHeight=${args.valueHeight}
+    .valueMaxHeight=${args.valueMaxHeight}
     .valueWidth=${args.valueWidth}
+    .valueMaxWidth=${args.valueMaxWidth}
     .valueAlign=${args.valueAlign}
     .valueOverflowX=${args.valueOverflowX}
     .lineHeight=${args.lineHeight}
@@ -190,21 +330,30 @@ export const Default: StoryFn<StatEntryProps> = (args) => html`
 Default.args = {
   compHeight: 'fit-content',
   compWidth: 'fit-content',
-  justifyContent: 'center',
-  alignItems: 'center',
+  contHeight: 'fit-content',
+  contWidth: '100%',
+  contJustify: 'space-between',
+  contAlign: 'center',
+  contPadX: '5px',
+  contBgColor: '#cfd8dc',
+  contBorderRadius: '3px',
   valNameGap: '15px',
   statName: 'HP',
   statValue: '45',
   nameHeight: 'fit-content',
+  nameMaxHeight: 'fit-content',
   nameWidth: 'fit-content',
+  nameMaxWidth: '50%',
   nameAlign: 'center',
   nameOverflowX: 'hidden',
   addColon: true,
   valueHeight: 'fit-content',
+  valueMaxHeight: 'fit-content',
   valueWidth: 'fit-content',
+  valueMaxWidth: '50%',
   valueAlign: 'center',
   valueOverflowX: 'auto',
-  lineHeight: '18px',
+  lineHeight: '20px',
   textFontSize: '17px',
   textFontWeight: 'normal',
   textFontFamily: "'FiraMono', sans-serif",

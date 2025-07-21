@@ -17,6 +17,8 @@ type ContentWindowProps = {
   windOverflowX?: string;
   windOverflowY?: string;
   windResize?: string;
+  gapSize?: string;
+
   showHeader?: boolean;
   headerHeight?: string;
   headerWidth?: string;
@@ -28,6 +30,7 @@ type ContentWindowProps = {
   headerTextColor?: string;
   headerTextShadow?: string;
   headerTextTransform?: string;
+
   showCloseButton?: boolean;
   closeButtonSrc?: string;
   closeHeight?: string;
@@ -36,6 +39,7 @@ type ContentWindowProps = {
   closeIconHeight?: string;
   closeIconWidth?: string;
   onCloseClick?: () => void;
+
   contentHeight?: string;
   contentWidth?: string;
   contentMaxHeight?: string;
@@ -43,7 +47,6 @@ type ContentWindowProps = {
   contentJustifyC?: string;
   contentAlignI?: string;
   contentGap?: string;
-  gapSize?: string;
 };
 
 const meta: Meta<ContentWindowProps> = {
@@ -55,9 +58,7 @@ const meta: Meta<ContentWindowProps> = {
         component: `
 ### \`<content-window>\`
 
-Content container component with optional header and close button.
-
----
+Content container with optional header and close button.
 
 #### CSS Custom Properties
 
@@ -65,8 +66,8 @@ Content container component with optional header and close button.
 |----------------------------------------------|-------------------------------------------|
 | \`--content-window-comp-height\`               | Height of the outer wrapper               |
 | \`--content-window-comp-width\`                | Width of the outer wrapper                |
-| \`--content-window-comp-max-height\`           | Maximum height of the outer wrapper               |
-| \`--content-window-comp-max-width\`            | Maximum width of the outer wrapper                |
+| \`--content-window-comp-max-height\`           | Maximum height of the outer wrapper       |
+| \`--content-window-comp-max-width\`            | Maximum width of the outer wrapper        |
 | \`--content-window-height\`                    | Height of the main container              |
 | \`--content-window-width\`                     | Width of the main container               |
 | \`--content-window-max-height\`                | Maximum height of the window              |
@@ -78,45 +79,44 @@ Content container component with optional header and close button.
 | \`--content-window-overflow-x\`                | Overflow in the x-direction               |
 | \`--content-window-overflow-y\`                | Overflow in the y-direction               |
 | \`--content-window-resize\`                    | Resizability of the window                |
-| \`--content-window-header-height\`            | Height of the header                      |
-| \`--content-window-header-width\`             | Width of the header                       |
-| \`--content-window-header-gap\`               | Gap between header elements               |
-| \`--content-window-tag-font-size\`            | Font size of the header text              |
-| \`--content-window-tag-font-weight\`          | Font weight of the header text            |
-| \`--content-window-tag-font-family\`          | Font family of the header text            |
-| \`--content-window-tag-color\`                | Color of the header text                  |
-| \`--content-window-tag-text-shadow\`          | Text shadow of the header text            |
-| \`--content-window-tag-text-transform\`       | Text transform for the header text        |
-| \`--content-window-close-height\`             | Height of the close button                |
-| \`--content-window-close-width\`              | Width of the close button                 |
-| \`--content-window-close-hover-color\`        | Background color on close button hover    |
-| \`--content-window-close-icon-height\`        | Height of the close icon                  |
-| \`--content-window-close-icon-width\`         | Width of the close icon                   |
-| \`--content-window-content-height\`           | Height of the content section             |
-| \`--content-window-content-width\`            | Width of the content section              |
-| \`--content-window-content-max-height\`       | Max height of the content section         |
-| \`--content-window-content-max-width\`        | Max width of the content section          |
-| \`--content-window-content-justify-content\`  | Justify-content of content layout         |
-| \`--content-window-content-align-items\`      | Align-items of content layout             |
-| \`--content-window-content-gap\`              | Gap between content elements              |
-
----
+| \`--content-window-header-height\`             | Height of the header                      |
+| \`--content-window-header-width\`              | Width of the header                       |
+| \`--content-window-header-gap\`                | Gap between header elements               |
+| \`--content-window-tag-font-size\`             | Font size of the header text              |
+| \`--content-window-tag-font-weight\`           | Font weight of the header text            |
+| \`--content-window-tag-font-family\`           | Font family of the header text            |
+| \`--content-window-tag-color\`                 | Color of the header text                  |
+| \`--content-window-tag-text-shadow\`           | Text shadow of the header text            |
+| \`--content-window-tag-text-transform\`        | Text transform for the header text        |
+| \`--content-window-close-height\`              | Height of the close button                |
+| \`--content-window-close-width\`               | Width of the close button                 |
+| \`--content-window-close-hover-color\`         | Background color on close button hover    |
+| \`--content-window-close-icon-height\`         | Height of the close icon                  |
+| \`--content-window-close-icon-width\`          | Width of the close icon                   |
+| \`--content-window-content-height\`            | Height of the content section             |
+| \`--content-window-content-width\`             | Width of the content section              |
+| \`--content-window-content-max-height\`        | Max height of the content section         |
+| \`--content-window-content-max-width\`         | Max width of the content section          |
+| \`--content-window-content-justify-content\`   | Justify-content of content layout         |
+| \`--content-window-content-align-items\`       | Align-items of content layout             |
+| \`--content-window-content-gap\`               | Gap between content elements              |
 
 #### Shadow DOM Parts
 
-| Part Name     | Description               |
-|--------------|---------------------------|
-| \`window\`     | The outer container        |
-| \`header\`     | Header container |
-| \`header-text\` | Text inside header         |
-| \`close-button\` | Close icon container       |
-| \`close-button-icon\` | Close icon                 |
-| \`content\`     | Slot for component content |
+| Part Name           | Description                        |
+|---------------------|------------------------------------|
+| \`window\`          | The main window container          |
+| \`header\`          | Header container                   |
+| \`header-text\`     | Text inside header                 |
+| \`close-button\`    | Close icon container               |
+| \`close-button-icon\` | Close icon                       |
+| \`content\`         | Slot for component content         |
         `,
       },
     },
   },
   argTypes: {
+    // Layout
     compHeight: {
       control: 'text',
       description: 'Height of the outer wrapper of the content window.',
@@ -135,8 +135,15 @@ Content container component with optional header and close button.
     compMaxWidth: {
       control: 'text',
       description: 'Maximum width of the outer wrapper of the content window.',
-      table: { category: 'Layout', defaultValue: { summary: '505px' } },
+      table: { category: 'Layout', defaultValue: { summary: '100%' } },
     },
+    gapSize: {
+      control: 'text',
+      description: 'Gap between sections inside the window.',
+      table: { category: 'Layout', defaultValue: { summary: '5px' } },
+    },
+
+    // Window
     windHeight: {
       control: 'text',
       description: 'Height of the main content window.',
@@ -191,12 +198,7 @@ Content container component with optional header and close button.
       table: { category: 'Window', defaultValue: { summary: 'none' } },
     },
 
-    gapSize: {
-      control: 'text',
-      description: 'Gap between sections inside the window.',
-      table: { category: 'Layout', defaultValue: { summary: '5px' } },
-    },
-
+    // Header
     showHeader: {
       control: 'boolean',
       description: 'Whether to show the header bar.',
@@ -259,6 +261,7 @@ Content container component with optional header and close button.
       table: { category: 'Header', defaultValue: { summary: 'none' } },
     },
 
+    // Close Button
     showCloseButton: {
       control: 'boolean',
       description: 'Whether to show the close button in the header.',
@@ -267,10 +270,7 @@ Content container component with optional header and close button.
     closeButtonSrc: {
       control: 'text',
       description: 'Source URL for the close button icon image.',
-      table: {
-        category: 'Close Button',
-        defaultValue: { summary: undefined },
-      },
+      table: { category: 'Close Button', defaultValue: { summary: undefined } },
     },
     closeHeight: {
       control: 'text',
@@ -309,7 +309,6 @@ Content container component with optional header and close button.
         defaultValue: { summary: 'fit-content' },
       },
     },
-
     onCloseClick: {
       action: 'closeClicked',
       description: 'Handler called when close button is clicked.',
@@ -317,6 +316,7 @@ Content container component with optional header and close button.
       control: false,
     },
 
+    // Content
     contentHeight: {
       control: 'text',
       description: 'Height of the content area.',
@@ -367,6 +367,7 @@ export const Default: StoryFn<ContentWindowProps> = (args) => html`
     .windWidth=${args.windWidth}
     .windMaxHeight=${args.windMaxHeight}
     .windMaxWidth=${args.windMaxWidth}
+    .windPad=${args.windPad}
     .windColor=${args.windColor}
     .windShadow=${args.windShadow}
     .windOverflowX=${args.windOverflowX}

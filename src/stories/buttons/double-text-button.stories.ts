@@ -84,81 +84,86 @@ const meta: Meta<DoubleTextButtonProps> = {
 
 A button with two customizable text sections (left and right).
 
+#### CSS Custom Properties
+
+| Variable                                         | Description                              |
+|--------------------------------------------------|------------------------------------------|
+| \`--double-text-button-comp-height\`              | Container height                         |
+| \`--double-text-button-comp-width\`               | Container width                          |
+| \`--double-text-button-height\`                   | Button height                            |
+| \`--double-text-button-width\`                    | Button width                             |
+| \`--double-text-button-border-radius\`            | Button border radius                     |
+| \`--double-text-button-shadow\`                   | Button shadow                            |
+| \`--double-text-button-left-bg-color\`            | Left section background color            |
+| \`--double-text-button-left-hover-bg-color\`      | Left section hover background color      |
+| \`--double-text-button-left-width\`               | Left section width                       |
+| \`--double-text-button-left-padx\`                | Left section horizontal padding          |
+| \`--double-text-button-left-font-size\`           | Left section font size                   |
+| \`--double-text-button-left-font-weight\`         | Left section font weight                 |
+| \`--double-text-button-left-font-family\`         | Left section font family                 |
+| \`--double-text-button-left-color\`               | Left section text color                  |
+| \`--double-text-button-left-text-shadow\`         | Left section text shadow                 |
+| \`--double-text-button-left-text-transform\`      | Left section text transform              |
+| \`--double-text-button-left-text-align\`          | Left section text alignment              |
+| \`--double-text-button-left-line-height\`         | Left section line height                 |
+| \`--double-text-button-right-bg-color\`           | Right section background color           |
+| \`--double-text-button-right-hover-bg-color\`     | Right section hover background color     |
+| \`--double-text-button-right-width\`              | Right section width                      |
+| \`--double-text-button-right-padx\`               | Right section horizontal padding         |
+| \`--double-text-button-right-font-size\`          | Right section font size                  |
+| \`--double-text-button-right-font-weight\`        | Right section font weight                |
+| \`--double-text-button-right-font-family\`        | Right section font family                |
+| \`--double-text-button-right-color\`              | Right section text color                 |
+| \`--double-text-button-right-text-shadow\`        | Right section text shadow                |
+| \`--double-text-button-right-text-transform\`     | Right section text transform             |
+| \`--double-text-button-right-text-align\`         | Right section text alignment             |
+| \`--double-text-button-right-line-height\`        | Right section line height                |
+        
 #### Shadow DOM Parts
 
-| Part Name      | Element                | Description                |
-|----------------|------------------------|----------------------------|
-| \`button\`        | \`<button>\`              | The clickable button area  |
-| \`left-section\`  | \`<span>\` (id="left-section")  | Left text section         |
-| \`right-section\` | \`<span>\` (id="right-section") | Right text section        |
-
-#### CSS Variables (Configurable via props)
-
-| Variable                                  | Description                              |
-|--------------------------------------------|------------------------------------------|
-| \`--double-text-button-comp-height\`       | Container height                         |
-| \`--double-text-button-comp-width\`        | Container width                          |
-| \`--double-text-button-height\`            | Button height                            |
-| \`--double-text-button-width\`             | Button width                             |
-| \`--double-text-button-border-radius\`     | Button border radius                     |
-| \`--double-text-button-shadow\`            | Button shadow                            |
-| \`--double-text-button-left-bg-color\`     | Left section background color            |
-| \`--double-text-button-left-hover-bg-color\`| Left section hover background color      |
-| \`--double-text-button-left-width\`        | Left section width                       |
-| \`--double-text-button-left-padx\`         | Left section horizontal padding          |
-| \`--double-text-button-left-font-size\`    | Left section font size                   |
-| \`--double-text-button-left-font-weight\`  | Left section font weight                 |
-| \`--double-text-button-left-font-family\`  | Left section font family                 |
-| \`--double-text-button-left-color\`        | Left section text color                  |
-| \`--double-text-button-left-text-shadow\`  | Left section text shadow                 |
-| \`--double-text-button-left-text-transform\`| Left section text transform              |
-| \`--double-text-button-left-text-align\`   | Left section text alignment              |
-| \`--double-text-button-right-bg-color\`    | Right section background color           |
-| \`--double-text-button-right-hover-bg-color\`| Right section hover background color    |
-| \`--double-text-button-right-width\`       | Right section width                      |
-| \`--double-text-button-right-padx\`        | Right section horizontal padding         |
-| \`--double-text-button-right-font-size\`   | Right section font size                  |
-| \`--double-text-button-right-font-weight\` | Right section font weight                |
-| \`--double-text-button-right-font-family\` | Right section font family                |
-| \`--double-text-button-right-color\`       | Right section text color                 |
-| \`--double-text-button-right-text-shadow\` | Right section text shadow                |
-| \`--double-text-button-right-text-transform\`| Right section text transform            |
-| \`--double-text-button-right-text-align\`  | Right section text alignment             |
-        `,
+| Part Name      | Description                |
+|----------------|----------------------------|
+| \`button\`        | The clickable button area  |
+| \`left-section\`  | Left text section         |
+| \`right-section\` | Right text section        |
+`,
       },
     },
   },
   argTypes: {
+    // Layout
     compHeight: {
       control: 'text',
       description: 'Height of the outer component container',
-      table: { category: 'Props', defaultValue: { summary: '60px' } },
+      table: { category: 'Layout', defaultValue: { summary: '60px' } },
     },
     compWidth: {
       control: 'text',
       description: 'Width of the outer component container',
-      table: { category: 'Props', defaultValue: { summary: '242px' } },
+      table: { category: 'Layout', defaultValue: { summary: '242px' } },
     },
+
+    // Button
     buttonHeight: {
       control: 'text',
       description: 'Height of the button',
-      table: { category: 'Props', defaultValue: { summary: '100%' } },
+      table: { category: 'Button', defaultValue: { summary: '100%' } },
     },
     buttonWidth: {
       control: 'text',
       description: 'Width of the button',
-      table: { category: 'Props', defaultValue: { summary: '100%' } },
+      table: { category: 'Button', defaultValue: { summary: '100%' } },
     },
     buttonBorderRadius: {
       control: 'text',
       description: 'Border radius of the button',
-      table: { category: 'Props', defaultValue: { summary: '12px' } },
+      table: { category: 'Button', defaultValue: { summary: '12px' } },
     },
     buttonShadow: {
       control: 'text',
       description: 'Box shadow of the button',
       table: {
-        category: 'Props',
+        category: 'Button',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
       },
     },
@@ -168,59 +173,61 @@ A button with two customizable text sections (left and right).
       table: { type: { summary: '() => void' }, category: 'Events' },
       control: false,
     },
+
+    // Left Section
     leftColor: {
       control: 'color',
       description: 'Background color of the left section',
-      table: { category: 'Props', defaultValue: { summary: '#eceff1' } },
+      table: { category: 'Left Section', defaultValue: { summary: '#eceff1' } },
     },
     leftHoverColor: {
       control: 'color',
       description: 'Background color of the left section on hover',
-      table: { category: 'Props', defaultValue: { summary: '#cfd8dc' } },
+      table: { category: 'Left Section', defaultValue: { summary: '#cfd8dc' } },
     },
     leftText: {
       control: 'text',
       description: 'Text content of the left section',
-      table: { category: 'Props' },
+      table: { category: 'Left Section' },
     },
     leftWidth: {
       control: 'text',
       description: 'Width of the left section',
-      table: { category: 'Props', defaultValue: { summary: '300px' } },
+      table: { category: 'Left Section', defaultValue: { summary: '300px' } },
     },
     leftPadX: {
       control: 'text',
       description: 'Horizontal padding of the left section',
-      table: { category: 'Props', defaultValue: { summary: '10px' } },
+      table: { category: 'Left Section', defaultValue: { summary: '10px' } },
     },
     leftTextFontSize: {
       control: 'text',
       description: 'Font size of the left section text',
-      table: { category: 'Props', defaultValue: { summary: '16px' } },
+      table: { category: 'Left Section', defaultValue: { summary: '16px' } },
     },
     leftTextFontWeight: {
       control: 'text',
       description: 'Font weight of the left section text',
-      table: { category: 'Props', defaultValue: { summary: 'bold' } },
+      table: { category: 'Left Section', defaultValue: { summary: 'bold' } },
     },
     leftTextFontFamily: {
       control: 'text',
       description: 'Font family of the left section text',
       table: {
-        category: 'Props',
+        category: 'Left Section',
         defaultValue: { summary: "'Helvetica', 'Arial', sans-serif" },
       },
     },
     leftTextColor: {
       control: 'color',
       description: 'Color of the left section text',
-      table: { category: 'Props', defaultValue: { summary: 'black' } },
+      table: { category: 'Left Section', defaultValue: { summary: 'black' } },
     },
     leftTextShadow: {
       control: 'text',
       description: 'Text shadow for the left section text',
       table: {
-        category: 'Props',
+        category: 'Left Section',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
       },
     },
@@ -228,71 +235,79 @@ A button with two customizable text sections (left and right).
       control: 'text',
       description:
         'Text transformation (e.g., uppercase, lowercase) for the left section',
-      table: { category: 'Props', defaultValue: { summary: 'none' } },
+      table: { category: 'Left Section', defaultValue: { summary: 'none' } },
     },
     leftTextAlign: {
       control: 'text',
       description: 'Text alignment within the left section',
-      table: { category: 'Props', defaultValue: { summary: 'center' } },
+      table: { category: 'Left Section', defaultValue: { summary: 'center' } },
     },
     leftLineHeight: {
       control: 'text',
       description: 'Line height of the left section text',
-      table: { category: 'Props', defaultValue: { summary: '21px' } },
+      table: { category: 'Left Section', defaultValue: { summary: '21px' } },
     },
+
+    // Right Section
     rightColor: {
       control: 'color',
       description: 'Background color of the right section',
-      table: { category: 'Props', defaultValue: { summary: '#cfd8dc' } },
+      table: {
+        category: 'Right Section',
+        defaultValue: { summary: '#cfd8dc' },
+      },
     },
     rightHoverColor: {
       control: 'color',
       description: 'Background color of the right section on hover',
-      table: { category: 'Props', defaultValue: { summary: '#B0BEC5' } },
+      table: {
+        category: 'Right Section',
+        defaultValue: { summary: '#B0BEC5' },
+      },
     },
     rightText: {
       control: 'text',
       description: 'Text content of the right section',
-      table: { category: 'Props' },
+      table: { category: 'Right Section' },
     },
     rightWidth: {
       control: 'text',
       description: 'Width of the right section',
-      table: { category: 'Props', defaultValue: { summary: '300px' } },
+      table: { category: 'Right Section', defaultValue: { summary: '300px' } },
     },
     rightPadX: {
       control: 'text',
       description: 'Horizontal padding of the right section',
-      table: { category: 'Props', defaultValue: { summary: '10px' } },
+      table: { category: 'Right Section', defaultValue: { summary: '10px' } },
     },
     rightTextFontSize: {
       control: 'text',
       description: 'Font size of the right section text',
-      table: { category: 'Props', defaultValue: { summary: '16px' } },
+      table: { category: 'Right Section', defaultValue: { summary: '16px' } },
     },
     rightTextFontWeight: {
       control: 'text',
       description: 'Font weight of the right section text',
-      table: { category: 'Props', defaultValue: { summary: 'bold' } },
+      table: { category: 'Right Section', defaultValue: { summary: 'bold' } },
     },
     rightTextFontFamily: {
       control: 'text',
       description: 'Font family of the right section text',
       table: {
-        category: 'Props',
+        category: 'Right Section',
         defaultValue: { summary: "'Helvetica', 'Arial', sans-serif" },
       },
     },
     rightTextColor: {
       control: 'color',
       description: 'Color of the right section text',
-      table: { category: 'Props', defaultValue: { summary: 'black' } },
+      table: { category: 'Right Section', defaultValue: { summary: 'black' } },
     },
     rightTextShadow: {
       control: 'text',
       description: 'Text shadow for the right section text',
       table: {
-        category: 'Props',
+        category: 'Right Section',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
       },
     },
@@ -300,17 +315,17 @@ A button with two customizable text sections (left and right).
       control: 'text',
       description:
         'Text transformation (e.g., uppercase, lowercase) for the right section',
-      table: { category: 'Props', defaultValue: { summary: 'none' } },
+      table: { category: 'Right Section', defaultValue: { summary: 'none' } },
     },
     rightTextAlign: {
       control: 'text',
       description: 'Text alignment within the right section',
-      table: { category: 'Props', defaultValue: { summary: 'center' } },
+      table: { category: 'Right Section', defaultValue: { summary: 'center' } },
     },
     rightLineHeight: {
       control: 'text',
       description: 'Line height of the right section text',
-      table: { category: 'Props', defaultValue: { summary: '21px' } },
+      table: { category: 'Right Section', defaultValue: { summary: '21px' } },
     },
   },
 };
