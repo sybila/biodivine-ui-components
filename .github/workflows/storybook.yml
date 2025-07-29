@@ -17,8 +17,7 @@ jobs:
             - run: npm ci
             - run: npm run storybook:build
             - uses: JamesIves/github-pages-deploy-action@v4
-              # Build storybook on every push, but only deploy on main branch.
-              if: github.ref == 'refs/heads/main'
               with:
                 folder: 'storybook-static'
+                target-folder: ${{ github.head_ref || github.ref_name }} 
     
