@@ -2,7 +2,7 @@
 
 console.log('Foo');
 
-function bar(): boolean 
+export function bar(): boolean 
 {
   console.log('Bar');  
 }
