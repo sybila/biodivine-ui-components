@@ -1,7 +1,6 @@
 name: storybook-deploy
 on:
     push:
-    pull_request:
 
 permissions: # so we can upload the storybook
   contents: write
