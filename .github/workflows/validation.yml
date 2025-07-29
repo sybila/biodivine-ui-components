@@ -48,4 +48,5 @@ jobs:
               with:
                 node-version: lts/*
             - run: npm ci
+            - run: npx playwright install
             - run: npm run storybook:test
