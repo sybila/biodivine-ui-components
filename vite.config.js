@@ -6,8 +6,8 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       formats: ['es', 'cjs'],
-      name: 'MyLitLibrary',
-      fileName: (format) => `my-lit-library.${format}.js`,
+      name: 'BiodivineUiComponents',
+      fileName: (format) => `biodivine-ui-components.${format}.js`,
     },
     rollupOptions: {
       external: /^lit/,
