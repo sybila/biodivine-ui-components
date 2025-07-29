@@ -5,22 +5,22 @@ import { expect } from 'storybook/test';
 import { MyLabel } from './demo';
 
 const meta = {
-    title: 'Demo',
-    component: 'my-label',
-} satisfies Meta<typeof MyLabel>
+  title: 'Demo',
+  component: 'my-label',
+} satisfies Meta<typeof MyLabel>;
 
 export default meta;
- 
+
 export const Default: StoryObj<typeof meta> = {
-    name: 'Demo story',
+  name: 'Demo story',
 };
 
 export const Test: StoryObj<typeof meta> = {
-    name: 'Simple test',
-    play: async ({ canvas, userEvent }) => {
-        await userEvent.keyboard('abc') // User is typing something mindlessly.
-        const body = document.querySelector('body')!
-        // This should intentionally fail to make sure CI is working correctly.
-        await expect(body).toBeDisabled()
-    }
-}
+  name: 'Simple test',
+  play: async ({ canvas, userEvent }) => {
+    await userEvent.keyboard('abc'); // User is typing something mindlessly.
+    const body = document.querySelector('body')!;
+    // This should intentionally fail to make sure CI is working correctly.
+    await expect(body).toBeDisabled();
+  },
+};
