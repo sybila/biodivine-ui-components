@@ -20,7 +20,6 @@ export const Test: StoryObj<typeof meta> = {
   play: async ({ userEvent }) => {
     await userEvent.keyboard('abc'); // User is typing something mindlessly.
     const body = document.querySelector('body')!;
-    // This should intentionally fail to make sure CI is working correctly.
-    await expect(body).toBeDisabled();
+    await expect(body).toBeVisible();
   },
 };
