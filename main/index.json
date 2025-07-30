@@ -1,0 +1,1 @@
+{"v":5,"entries":{"demo--default":{"type":"story","id":"demo--default","name":"Demo story","title":"Demo","importPath":"./src/components/demo.stories.ts","tags":["dev","test"]},"demo--test":{"type":"story","id":"demo--test","name":"Simple test","title":"Demo","importPath":"./src/components/demo.stories.ts","tags":["dev","test","play-fn"]}}}
