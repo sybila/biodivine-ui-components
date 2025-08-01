@@ -188,7 +188,7 @@ A button with customizable text content.
     textLineHeight: {
       control: 'text',
       description: 'Line height of the text',
-      table: { defaultValue: { summary: '100%' }, category: 'Text' },
+      table: { defaultValue: { summary: '20px' }, category: 'Text' },
     },
 
     // State
@@ -229,10 +229,10 @@ export const Default: StoryFn<TextButtonProps> = (args) => html`
 `;
 
 Default.args = {
-  compHeight: 'fit-content',
-  compWidth: 'fit-content',
-  buttonHeight: '40px',
-  buttonWidth: '120px',
+  compHeight: '30px',
+  compWidth: '60px',
+  buttonHeight: '100%',
+  buttonWidth: '100%',
   buttonColor: '#eceff1',
   buttonHoverColor: '#b0bec5',
   buttonActiveColor: '#cfd8dc',
@@ -241,12 +241,12 @@ Default.args = {
   textContainerHeight: '100%',
   textContainerWidth: '100%',
   textFontSize: '16px',
-  textFontWeight: '600',
-  textFontFamily: 'Arial, sans-serif',
-  textColor: '#333',
-  textShadow: '0px 1px 2px #aaa',
-  textTransform: 'uppercase',
+  textFontWeight: 'bold',
+  textFontFamily: 'Helvetica, Arial, sans-serif',
+  textColor: 'black',
+  textShadow: '0px 2px 5px #d0d0d0',
+  textTransform: 'none',
   textAlign: 'center',
-  textLineHeight: '100%',
+  textLineHeight: '20px',
   active: false,
 };
