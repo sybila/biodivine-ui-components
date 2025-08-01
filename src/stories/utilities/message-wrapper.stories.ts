@@ -11,8 +11,11 @@ type MessageWrapperProps = {
   compZindex?: string;
   wrapperHeight?: string;
   wrapperWidth?: string;
+  wrapperOverflowX?: string;
+  wrapperOverflowY?: string;
   messageHeight?: string;
   messageWidth?: string;
+  messageLineHeight?: string;
   messagePad?: string;
   messageTop?: string;
   messageBottom?: string;
@@ -28,6 +31,9 @@ type MessageWrapperProps = {
   infoColor?: string;
   successColor?: string;
   errorColor?: string;
+  contentHeight?: string;
+  contentWidth?: string;
+  contentZindex?: string;
 };
 
 const meta: Meta<MessageWrapperProps> = {
@@ -39,34 +45,40 @@ const meta: Meta<MessageWrapperProps> = {
         component: `
 ### \`<message-wrapper>\`
 
-Used for displaying contextual messages such as info, success, or error banners. Typically, you should wrap your entire app (or the main container) with this component to enable global message display anywhere in your application.
+A global message overlay component. Place once at the root of your app and control visibility via the global \`Message\` handler.
 
 #### CSS Custom Properties
 
-| Variable                                 | Description                             |
-|------------------------------------------|-----------------------------------------|
-| \`--message-wrapper-comp-height\`         | Outer component height                  |
-| \`--message-wrapper-comp-width\`          | Outer component width                   |
-| \`--message-wrapper-z-index\`             | Z-index for the component               |
-| \`--message-wrapper-height\`              | Height of outer wrapper                 |
-| \`--message-wrapper-width\`               | Width of outer wrapper                  |
-| \`--message-wrapper-message-padding\`     | Padding inside the message container    |
-| \`--message-wrapper-message-height\`      | Height of message container             |
-| \`--message-wrapper-message-width\`       | Width of message container              |
-| \`--message-wrapper-message-top\`         | Top offset                              |
-| \`--message-wrapper-message-bottom\`      | Bottom offset                           |
-| \`--message-wrapper-message-left\`        | Left offset                             |
-| \`--message-wrapper-message-right\`       | Right offset                            |
-| \`--message-wrapper-message-color\`       | Background color                        |
-| \`--message-wrapper-message-shadow\`      | Shadow applied to the message box       |
-| \`--message-wrapper-message-font-size\`   | Font size of message text               |
-| \`--message-wrapper-message-font-weight\` | Font weight of message text             |
-| \`--message-wrapper-message-font-family\` | Font family of message text             |
-| \`--message-wrapper-message-text-transform\` | Text transformation (e.g., uppercase) |
-| \`--message-wrapper-message-align\`       | Text alignment                          |
-| \`--message-wrapper-info-color\`          | Color for informational text            |
-| \`--message-wrapper-success-color\`       | Color for success text                  |
-| \`--message-wrapper-error-color\`         | Color for error text                    |
+| Variable                                       | Description                             |
+|------------------------------------------------|-----------------------------------------|
+| \`--message-wrapper-comp-height\`               | Outer component height                  |
+| \`--message-wrapper-comp-width\`                | Outer component width                   |
+| \`--message-wrapper-z-index\`                   | Z-index for the component               |
+| \`--message-wrapper-height\`                    | Height of outer wrapper                 |
+| \`--message-wrapper-width\`                     | Width of outer wrapper                  |
+| \`--message-wrapper-overflow-x\`                | Overflow-x of the wrapper container     |
+| \`--message-wrapper-overflow-y\`                | Overflow-y of the wrapper container     |
+| \`--message-wrapper-message-padding\`           | Padding inside the message container    |
+| \`--message-wrapper-message-height\`            | Height of message container             |
+| \`--message-wrapper-message-width\`             | Width of message container              |
+| \`--message-wrapper-message-line-height\`       | Line height of message text             |
+| \`--message-wrapper-message-top\`               | Top offset                              |
+| \`--message-wrapper-message-bottom\`            | Bottom offset                           |
+| \`--message-wrapper-message-left\`              | Left offset                             |
+| \`--message-wrapper-message-right\`             | Right offset                            |
+| \`--message-wrapper-message-color\`             | Background color                        |
+| \`--message-wrapper-message-shadow\`            | Shadow applied to the message box       |
+| \`--message-wrapper-message-font-size\`         | Font size of message text               |
+| \`--message-wrapper-message-font-weight\`       | Font weight of message text             |
+| \`--message-wrapper-message-font-family\`       | Font family of message text             |
+| \`--message-wrapper-message-text-transform\`    | Text transformation (e.g., uppercase)   |
+| \`--message-wrapper-message-align\`             | Text alignment                          |
+| \`--message-wrapper-info-color\`                | Color for informational text            |
+| \`--message-wrapper-success-color\`             | Color for success text                  |
+| \`--message-wrapper-error-color\`               | Color for error text                    |
+| \`--message-wrapper-content-height\`            | Height of the content area              |
+| \`--message-wrapper-content-width\`             | Width of the content area               |
+| \`--message-wrapper-content-z-index\`           | Z-index of the content area             |
 
 #### Shadow DOM Parts
 
@@ -75,174 +87,190 @@ Used for displaying contextual messages such as info, success, or error banners.
 | \`outer-wrapper\`     | Outer container      | Wrapper container        |
 | \`message-container\` | Message box          | Inner message container  |
 | \`message\`           | Message text (\`<p>\`) | The actual message text  |
-
-### How to use the \`Message\` functions
-
-The global \`Message\` object allows you to show contextual messages anywhere in your app, provided there is a \`<message-wrapper>\` element on the page.
+| \`content\`           | Slot content         | Main content area        |
 
 ---
 
-#### \`Message.showInfo(message: string, duration?: number)\`
+### How to Show Messages Globally
 
-Displays an informational message.
+Use the global \`Message\` handler to display messages anywhere in your app:
 
 \`\`\`ts
-Message.showInfo('Informational message', 3000);
+// Show an info message
+Message.showInfo('Your info message', 3000);
+
+// Show a success message
+Message.showSuccess('Success!', 3000);
+
+// Show an error message
+Message.showError('Something went wrong', 3000);
 \`\`\`
 
-- \`message\`: The info message text to display.  
-- \`duration\` (optional): How long to display the message in milliseconds (default: 3000).
-
----
-
-#### \`Message.showSuccess(message: string, duration?: number)\`
-
-Displays a success message.
-
+Message handler function type:
 \`\`\`ts
-Message.showSuccess('Success message', 3000);
+Message.showFunction(message: string, duration?: number)\`
 \`\`\`
+- \`message\`: The text to display.
+- \`duration\` (optional): How long to show the message (in milliseconds, default is 3000).
 
-- \`message\`: The success message text to display.  
-- \`duration\` (optional): How long to display the message in milliseconds (default: 3000).
-
----
-
-#### \`Message.showError(message: string, duration?: number)\`
-
-Displays an error message.
-
-\`\`\`ts
-Message.showError('Error message', 3000);
-\`\`\`
-
-- \`message\`: The error message text to display.  
-- \`duration\` (optional): How long to display the message in milliseconds (default: 3000).
-
----
-
-Messages appear inside the global \`<message-wrapper>\` element and hide automatically after the duration expires.
-
+Just call one of these functions and the message will appear in the overlay.
         `,
       },
     },
   },
   argTypes: {
+    // Layout
     compHeight: {
       control: 'text',
       description: 'Height of the outer component container',
-      table: { defaultValue: { summary: '100%' }, category: 'Props' },
+      table: { category: 'Layout', defaultValue: { summary: '100%' } },
     },
     compWidth: {
       control: 'text',
       description: 'Width of the outer component container',
-      table: { defaultValue: { summary: '100%' }, category: 'Props' },
+      table: { category: 'Layout', defaultValue: { summary: '100%' } },
     },
     compZindex: {
       control: 'text',
       description: 'Z-index for layering control',
-      table: { defaultValue: { summary: '1000000000' }, category: 'Props' },
+      table: { category: 'Layout', defaultValue: { summary: '1000000000' } },
     },
     wrapperHeight: {
       control: 'text',
       description: 'Height of the wrapper element',
-      table: { defaultValue: { summary: '100%' }, category: 'Props' },
+      table: { category: 'Layout', defaultValue: { summary: '100%' } },
     },
     wrapperWidth: {
       control: 'text',
       description: 'Width of the wrapper element',
-      table: { defaultValue: { summary: '100%' }, category: 'Props' },
+      table: { category: 'Layout', defaultValue: { summary: '100%' } },
     },
+    wrapperOverflowX: {
+      control: 'text',
+      description: 'Overflow-x of the wrapper container',
+      table: { category: 'Layout', defaultValue: { summary: 'hidden' } },
+    },
+    wrapperOverflowY: {
+      control: 'text',
+      description: 'Overflow-y of the wrapper container',
+      table: { category: 'Layout', defaultValue: { summary: 'hidden' } },
+    },
+
+    // Message
     messageHeight: {
       control: 'text',
       description: 'Height of the message container',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: 'fit-content' } },
     },
     messageWidth: {
       control: 'text',
       description: 'Width of the message container',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: '250px' } },
+    },
+    messageLineHeight: {
+      control: 'text',
+      description: 'Line height of the message text',
+      table: { category: 'Message', defaultValue: { summary: '18px' } },
     },
     messagePad: {
       control: 'text',
       description: 'Padding inside the message container',
-      table: { defaultValue: { summary: '5px' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: '15px' } },
     },
     messageTop: {
       control: 'text',
       description: 'Top offset for the message box',
-      table: { defaultValue: { summary: '20px' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: '20px' } },
     },
     messageBottom: {
       control: 'text',
       description: 'Bottom offset for the message box',
-      table: { defaultValue: { summary: 'auto' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: 'auto' } },
     },
     messageLeft: {
       control: 'text',
       description: 'Left offset for the message box',
-      table: { defaultValue: { summary: 'auto' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: '50%' } },
     },
     messageRight: {
       control: 'text',
       description: 'Right offset for the message box',
-      table: { defaultValue: { summary: 'auto' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: '50%' } },
     },
     messageColor: {
       control: 'color',
       description: 'Background color of the message box',
-      table: { defaultValue: { summary: '#eceff1' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: '#eceff1' } },
     },
     messageShadow: {
       control: 'text',
       description: 'Box shadow applied to the message container',
       table: {
+        category: 'Message',
         defaultValue: { summary: '0px 2px 5px #d0d0d0' },
-        category: 'Props',
       },
     },
     messageFontSize: {
       control: 'text',
       description: 'Font size of the message text',
-      table: { defaultValue: { summary: '90%' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: '14px' } },
     },
     messageFontWeight: {
       control: 'text',
       description: 'Font weight of the message text',
-      table: { defaultValue: { summary: 'bold' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: 'bold' } },
     },
     messageFontFamily: {
       control: 'text',
       description: 'Font family used in the message text',
       table: {
+        category: 'Message',
         defaultValue: { summary: `'Helvetica', 'Arial', sans-serif` },
-        category: 'Props',
       },
     },
     messageTransform: {
       control: 'text',
       description: 'Text transformation (e.g., uppercase)',
-      table: { defaultValue: { summary: 'none' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: 'none' } },
     },
     messageAlign: {
       control: 'text',
       description: 'Text alignment inside the message box',
-      table: { defaultValue: { summary: 'start' }, category: 'Props' },
+      table: { category: 'Message', defaultValue: { summary: 'center' } },
     },
+
+    // Colors
     infoColor: {
       control: 'color',
       description: 'Color used for informational messages',
-      table: { defaultValue: { summary: 'black' }, category: 'Props' },
+      table: { category: 'Colors', defaultValue: { summary: 'black' } },
     },
     successColor: {
       control: 'color',
       description: 'Color used for success messages',
-      table: { defaultValue: { summary: 'green' }, category: 'Props' },
+      table: { category: 'Colors', defaultValue: { summary: 'green' } },
     },
     errorColor: {
       control: 'color',
       description: 'Color used for error messages',
-      table: { defaultValue: { summary: 'red' }, category: 'Props' },
+      table: { category: 'Colors', defaultValue: { summary: 'red' } },
+    },
+
+    // Content
+    contentHeight: {
+      control: 'text',
+      description: 'Height of the content area',
+      table: { category: 'Content', defaultValue: { summary: '100%' } },
+    },
+    contentWidth: {
+      control: 'text',
+      description: 'Width of the content area',
+      table: { category: 'Content', defaultValue: { summary: '100%' } },
+    },
+    contentZindex: {
+      control: 'text',
+      description: 'Z-index of the content area',
+      table: { category: 'Content', defaultValue: { summary: '1' } },
     },
   },
 };
@@ -251,7 +279,7 @@ export default meta;
 
 export const Default: StoryFn<MessageWrapperProps> = (args) => html`
   <div
-    style="border: 1px solid black; height: ${args.compHeight}; width: ${args.compWidth};"
+    style="border: 1px solid #ccc; height: ${args.compHeight}; width: ${args.compWidth}; position: relative;"
   >
     <message-wrapper
       .compHeight=${args.compHeight}
@@ -259,8 +287,11 @@ export const Default: StoryFn<MessageWrapperProps> = (args) => html`
       .compZindex=${args.compZindex}
       .wrapperHeight=${args.wrapperHeight}
       .wrapperWidth=${args.wrapperWidth}
+      .wrapperOverflowX=${args.wrapperOverflowX}
+      .wrapperOverflowY=${args.wrapperOverflowY}
       .messageHeight=${args.messageHeight}
       .messageWidth=${args.messageWidth}
+      .messageLineHeight=${args.messageLineHeight}
       .messagePad=${args.messagePad}
       .messageTop=${args.messageTop}
       .messageBottom=${args.messageBottom}
@@ -276,24 +307,40 @@ export const Default: StoryFn<MessageWrapperProps> = (args) => html`
       .infoColor=${args.infoColor}
       .successColor=${args.successColor}
       .errorColor=${args.errorColor}
+      .contentHeight=${args.contentHeight}
+      .contentWidth=${args.contentWidth}
+      .contentZindex=${args.contentZindex}
     >
-      <content-window style="position: absolute; left: 10%; bottom: 10%;">
-        <text-button
-          buttonWidth="200px"
-          .onClick=${() => Message.showInfo('This is info')}
-          tagText="Show Info"
-        ></text-button>
-        <text-button
-          buttonWidth="200px"
-          .onClick=${() => Message.showSuccess('This is success')}
-          tagText="Show Success"
-        ></text-button>
-        <text-button
-          buttonWidth="200px"
-          .onClick=${() => Message.showError('This is error')}
-          tagText="Show Error"
-        ></text-button>
-      </content-window>
+      <div
+        style="
+          height: 100%;
+          width: 100%;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: center;
+          align-items: center;"
+      >
+        <content-window compHeight="fit-content" compWidth="fit-content">
+          <text-button
+            compWidth="200px"
+            .handleClick=${() =>
+              Message.showInfo(
+                'This is info - Long Text Example That Should Wrap If Needed'
+              )}
+            text="Show Info"
+          ></text-button>
+          <text-button
+            compWidth="200px"
+            .handleClick=${() => Message.showSuccess('This is success')}
+            text="Show Success"
+          ></text-button>
+          <text-button
+            compWidth="200px"
+            .handleClick=${() => Message.showError('This is error')}
+            text="Show Error"
+          ></text-button>
+        </content-window>
+      </div>
     </message-wrapper>
   </div>
 `;
@@ -304,21 +351,27 @@ Default.args = {
   compZindex: '1000000000',
   wrapperHeight: '100%',
   wrapperWidth: '100%',
-  messageHeight: '50px',
-  messageWidth: '200px',
-  messagePad: '5px',
-  messageTop: '40px',
+  wrapperOverflowX: 'hidden',
+  wrapperOverflowY: 'hidden',
+  messageHeight: 'fit-content',
+  messageWidth: '250px',
+  messageLineHeight: '18px',
+  messagePad: '15px',
+  messageTop: '20px',
   messageBottom: 'auto',
   messageLeft: '50%',
   messageRight: '50%',
   messageColor: '#eceff1',
   messageShadow: '0px 2px 5px #d0d0d0',
-  messageFontSize: '16px',
+  messageFontSize: '14px',
   messageFontWeight: 'bold',
-  messageFontFamily: 'Arial, sans-serif',
+  messageFontFamily: "'Helvetica', 'Arial', sans-serif",
   messageTransform: 'none',
   messageAlign: 'center',
   infoColor: 'black',
   successColor: 'green',
   errorColor: 'red',
+  contentHeight: '100%',
+  contentWidth: '100%',
+  contentZindex: '1',
 };
