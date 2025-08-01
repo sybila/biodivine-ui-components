@@ -47,6 +47,8 @@ export class LoadingWrapper extends LitElement {
 
   @property({ type: String }) declare wrapperHeight?: string;
   @property({ type: String }) declare wrapperWidth?: string;
+  @property({ type: String }) declare wrapperOverflowX?: string;
+  @property({ type: String }) declare wrapperOverflowY?: string;
 
   @property({ type: String }) declare loadContHeight?: string;
   @property({ type: String }) declare loadContWidth?: string;
@@ -55,11 +57,15 @@ export class LoadingWrapper extends LitElement {
   @property({ type: String }) declare loadContLeft?: string;
   @property({ type: String }) declare loadContRight?: string;
 
+  @property({ type: String }) declare contentHeight?: string;
+  @property({ type: String }) declare contentWidth?: string;
+  @property({ type: String }) declare contentZindex?: string;
+
   @state() declare visible?: boolean;
 
   static styles = css`
     :host {
-      display: inline-block;
+      display: block;
       height: var(--loading-wrapper-comp-height, 100%);
       width: var(--loading-wrapper-comp-width, 100%);
       max-height: var(--loading-wrapper-comp-height, 100%);
@@ -71,6 +77,8 @@ export class LoadingWrapper extends LitElement {
       height: var(--loading-wrapper-height, 100%);
       width: var(--loading-wrapper-width, 100%);
       position: relative;
+      overflow-x: var(--loading-wrapper-overflow-x, hidden);
+      overflow-y: var(--loading-wrapper-overflow-y, hidden);
     }
 
     #loading-container {
@@ -91,14 +99,22 @@ export class LoadingWrapper extends LitElement {
       transition:
         opacity 0.4s ease,
         transform 0.4s ease;
-      transform: translateY(-10px);
+
       pointer-events: none;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%);
       z-index: var(--loading-wrapper-z-index, 999999999);
     }
 
     #loading-container.visible {
       opacity: 1;
+    }
+
+    #content {
+      display: block;
+      height: var(--loading-wrapper-content-height, 100%);
+      width: var(--loading-wrapper-content-width, 100%);
+      position: relative;
+      z-index: var(--loading-wrapper-content-z-index, 1);
     }
   `;
 
@@ -125,6 +141,8 @@ export class LoadingWrapper extends LitElement {
 
     update('wrapperHeight', '--loading-wrapper-height', '100%');
     update('wrapperWidth', '--loading-wrapper-width', '100%');
+    update('wrapperOverflowX', '--loading-wrapper-overflow-x', 'hidden');
+    update('wrapperOverflowY', '--loading-wrapper-overflow-y', 'hidden');
 
     update(
       'loadContHeight',
@@ -132,11 +150,14 @@ export class LoadingWrapper extends LitElement {
       'fit-content'
     );
     update('loadContWidth', '--loading-wrapper-container-width', 'fit-content');
-    update('loadContPad', '--loading-wrapper-container-padding', '5px');
     update('loadContTop', '--loading-wrapper-container-top', '20px');
     update('loadContBottom', '--loading-wrapper-container-bottom', 'auto');
-    update('loadContLeft', '--loading-wrapper-container-left', 'auto');
-    update('loadContRight', '--loading-wrapper-container-right', 'auto');
+    update('loadContLeft', '--loading-wrapper-container-left', '50%');
+    update('loadContRight', '--loading-wrapper-container-right', '50%');
+
+    update('contentHeight', '--loading-wrapper-content-height', '100%');
+    update('contentWidth', '--loading-wrapper-content-width', '100%');
+    update('contentZindex', '--loading-wrapper-content-z-index', '1');
   }
 
   render() {
@@ -150,7 +171,7 @@ export class LoadingWrapper extends LitElement {
           <slot name="loading-component" part="loading-component"></slot>
         </div>
 
-        <slot></slot>
+        <slot id="content" part="content"></slot>
       </div>
     `;
   }
