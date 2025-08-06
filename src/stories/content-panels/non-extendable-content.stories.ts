@@ -95,7 +95,7 @@ Behaves the same as \`extendable-content\`, but does not allow extending the con
     compHeight: {
       control: 'text',
       description: 'Height of the outer component container',
-      table: { category: 'Layout', defaultValue: { summary: '30px' } },
+      table: { category: 'Layout', defaultValue: { summary: '39px' } },
     },
     compWidth: {
       control: 'text',
@@ -291,7 +291,7 @@ export const Default: StoryFn<NonExtendableContentProps> = (args) => html`
 `;
 
 Default.args = {
-  compHeight: '30px',
+  compHeight: '39px',
   compWidth: '500px',
   contHeight: '100%',
   contWidth: '100%',
