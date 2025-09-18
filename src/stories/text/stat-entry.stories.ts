@@ -22,7 +22,7 @@ type StatEntryProps = {
   nameMaxHeight?: string;
   nameWidth?: string;
   nameMaxWidth?: string;
-  nameAlign?: string;
+  nameJustify?: string;
   nameOverflowX?: string;
 
   addColon?: boolean;
@@ -31,7 +31,7 @@ type StatEntryProps = {
   valueMaxHeight?: string;
   valueWidth?: string;
   valueMaxWidth?: string;
-  valueAlign?: string;
+  valueJustify?: string;
   valueOverflowX?: string;
 
   lineHeight?: string;
@@ -72,13 +72,13 @@ Component for displaying a labeled statistic (like "HP: 45").
 | \`--stat-entry-name-max-height\`       | Name section max height        |
 | \`--stat-entry-name-width\`            | Name section width             |
 | \`--stat-entry-name-max-width\`        | Name section max width         |
-| \`--stat-entry-name-align\`            | Name text-align                |
+| \`--stat-entry-name-justify-content\`  | Name text justify              |
 | \`--stat-entry-name-overflow-x\`       | Name overflow-x                |
 | \`--stat-entry-value-height\`          | Value section height           |
 | \`--stat-entry-value-max-height\`      | Value section max height       |
 | \`--stat-entry-value-width\`           | Value section width            |
 | \`--stat-entry-value-max-width\`       | Value section max width        |
-| \`--stat-entry-value-align\`           | Value text-align               |
+| \`--stat-entry-value-justify-content\` | Value text justify             |
 | \`--stat-entry-value-overflow-x\`      | Value overflow-x               |
 | \`--stat-entry-line-height\`           | Line height of text            |
 | \`--stat-entry-font-size\`             | Font size                      |
@@ -176,7 +176,7 @@ Component for displaying a labeled statistic (like "HP: 45").
     nameHeight: {
       control: 'text',
       description: 'Name section height',
-      table: { category: 'Name', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Name', defaultValue: { summary: 'auto' } },
     },
     nameMaxHeight: {
       control: 'text',
@@ -186,17 +186,17 @@ Component for displaying a labeled statistic (like "HP: 45").
     nameWidth: {
       control: 'text',
       description: 'Name section width',
-      table: { category: 'Name', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Name', defaultValue: { summary: 'auto' } },
     },
     nameMaxWidth: {
       control: 'text',
       description: 'Name section max width',
       table: { category: 'Name', defaultValue: { summary: '50%' } },
     },
-    nameAlign: {
+    nameJustify: {
       control: 'text',
-      description: 'Name text alignment',
-      table: { category: 'Name', defaultValue: { summary: 'center' } },
+      description: 'Name text justify-content',
+      table: { category: 'Name', defaultValue: { summary: 'safe center' } },
     },
     nameOverflowX: {
       control: 'text',
@@ -215,7 +215,7 @@ Component for displaying a labeled statistic (like "HP: 45").
     valueHeight: {
       control: 'text',
       description: 'Value section height',
-      table: { category: 'Value', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Value', defaultValue: { summary: 'auto' } },
     },
     valueMaxHeight: {
       control: 'text',
@@ -225,17 +225,17 @@ Component for displaying a labeled statistic (like "HP: 45").
     valueWidth: {
       control: 'text',
       description: 'Value section width',
-      table: { category: 'Value', defaultValue: { summary: 'fit-content' } },
+      table: { category: 'Value', defaultValue: { summary: 'auto' } },
     },
     valueMaxWidth: {
       control: 'text',
       description: 'Value section max width',
       table: { category: 'Value', defaultValue: { summary: '50%' } },
     },
-    valueAlign: {
+    valueJustify: {
       control: 'text',
-      description: 'Value text alignment',
-      table: { category: 'Value', defaultValue: { summary: 'center' } },
+      description: 'Value text justify-content',
+      table: { category: 'Value', defaultValue: { summary: 'safe center' } },
     },
     valueOverflowX: {
       control: 'text',
@@ -308,14 +308,14 @@ export const Default: StoryFn<StatEntryProps> = (args) => html`
     .nameMaxHeight=${args.nameMaxHeight}
     .nameWidth=${args.nameWidth}
     .nameMaxWidth=${args.nameMaxWidth}
-    .nameAlign=${args.nameAlign}
+    .nameJustify=${args.nameJustify}
     .nameOverflowX=${args.nameOverflowX}
     .addColon=${args.addColon}
     .valueHeight=${args.valueHeight}
     .valueMaxHeight=${args.valueMaxHeight}
     .valueWidth=${args.valueWidth}
     .valueMaxWidth=${args.valueMaxWidth}
-    .valueAlign=${args.valueAlign}
+    .valueJustify=${args.valueJustify}
     .valueOverflowX=${args.valueOverflowX}
     .lineHeight=${args.lineHeight}
     .textFontSize=${args.textFontSize}
@@ -340,18 +340,18 @@ Default.args = {
   valNameGap: '15px',
   statName: 'HP',
   statValue: '45',
-  nameHeight: 'fit-content',
+  nameHeight: 'auto',
   nameMaxHeight: 'fit-content',
-  nameWidth: 'fit-content',
+  nameWidth: 'auto',
   nameMaxWidth: '50%',
-  nameAlign: 'center',
+  nameJustify: 'safe center',
   nameOverflowX: 'hidden',
   addColon: true,
-  valueHeight: 'fit-content',
+  valueHeight: 'auto',
   valueMaxHeight: 'fit-content',
-  valueWidth: 'fit-content',
+  valueWidth: 'auto',
   valueMaxWidth: '50%',
-  valueAlign: 'center',
+  valueJustify: 'safe center',
   valueOverflowX: 'auto',
   lineHeight: '20px',
   textFontSize: '17px',
