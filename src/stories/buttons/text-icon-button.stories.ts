@@ -1,6 +1,6 @@
 import '../../components/buttons/text-icon-button';
 import { html } from 'lit';
-import type { Meta, StoryFn } from '@storybook/web-components';
+import type { Meta, StoryFn } from '@storybook/web-components-vite';
 
 type TextIconButtonProps = {
   compHeight?: string;

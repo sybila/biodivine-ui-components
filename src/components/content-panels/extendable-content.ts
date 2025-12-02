@@ -1,6 +1,62 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+type StyleProperty =
+  | 'compHeight'
+  | 'compWidth'
+  | 'contHeight'
+  | 'contWidth'
+  | 'contMaxHeight'
+  | 'contMaxWidth'
+  | 'contOverflowX'
+  | 'contOverflowY'
+  | 'contBorder'
+  | 'contBorderRadius'
+  | 'contColor'
+  | 'contShadow'
+  | 'contPadding'
+  | 'contHoverBorder'
+  | 'contHoverColor'
+  | 'contActiveBorder'
+  | 'contActiveColor'
+  | 'contExtendedHeight'
+  | 'contExtendedMaxHeight'
+  | 'topBottomGap'
+  | 'topHeight'
+  | 'topWidth'
+  | 'topMaxHeight'
+  | 'topMaxWidth'
+  | 'topJustifyC'
+  | 'topAlignI'
+  | 'topOverflowX'
+  | 'topOverflowY'
+  | 'topContentHeight'
+  | 'topContentWidth'
+  | 'topContentMaxHeight'
+  | 'topContentMaxWidth'
+  | 'topContentJustifyC'
+  | 'topContentAlignI'
+  | 'topContentOverflowX'
+  | 'topContentOverflowY'
+  | 'extendContentHeight'
+  | 'extendContentWidth'
+  | 'extendContentMaxHeight'
+  | 'extendContentMaxWidth'
+  | 'extendContentJustifyC'
+  | 'extendContentAlignI'
+  | 'extendContentOverflowX'
+  | 'extendContentOverflowY'
+  | 'buttonHeight'
+  | 'buttonWidth'
+  | 'buttonMaxHeight'
+  | 'buttonMaxWidth'
+  | 'buttonBorderRadius'
+  | 'buttonColor'
+  | 'buttonHoverColor'
+  | 'buttonIconSrc'
+  | 'buttonIconHeight'
+  | 'buttonIconWidth';
+
 @customElement('extendable-content')
 export class ExtendableContent extends LitElement {
   @property({ type: String }) declare compHeight?: string;
@@ -232,16 +288,16 @@ export class ExtendableContent extends LitElement {
   `;
 
   private updateStyleVariable(
-    propertyName: string,
+    propertyName: StyleProperty,
     cssVar: string,
     fallback: string
   ) {
-    const value = (this as any)[propertyName] ?? fallback;
+    const value = this[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, any>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, StyleProperty>) {
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--extendable-content-comp-height', 'fit-content');

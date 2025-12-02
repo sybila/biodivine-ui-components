@@ -1,6 +1,50 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+type StyleProperty =
+  | 'compHeight'
+  | 'compWidth'
+  | 'compMaxHeight'
+  | 'compMaxWidth'
+  | 'compZIndex'
+  | 'compBackgroundColor'
+  | 'compBackgroundWidth'
+  | 'compBackgroundHeight'
+  | 'windHeight'
+  | 'windWidth'
+  | 'windMaxHeight'
+  | 'windMaxWidth'
+  | 'windPad'
+  | 'windColor'
+  | 'windShadow'
+  | 'windOverflowX'
+  | 'windOverflowY'
+  | 'windResize'
+  | 'gapSize'
+  | 'headerHeight'
+  | 'headerWidth'
+  | 'headerGap'
+  | 'headerText'
+  | 'headerTextFontSize'
+  | 'headerTextFontWeight'
+  | 'headerTextFontFamily'
+  | 'headerTextColor'
+  | 'headerTextShadow'
+  | 'headerTextTransform'
+  | 'closeButtonSrc'
+  | 'closeHeight'
+  | 'closeWidth'
+  | 'closeHoverColor'
+  | 'closeIconHeight'
+  | 'closeIconWidth'
+  | 'contentHeight'
+  | 'contentWidth'
+  | 'contentMaxHeight'
+  | 'contentMaxWidth'
+  | 'contentJustifyC'
+  | 'contentAlignI'
+  | 'contentGap';
+
 @customElement('overlay-window')
 export class OverlayWindow extends LitElement {
   @property({ type: String }) declare compHeight?: string;
@@ -167,16 +211,16 @@ export class OverlayWindow extends LitElement {
   `;
 
   private updateStyleVariable(
-    propertyName: string,
+    propertyName: StyleProperty,
     cssVar: string,
     fallback: string
   ) {
-    const value = (this as any)[propertyName] ?? fallback;
+    const value = this[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, any>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, StyleProperty>) {
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--overlay-window-comp-height', '100vh');

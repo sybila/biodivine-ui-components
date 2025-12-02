@@ -1,6 +1,6 @@
 import '../../components/text/dot-header';
 import { html } from 'lit';
-import type { Meta, StoryFn } from '@storybook/web-components';
+import type { Meta, StoryFn } from '@storybook/web-components-vite';
 
 type DotHeaderProps = {
   compHeight?: string;

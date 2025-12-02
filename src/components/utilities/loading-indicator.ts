@@ -1,6 +1,26 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+type StyleProperty =
+  | 'compHeight'
+  | 'compWidth'
+  | 'loadBoxHeight'
+  | 'loadBoxWidth'
+  | 'loadBoxColor'
+  | 'loadBoxShadow'
+  | 'loadBoxPad'
+  | 'loadBoxGap'
+  | 'loadingSpinnerSrc'
+  | 'loadingSpinnerHeight'
+  | 'loadingSpinnerWidth'
+  | 'loadingMessage'
+  | 'loadingMessageFontSize'
+  | 'loadingMessageFontWeight'
+  | 'tagTextFontFamily'
+  | 'tagTextColor'
+  | 'tagTextShadow'
+  | 'tagTextTransform';
+
 @customElement('loading-indicator')
 export class LoadingIndicator extends LitElement {
   @property({ type: String }) declare compHeight?: string;
@@ -76,16 +96,16 @@ export class LoadingIndicator extends LitElement {
   `;
 
   private updateStyleVariable(
-    propertyName: string,
+    propertyName: StyleProperty,
     cssVar: string,
     fallback: string
   ) {
-    const value = (this as any)[propertyName] ?? fallback;
+    const value = this[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, any>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, StyleProperty>) {
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--loading-indicator-comp-height', 'fit-content');

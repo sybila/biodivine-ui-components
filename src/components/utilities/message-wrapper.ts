@@ -1,6 +1,36 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
+type StyleProperty =
+  | 'compHeight'
+  | 'compWidth'
+  | 'compZindex'
+  | 'wrapperHeight'
+  | 'wrapperWidth'
+  | 'wrapperOverflowX'
+  | 'wrapperOverflowY'
+  | 'messageHeight'
+  | 'messageWidth'
+  | 'messageLineHeight'
+  | 'messagePad'
+  | 'messageTop'
+  | 'messageBottom'
+  | 'messageLeft'
+  | 'messageRight'
+  | 'messageColor'
+  | 'messageShadow'
+  | 'messageFontSize'
+  | 'messageFontWeight'
+  | 'messageFontFamily'
+  | 'messageTransform'
+  | 'messageAlign'
+  | 'infoColor'
+  | 'successColor'
+  | 'errorColor'
+  | 'contentHeight'
+  | 'contentWidth'
+  | 'contentZindex';
+
 type MessageType = 'info' | 'success' | 'error';
 
 class MessageHandler {
@@ -9,7 +39,7 @@ class MessageHandler {
   findGlobalMessage(): MessageWrapper | null {
     if (this.instance) return this.instance;
 
-    let el = document.querySelector('message-wrapper') as MessageWrapper;
+    const el = document.querySelector('message-wrapper') as MessageWrapper;
 
     if (!el) return null;
 
@@ -190,16 +220,16 @@ export class MessageWrapper extends LitElement {
   }
 
   private updateStyleVariable(
-    propertyName: string,
+    propertyName: StyleProperty,
     cssVar: string,
     fallback: string
   ) {
-    const value = (this as any)[propertyName] ?? fallback;
+    const value = this[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, any>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, StyleProperty>) {
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--message-wrapper-comp-height', '100%');

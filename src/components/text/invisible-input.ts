@@ -1,6 +1,53 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+type StyleProperty =
+  | 'compHeight'
+  | 'compWidth'
+  | 'contHeight'
+  | 'contWidth'
+  | 'contPadX'
+  | 'contPadY'
+  | 'contBorderRadius'
+  | 'contOverflowX'
+  | 'contOverflowY'
+  | 'singleHeight'
+  | 'singleWidth'
+  | 'singleMaxHeight'
+  | 'singleMaxWidth'
+  | 'singleLineHeight'
+  | 'singleFontFamily'
+  | 'singleFontWeight'
+  | 'singleFontSize'
+  | 'singleTextColor'
+  | 'singleTextAlign'
+  | 'singleFocusFontFamily'
+  | 'singleFocusFontWeight'
+  | 'singleFocusBgColor'
+  | 'singlePlaceholderColor'
+  | 'singlePlaceholderFontStyle'
+  | 'singlePlaceholderFontFamily'
+  | 'multiHeight'
+  | 'multiWidth'
+  | 'multiMaxHeight'
+  | 'multiMaxWidth'
+  | 'multiLineHeight'
+  | 'multiFontFamily'
+  | 'multiFontWeight'
+  | 'multiFontSize'
+  | 'multiTextColor'
+  | 'multiTextAlign'
+  | 'multiFocusFontFamily'
+  | 'multiFocusFontWeight'
+  | 'multiFocusBgColor'
+  | 'multiPlaceholderColor'
+  | 'multiPlaceholderFontStyle'
+  | 'multiPlaceholderFontFamily'
+  | 'hoverIconSrc'
+  | 'hoverIconHeight'
+  | 'hoverIconWidth'
+  | 'errorBgColor';
+
 @customElement('invisible-input')
 export class InvisibleInput extends LitElement {
   @property({ type: String }) declare compHeight?: string;
@@ -11,14 +58,14 @@ export class InvisibleInput extends LitElement {
   @property({ type: String }) declare contPadX?: string;
   @property({ type: String }) declare contPadY?: string;
   @property({ type: String }) declare contBorderRadius?: string;
+  @property({ type: String }) declare contOverflowX?: string;
+  @property({ type: String }) declare contOverflowY?: string;
 
   @property({ type: String }) declare singleHeight?: string;
   @property({ type: String }) declare singleWidth?: string;
   @property({ type: String }) declare singleMaxHeight?: string;
   @property({ type: String }) declare singleMaxWidth?: string;
   @property({ type: String }) declare singleLineHeight?: string;
-  @property({ type: String }) declare singleOverflowX?: string;
-  @property({ type: String }) declare singleOverflowY?: string;
 
   @property({ type: String }) declare singleFontFamily?: string;
   @property({ type: String }) declare singleFontWeight?: string;
@@ -41,8 +88,6 @@ export class InvisibleInput extends LitElement {
   @property({ type: String }) declare multiMaxHeight?: string;
   @property({ type: String }) declare multiMaxWidth?: string;
   @property({ type: String }) declare multiLineHeight?: string;
-  @property({ type: String }) declare multiOverflowX?: string;
-  @property({ type: String }) declare multiOverflowY?: string;
 
   @property({ type: String }) declare multiFontFamily?: string;
   @property({ type: String }) declare multiFontWeight?: string;
@@ -249,16 +294,16 @@ export class InvisibleInput extends LitElement {
   }
 
   private updateStyleVariable(
-    propertyName: string,
+    propertyName: StyleProperty,
     cssVar: string,
     fallback: string
   ) {
-    const value = (this as any)[propertyName] ?? fallback;
+    const value = this[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, any>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, StyleProperty>) {
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--invisible-input-comp-height', '200px');

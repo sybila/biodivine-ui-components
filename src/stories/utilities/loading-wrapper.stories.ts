@@ -2,7 +2,7 @@ import '../../components/utilities/loading-wrapper';
 import '../../components/utilities/loading-indicator';
 import '../../components/buttons/text-button';
 import { html } from 'lit';
-import type { Meta, StoryFn } from '@storybook/web-components';
+import type { Meta, StoryFn } from '@storybook/web-components-vite';
 import { Loading } from '../../components/utilities/loading-wrapper';
 
 type LoadingWrapperProps = {

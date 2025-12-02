@@ -1,6 +1,28 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+type StyleProperty =
+  | 'compHeight'
+  | 'compWidth'
+  | 'buttonSize'
+  | 'buttonBorderRadius'
+  | 'buttonColor'
+  | 'buttonHoverColor'
+  | 'buttonActiveColor'
+  | 'buttonShadow'
+  | 'iconSize'
+  | 'tagLineHeight'
+  | 'tagPadX'
+  | 'tagWidth'
+  | 'tagTextFontSize'
+  | 'tagTextFontWeight'
+  | 'tagTextFontFamily'
+  | 'tagTextColor'
+  | 'tagTextShadow'
+  | 'tagTextTransform'
+  | 'tagTextAlign'
+  | 'tagTextDelay';
+
 @customElement('icon-button')
 export class IconButton extends LitElement {
   @property({ type: String }) declare compHeight?: string;
@@ -139,16 +161,16 @@ export class IconButton extends LitElement {
   `;
 
   private updateStyleVariable(
-    propertyName: string,
+    propertyName: StyleProperty,
     cssVar: string,
     fallback: string
   ) {
-    const value = (this as any)[propertyName] ?? fallback;
+    const value = this[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, any>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, StyleProperty>) {
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--icon-button-comp-height', '60px');

@@ -1,6 +1,39 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+type StyleProperty =
+  | 'compHeight'
+  | 'compWidth'
+  | 'contHeight'
+  | 'contWidth'
+  | 'contJustify'
+  | 'contAlign'
+  | 'contPadX'
+  | 'contBgColor'
+  | 'contBorderRadius'
+  | 'valNameGap'
+  | 'statName'
+  | 'statValue'
+  | 'nameHeight'
+  | 'nameMaxHeight'
+  | 'nameWidth'
+  | 'nameMaxWidth'
+  | 'nameJustify'
+  | 'nameOverflowX'
+  | 'valueHeight'
+  | 'valueMaxHeight'
+  | 'valueWidth'
+  | 'valueMaxWidth'
+  | 'valueJustify'
+  | 'valueOverflowX'
+  | 'lineHeight'
+  | 'textFontSize'
+  | 'textFontWeight'
+  | 'textFontFamily'
+  | 'textColor'
+  | 'textShadow'
+  | 'textTransform';
+
 @customElement('stat-entry')
 export class StatEntry extends LitElement {
   @property({ type: String }) declare compHeight?: string;
@@ -100,16 +133,16 @@ export class StatEntry extends LitElement {
   `;
 
   private updateStyleVariable(
-    propertyName: string,
+    propertyName: StyleProperty,
     cssVar: string,
     fallback: string
   ) {
-    const value = (this as any)[propertyName] ?? fallback;
+    const value = this[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, any>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, StyleProperty>) {
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--stat-entry-comp-height', 'fit-content');

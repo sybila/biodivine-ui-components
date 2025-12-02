@@ -1,6 +1,6 @@
 import '../../components/text/invisible-input';
 import { html } from 'lit';
-import type { Meta, StoryFn } from '@storybook/web-components';
+import type { Meta, StoryFn } from '@storybook/web-components-vite';
 
 type InvisibleInputProps = {
   compHeight?: string;
@@ -232,22 +232,6 @@ Input field supporting both single-line and multi-line modes.
         defaultValue: { summary: '100%' },
       },
     },
-    singleOverflowX: {
-      control: 'text',
-      description: 'Horizontal overflow for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: 'auto' },
-      },
-    },
-    singleOverflowY: {
-      control: 'text',
-      description: 'Vertical overflow for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: 'auto' },
-      },
-    },
     singleFontFamily: {
       control: 'text',
       description: 'Font family for single-line input',
@@ -370,16 +354,6 @@ Input field supporting both single-line and multi-line modes.
       control: 'text',
       description: 'Line height for multi-line input',
       table: { category: 'Multi-Line Mode', defaultValue: { summary: '21px' } },
-    },
-    multiOverflowX: {
-      control: 'text',
-      description: 'Horizontal overflow for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: 'auto' } },
-    },
-    multiOverflowY: {
-      control: 'text',
-      description: 'Vertical overflow for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: 'auto' } },
     },
     multiFontFamily: {
       control: 'text',
@@ -542,8 +516,6 @@ export const Default: StoryFn<InvisibleInputProps> = (args) => html`
     .singleMaxHeight=${args.singleMaxHeight}
     .singleMaxWidth=${args.singleMaxWidth}
     .singleLineHeight=${args.singleLineHeight}
-    .singleOverflowX=${args.singleOverflowX}
-    .singleOverflowY=${args.singleOverflowY}
     .singleFontFamily=${args.singleFontFamily}
     .singleFontWeight=${args.singleFontWeight}
     .singleFontSize=${args.singleFontSize}
@@ -561,8 +533,6 @@ export const Default: StoryFn<InvisibleInputProps> = (args) => html`
     .multiMaxHeight=${args.multiMaxHeight}
     .multiMaxWidth=${args.multiMaxWidth}
     .multiLineHeight=${args.multiLineHeight}
-    .multiOverflowX=${args.multiOverflowX}
-    .multiOverflowY=${args.multiOverflowY}
     .multiFontFamily=${args.multiFontFamily}
     .multiFontWeight=${args.multiFontWeight}
     .multiFontSize=${args.multiFontSize}
@@ -605,8 +575,6 @@ Default.args = {
   singleFontWeight: 'normal',
   singleTextColor: 'black',
   singleLineHeight: '21px',
-  singleOverflowX: 'auto',
-  singleOverflowY: 'auto',
   singleFontFamily: "'FiraMono', monospace",
   singleTextAlign: 'start',
   singleFocusFontFamily: "'FiraMonoBold', monospace",
@@ -621,8 +589,6 @@ Default.args = {
   multiMaxHeight: '100%',
   multiMaxWidth: '100%',
   multiLineHeight: '21px',
-  multiOverflowX: 'auto',
-  multiOverflowY: 'auto',
   multiFontFamily: "'FiraMono', monospace",
   multiFontWeight: 'normal',
   multiFontSize: '20px',

@@ -1,6 +1,6 @@
 import '../../components/non-text-inputs/value-slider';
 import { html } from 'lit';
-import type { Meta, StoryFn } from '@storybook/web-components';
+import type { Meta, StoryFn } from '@storybook/web-components-vite';
 
 type ValueSliderProps = {
   /** Height of the outer component container */

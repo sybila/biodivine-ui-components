@@ -1,6 +1,33 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+type StyleProperty =
+  | 'compHeight'
+  | 'compWidth'
+  | 'contHeight'
+  | 'contWidth'
+  | 'contJustifyC'
+  | 'contAlignI'
+  | 'contOverflowX'
+  | 'contOverflowY'
+  | 'contBorder'
+  | 'contBorderRadius'
+  | 'contColor'
+  | 'contShadow'
+  | 'contPadding'
+  | 'contHoverBorder'
+  | 'contHoverColor'
+  | 'contActiveBorder'
+  | 'contActiveColor'
+  | 'contentHeight'
+  | 'contentWidth'
+  | 'contentMaxHeight'
+  | 'contentMaxWidth'
+  | 'contentJustifyC'
+  | 'contentAlignI'
+  | 'contentOverflowX'
+  | 'contentOverflowY';
+
 @customElement('non-extendable-content')
 export class NonExtendableContent extends LitElement {
   @property({ type: String }) declare compHeight?: string;
@@ -107,16 +134,16 @@ export class NonExtendableContent extends LitElement {
   `;
 
   private updateStyleVariable(
-    propertyName: string,
+    propertyName: StyleProperty,
     cssVar: string,
     fallback: string
   ) {
-    const value = (this as any)[propertyName] ?? fallback;
+    const value = this[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, any>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, StyleProperty>) {
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--non-extendable-content-comp-height', '39px');
