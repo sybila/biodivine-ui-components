@@ -12,8 +12,6 @@ type StyleProperty =
   | 'contBgColor'
   | 'contBorderRadius'
   | 'valNameGap'
-  | 'statName'
-  | 'statValue'
   | 'nameHeight'
   | 'nameMaxHeight'
   | 'nameWidth'
