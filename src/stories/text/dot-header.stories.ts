@@ -110,7 +110,10 @@ A header component that displays a dot followed by customizable text.
     textFontFamily: {
       control: 'text',
       description: 'Font family of the header text',
-      table: { category: 'Text', defaultValue: { summary: "'FiraMono', sans-serif" } },
+      table: {
+        category: 'Text',
+        defaultValue: { summary: "'FiraMono', sans-serif" },
+      },
     },
     textColor: {
       control: 'color',
@@ -120,11 +123,15 @@ A header component that displays a dot followed by customizable text.
     textShadow: {
       control: 'text',
       description: 'Text shadow for the header text',
-      table: { category: 'Text', defaultValue: { summary: '0px 2px 5px #d0d0d0' } },
+      table: {
+        category: 'Text',
+        defaultValue: { summary: '0px 2px 5px #d0d0d0' },
+      },
     },
     textTransform: {
       control: 'text',
-      description: 'Text transformation (e.g., uppercase, lowercase) for the header text',
+      description:
+        'Text transformation (e.g., uppercase, lowercase) for the header text',
       table: { category: 'Text', defaultValue: { summary: 'uppercase' } },
     },
     textAlign: {
