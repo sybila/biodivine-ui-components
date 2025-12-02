@@ -220,11 +220,13 @@ export const Default: StoryFn<LoadingWrapperProps> = (args) => html`
       >
         <text-button
           text="Start Loading"
+          compHeight="40px"
           compWidth="100px"
           .handleClick=${() => Loading.startLoading()}
         ></text-button>
         <text-button
           text="Stop Loading"
+          compHeight="40px"
           compWidth="100px"
           .handleClick=${() => Loading.endLoading()}
         ></text-button>
