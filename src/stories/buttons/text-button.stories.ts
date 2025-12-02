@@ -230,7 +230,7 @@ export const Default: StoryFn<TextButtonProps> = (args) => html`
 
 Default.args = {
   compHeight: '30px',
-  compWidth: '60px',
+  compWidth: '80px',
   buttonHeight: '100%',
   buttonWidth: '100%',
   buttonColor: '#eceff1',
