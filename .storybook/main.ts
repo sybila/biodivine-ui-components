@@ -4,9 +4,14 @@ const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
     '@chromatic-com/storybook',
-    '@storybook/addon-docs',
     '@storybook/addon-a11y',
     '@storybook/addon-vitest',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        autodocs: true,
+      },
+    },
   ],
   framework: {
     name: '@storybook/web-components-vite',

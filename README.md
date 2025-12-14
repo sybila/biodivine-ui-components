@@ -1,5 +1,8 @@
 # biodivine-ui-components
 
+A collection of reusable web components developed at the **Sybila Laboratory**.  
+This library is built with **Lit** and documented through **Storybook**.
+
 ## Developer instructions
 
 Currently, the project has several integrity checks that are enforced by the CI/CD pipeline. To run them locally, use the prepared NPM scripts:
