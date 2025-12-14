@@ -1,7 +1,7 @@
 # biodivine-ui-components
 
 A collection of reusable web components developed at the **Sybila Laboratory**.  
-This library is built with **Lit** and documented & tested through **Storybook**.
+This library is built with **Lit** and documented through **Storybook**.
 
 ## Developer instructions
 
