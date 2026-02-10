@@ -79,24 +79,24 @@ A button with customizable text content.
     compHeight: {
       control: 'text',
       description: 'Height of the outer component container',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Layout' },
+      table: { defaultValue: { summary: '30px' }, category: 'Layout' },
     },
     compWidth: {
       control: 'text',
       description: 'Width of the outer component container',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Layout' },
+      table: { defaultValue: { summary: '60px' }, category: 'Layout' },
     },
 
     // Button
     buttonHeight: {
       control: 'text',
       description: 'Height of the button',
-      table: { defaultValue: { summary: '40px' }, category: 'Button' },
+      table: { defaultValue: { summary: '100%' }, category: 'Button' },
     },
     buttonWidth: {
       control: 'text',
       description: 'Width of the button',
-      table: { defaultValue: { summary: '120px' }, category: 'Button' },
+      table: { defaultValue: { summary: '100%' }, category: 'Button' },
     },
     buttonColor: {
       control: 'color',
@@ -152,7 +152,7 @@ A button with customizable text content.
     textFontWeight: {
       control: 'text',
       description: 'Font weight of the text',
-      table: { defaultValue: { summary: '600' }, category: 'Text' },
+      table: { defaultValue: { summary: 'bold' }, category: 'Text' },
     },
     textFontFamily: {
       control: 'text',
@@ -165,20 +165,20 @@ A button with customizable text content.
     textColor: {
       control: 'color',
       description: 'Color of the text',
-      table: { defaultValue: { summary: '#333' }, category: 'Text' },
+      table: { defaultValue: { summary: 'black' }, category: 'Text' },
     },
     textShadow: {
       control: 'text',
       description: 'Text shadow for the text',
       table: {
-        defaultValue: { summary: '0px 1px 2px #aaa' },
+        defaultValue: { summary: '0px 2px 5px #d0d0d0' },
         category: 'Text',
       },
     },
     textTransform: {
       control: 'text',
       description: 'Text transformation (e.g., uppercase, lowercase)',
-      table: { defaultValue: { summary: 'uppercase' }, category: 'Text' },
+      table: { defaultValue: { summary: 'none' }, category: 'Text' },
     },
     textAlign: {
       control: 'text',
