@@ -130,20 +130,20 @@ Displays an array of words where each word can have its own color and font weigh
     fontSize: {
       control: 'text',
       description: 'Words font size',
-      table: { category: 'Text', defaultValue: { summary: '16px' } },
+      table: { category: 'Text', defaultValue: { summary: '21px' } },
     },
     fontFamily: {
       control: 'text',
       description: 'Words font family',
       table: {
         category: 'Text',
-        defaultValue: { summary: "'Helvetica', 'Arial', sans-serif" },
+        defaultValue: { summary: "'Arial', sans-serif" },
       },
     },
     lineHeight: {
       control: 'text',
       description: 'Words line height',
-      table: { category: 'Text', defaultValue: { summary: 'normal' } },
+      table: { category: 'Text', defaultValue: { summary: '22px' } },
     },
   },
 };
@@ -190,7 +190,7 @@ Default.args = {
   contMarginBottom: '10px',
   contOverflowY: 'auto',
   wordGap: '0.5rem',
-  fontSize: '16px',
-  fontFamily: "'Helvetica', 'Arial', sans-serif",
-  lineHeight: 'normal',
+  fontSize: '21px',
+  fontFamily: "'Arial', sans-serif",
+  lineHeight: '22px',
 };
