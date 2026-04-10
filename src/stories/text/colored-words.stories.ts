@@ -137,7 +137,7 @@ Displays an array of words where each word can have its own color and font weigh
       description: 'Words font family',
       table: {
         category: 'Text',
-        defaultValue: { summary: "'Arial', sans-serif" },
+        defaultValue: { summary: 'Arial, sans-serif' },
       },
     },
     lineHeight: {
@@ -191,6 +191,6 @@ Default.args = {
   contOverflowY: 'auto',
   wordGap: '0.5rem',
   fontSize: '21px',
-  fontFamily: "'Arial', sans-serif",
+  fontFamily: 'Arial, sans-serif',
   lineHeight: '22px',
 };
