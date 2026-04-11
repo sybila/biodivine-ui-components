@@ -187,7 +187,7 @@ export class StatTable extends LitElement {
             (stat) => html`
               <div>
                 <span id="name" style="width: ${stat.nameWidth};"
-                  >${stat.name}${this.separator ?? ' :'}
+                  >${stat.name}${this.separator ?? ':'}
                 </span>
                 <span id="value" style="width: ${stat.valueWidth}"
                   >${stat.value}</span

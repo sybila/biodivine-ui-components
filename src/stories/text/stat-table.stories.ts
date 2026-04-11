@@ -111,7 +111,7 @@ Component for rendering a vertical list of labeled statistics.
     separator: {
       control: 'text',
       description: 'Separator to display between name and value',
-      table: { category: 'Data', defaultValue: { summary: ' :' } },
+      table: { category: 'Data', defaultValue: { summary: ':' } },
     },
 
     contMinHeight: {
@@ -304,7 +304,7 @@ Default.args = {
     { name: 'Defense', value: '12', nameWidth: '50%', valueWidth: '50%' },
     { name: 'Speed', value: '26', nameWidth: '50%', valueWidth: '50%' },
   ],
-  separator: ' :',
+  separator: ':',
   contMinHeight: '100px',
   contMinWidth: '200px',
   contMaxHeight: '400px',
