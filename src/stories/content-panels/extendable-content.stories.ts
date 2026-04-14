@@ -3,15 +3,7 @@ import type { Meta, StoryFn } from '@storybook/web-components-vite';
 import '../../components/content-panels/extendable-content';
 
 type ExtendableContentProps = {
-  compHeight?: string;
-  compWidth?: string;
-
-  contHeight?: string;
   contWidth?: string;
-  contMaxHeight?: string;
-  contMaxWidth?: string;
-  contOverflowX?: string;
-  contOverflowY?: string;
   contBorder?: string;
   contBorderRadius?: string;
   contColor?: string;
@@ -24,22 +16,13 @@ type ExtendableContentProps = {
   contActiveBorder?: string;
   contActiveColor?: string;
 
-  contExtendedHeight?: string;
-  contExtendedMaxHeight?: string;
-
   topBottomGap?: string;
 
   topHeight?: string;
   topWidth?: string;
-  topMaxHeight?: string;
-  topMaxWidth?: string;
-  topJustifyC?: string;
-  topAlignI?: string;
-  topOverflowX?: string;
-  topOverflowY?: string;
 
-  topContentHeight?: string;
-  topContentWidth?: string;
+  topContentMinHeight?: string;
+  topContentMinWidth?: string;
   topContentMaxHeight?: string;
   topContentMaxWidth?: string;
   topContentJustifyC?: string;
@@ -47,8 +30,8 @@ type ExtendableContentProps = {
   topContentOverflowX?: string;
   topContentOverflowY?: string;
 
-  extendContentHeight?: string;
-  extendContentWidth?: string;
+  extendContentMinHeight?: string;
+  extendContentMinWidth?: string;
   extendContentMaxHeight?: string;
   extendContentMaxWidth?: string;
   extendContentJustifyC?: string;
@@ -58,8 +41,6 @@ type ExtendableContentProps = {
 
   buttonHeight?: string;
   buttonWidth?: string;
-  buttonMaxHeight?: string;
-  buttonMaxWidth?: string;
   buttonBorderRadius?: string;
   buttonColor?: string;
   buttonHoverColor?: string;
@@ -69,6 +50,7 @@ type ExtendableContentProps = {
 
   extended?: boolean;
   active?: boolean;
+  hover?: boolean;
 };
 
 const meta: Meta<ExtendableContentProps> = {
@@ -86,59 +68,42 @@ Container component that can toggle between collapsed and extended states.
 
 | Variable                                 | Description                                   |
 |------------------------------------------|-----------------------------------------------|
-| \`--extendable-content-comp-height\`      | Height of the outer component                  |
-| \`--extendable-content-comp-width\`       | Width of the outer component                   |
-| \`--extendable-content-cont-height\`      | Height of the main container                    |
-| \`--extendable-content-cont-width\`       | Width of the main container                     |
-| \`--extendable-content-cont-max-height\`  | Max height of the main container                |
-| \`--extendable-content-cont-max-width\`   | Max width of the main container                 |
-| \`--extendable-content-cont-overflow-x\`  | Horizontal overflow behavior                     |
-| \`--extendable-content-cont-overflow-y\`  | Vertical overflow behavior                       |
-| \`--extendable-content-cont-border\`      | Border styling of the container                  |
-| \`--extendable-content-cont-border-radius\` | Border radius of the container                   |
-| \`--extendable-content-cont-bg-color\`    | Background color of the container                |
-| \`--extendable-content-cont-shadow\`      | Box shadow of the container                       |
-| \`--extendable-content-cont-padding\`     | Padding inside the container                      |
-| \`--extendable-content-cont-hover-border\`| Border on hover                                  |
-| \`--extendable-content-hover-bg-color\`   | Background color on hover                         |
-| \`--extendable-content-active-border\`    | Border when active                                |
-| \`--extendable-content-active-bg-color\`  | Background color when active                       |
-| \`--extendable-content-cont-extended-height\` | Height when extended                           |
-| \`--extendable-content-cont-extended-max-height\` | Max height when extended                  |
-| \`--extendable-content-top-bottom-gap\`   | Gap between top and bottom sections              |
-| \`--extendable-content-top-height\`       | Height of the top container                      |
-| \`--extendable-content-top-width\`        | Width of the top container                       |
-| \`--extendable-content-top-max-height\`   | Max height of the top container                  |
-| \`--extendable-content-top-max-width\`    | Max width of the top container                   |
-| \`--extendable-content-top-justify-content\` | Justify content of the top container         |
-| \`--extendable-content-top-align-items\`  | Align items of the top container                 |
-| \`--extendable-content-top-overflow-x\`   | Overflow-x of the top container                  |
-| \`--extendable-content-top-overflow-y\`   | Overflow-y of the top container                  |
-| \`--extendable-content-top-content-height\` | Height of the top content                     |
-| \`--extendable-content-top-content-width\` | Width of the top content                       |
-| \`--extendable-content-top-content-max-height\` | Max height of the top content             |
-| \`--extendable-content-top-content-max-width\` | Max width of the top content               |
-| \`--extendable-content-top-content-justify-content\` | Justify content of the top content      |
-| \`--extendable-content-top-content-align-items\` | Align items of the top content            |
-| \`--extendable-content-top-content-overflow-x\` | Overflow-x of the top content             |
-| \`--extendable-content-top-content-overflow-y\` | Overflow-y of the top content             |
-| \`--extendable-content-extended-content-height\` | Height of the extended content           |
-| \`--extendable-content-extended-content-width\` | Width of the extended content             |
-| \`--extendable-content-extended-content-max-height\` | Max height of the extended content   |
-| \`--extendable-content-extended-content-max-width\` | Max width of the extended content     |
-| \`--extendable-content-extended-content-justify-content\` | Justify content of the extended content |
-| \`--extendable-content-extended-content-align-items\` | Align items of the extended content     |
-| \`--extendable-content-extended-content-overflow-x\` | Overflow-x of the extended content      |
-| \`--extendable-content-extended-content-overflow-y\` | Overflow-y of the extended content      |
-| \`--extendable-content-button-height\`    | Height of the extend button                   |
-| \`--extendable-content-button-width\`     | Width of the extend button                    |
-| \`--extendable-content-button-max-height\`| Max height of the extend button               |
-| \`--extendable-content-button-max-width\` | Max width of the extend button                |
-| \`--extendable-content-button-border-radius\` | Border radius of the extend button        |
-| \`--extendable-content-button-bg-color\`  | Background color of the extend button         |
-| \`--extendable-content-button-hover-bg-color\` | Hover background color of the button     |
-| \`--extendable-content-button-icon-height\` | Height of the button icon                 |
-| \`--extendable-content-button-icon-width\` | Width of the button icon                  |
+| \`--extendable-content-cont-width\`       | Width of the host and container               |
+| \`--extendable-content-cont-border\`      | Border of the container                       |
+| \`--extendable-content-cont-border-radius\` | Border radius of the container              |
+| \`--extendable-content-cont-bg-color\`    | Background color of the container             |
+| \`--extendable-content-cont-shadow\`      | Box shadow of the container                   |
+| \`--extendable-content-cont-padding\`     | Padding inside the container                  |
+| \`--extendable-content-cont-hover-border\`| Border while hovered                          |
+| \`--extendable-content-hover-bg-color\`   | Background color while hovered                |
+| \`--extendable-content-active-border\`    | Border while active                           |
+| \`--extendable-content-active-bg-color\`  | Background color while active                 |
+| \`--extendable-content-top-bottom-gap\`   | Gap between top container and extended content         |
+| \`--extendable-content-top-height\`       | Height of top container                       |
+| \`--extendable-content-top-width\`        | Width of top container                        |
+| \`--extendable-content-top-content-min-height\` | Min height of top-content slot         |
+| \`--extendable-content-top-content-min-width\` | Min width of top-content slot           |
+| \`--extendable-content-top-content-max-height\` | Max height of top-content slot         |
+| \`--extendable-content-top-content-max-width\` | Max width of top-content slot           |
+| \`--extendable-content-top-content-justify-content\` | Justify content for top-content slot |
+| \`--extendable-content-top-content-align-items\` | Align items for top-content slot       |
+| \`--extendable-content-top-content-overflow-x\` | Horizontal overflow of top-content slot |
+| \`--extendable-content-top-content-overflow-y\` | Vertical overflow of top-content slot   |
+| \`--extendable-content-extended-content-min-height\` | Min height of extended-content slot |
+| \`--extendable-content-extended-content-min-width\` | Min width of extended-content slot   |
+| \`--extendable-content-extended-content-max-height\` | Max height of extended-content slot |
+| \`--extendable-content-extended-content-max-width\` | Max width of extended-content slot   |
+| \`--extendable-content-extended-content-justify-content\` | Justify content for extended-content slot |
+| \`--extendable-content-extended-content-align-items\` | Align items for extended-content slot |
+| \`--extendable-content-extended-content-overflow-x\` | Horizontal overflow of extended-content slot |
+| \`--extendable-content-extended-content-overflow-y\` | Vertical overflow of extended-content slot |
+| \`--extendable-content-button-height\`    | Height of extend button                       |
+| \`--extendable-content-button-width\`     | Width of extend button                        |
+| \`--extendable-content-button-border-radius\` | Border radius of extend button            |
+| \`--extendable-content-button-bg-color\`  | Background color of extend button             |
+| \`--extendable-content-button-hover-bg-color\` | Hover background of extend button       |
+| \`--extendable-content-button-icon-height\` | Height of button icon                       |
+| \`--extendable-content-button-icon-width\` | Width of button icon                        |
         
 #### Shadow DOM Parts
 
@@ -154,51 +119,10 @@ Container component that can toggle between collapsed and extended states.
     },
   },
   argTypes: {
-    compHeight: {
-      control: 'text',
-      description: 'Height of the outer component container',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Layout' },
-    },
-    compWidth: {
-      control: 'text',
-      description: 'Width of the outer component container',
-      table: { defaultValue: { summary: '500px' }, category: 'Layout' },
-    },
-    contHeight: {
-      control: 'text',
-      description: 'Height of the main container',
-      table: {
-        defaultValue: { summary: 'fit-content' },
-        category: 'Container',
-      },
-    },
     contWidth: {
       control: 'text',
       description: 'Width of the main container',
-      table: { defaultValue: { summary: '100%' }, category: 'Container' },
-    },
-    contMaxHeight: {
-      control: 'text',
-      description: 'Max height of the main container',
-      table: {
-        defaultValue: { summary: 'fit-content' },
-        category: 'Container',
-      },
-    },
-    contMaxWidth: {
-      control: 'text',
-      description: 'Max width of the main container',
-      table: { defaultValue: { summary: '100%' }, category: 'Container' },
-    },
-    contOverflowX: {
-      control: 'text',
-      description: 'Horizontal overflow of the main container',
-      table: { defaultValue: { summary: 'hidden' }, category: 'Container' },
-    },
-    contOverflowY: {
-      control: 'text',
-      description: 'Vertical overflow of the main container',
-      table: { defaultValue: { summary: 'hidden' }, category: 'Container' },
+      table: { defaultValue: { summary: '500px' }, category: 'Container' },
     },
     contBorder: {
       control: 'text',
@@ -263,78 +187,29 @@ Container component that can toggle between collapsed and extended states.
         category: 'Container: Active',
       },
     },
-    contExtendedHeight: {
-      control: 'text',
-      description: 'Height when extended',
-      table: {
-        defaultValue: { summary: '200px' },
-        category: 'Container: Extended',
-      },
-    },
-    contExtendedMaxHeight: {
-      control: 'text',
-      description: 'Max height when extended',
-      table: {
-        defaultValue: { summary: '200px' },
-        category: 'Container: Extended',
-      },
-    },
     topBottomGap: {
       control: 'text',
-      description: 'Gap between top and bottom sections',
-      table: { defaultValue: { summary: '5px' }, category: 'Top Section' },
+      description: 'Gap between top container and extended content',
+      table: { defaultValue: { summary: '5px' }, category: 'Top Container' },
     },
     topHeight: {
       control: 'text',
       description: 'Height of the top container',
-      table: { defaultValue: { summary: '25px' }, category: 'Top Section' },
+      table: { defaultValue: { summary: '25px' }, category: 'Top Container' },
     },
     topWidth: {
       control: 'text',
       description: 'Width of the top container',
-      table: { defaultValue: { summary: '100%' }, category: 'Top Section' },
+      table: { defaultValue: { summary: '100%' }, category: 'Top Container' },
     },
-    topMaxHeight: {
+    topContentMinHeight: {
       control: 'text',
-      description: 'Max height of the top container',
-      table: { defaultValue: { summary: '25px' }, category: 'Top Section' },
-    },
-    topMaxWidth: {
-      control: 'text',
-      description: 'Max width of the top container',
-      table: { defaultValue: { summary: '100%' }, category: 'Top Section' },
-    },
-    topJustifyC: {
-      control: 'text',
-      description: 'Justify content of the top container',
-      table: {
-        defaultValue: { summary: 'space-between' },
-        category: 'Top Section',
-      },
-    },
-    topAlignI: {
-      control: 'text',
-      description: 'Align items of the top container',
-      table: { defaultValue: { summary: 'center' }, category: 'Top Section' },
-    },
-    topOverflowX: {
-      control: 'text',
-      description: 'Overflow-x of the top container',
-      table: { defaultValue: { summary: 'hidden' }, category: 'Top Section' },
-    },
-    topOverflowY: {
-      control: 'text',
-      description: 'Overflow-y of the top container',
-      table: { defaultValue: { summary: 'hidden' }, category: 'Top Section' },
-    },
-    topContentHeight: {
-      control: 'text',
-      description: 'Height of the top content',
+      description: 'Min height of the top content',
       table: { defaultValue: { summary: '100%' }, category: 'Top Content' },
     },
-    topContentWidth: {
+    topContentMinWidth: {
       control: 'text',
-      description: 'Width of the top content',
+      description: 'Min width of the top content',
       table: {
         defaultValue: { summary: 'calc(100% - 30px)' },
         category: 'Top Content',
@@ -376,17 +251,17 @@ Container component that can toggle between collapsed and extended states.
       description: 'Overflow-y of the top content',
       table: { defaultValue: { summary: 'hidden' }, category: 'Top Content' },
     },
-    extendContentHeight: {
+    extendContentMinHeight: {
       control: 'text',
-      description: 'Height of the extended content',
+      description: 'Min height of the extended content',
       table: {
-        defaultValue: { summary: 'calc(100% - 30px)' },
+        defaultValue: { summary: '0px' },
         category: 'Extended Content',
       },
     },
-    extendContentWidth: {
+    extendContentMinWidth: {
       control: 'text',
-      description: 'Width of the extended content',
+      description: 'Min width of the extended content',
       table: {
         defaultValue: { summary: '100%' },
         category: 'Extended Content',
@@ -396,7 +271,7 @@ Container component that can toggle between collapsed and extended states.
       control: 'text',
       description: 'Max height of the extended content',
       table: {
-        defaultValue: { summary: 'calc(100% - 30px)' },
+        defaultValue: { summary: 'fit-content' },
         category: 'Extended Content',
       },
     },
@@ -450,16 +325,6 @@ Container component that can toggle between collapsed and extended states.
       description: 'Width of the extend button',
       table: { defaultValue: { summary: '24px' }, category: 'Button' },
     },
-    buttonMaxHeight: {
-      control: 'text',
-      description: 'Max height of the extend button',
-      table: { defaultValue: { summary: '24px' }, category: 'Button' },
-    },
-    buttonMaxWidth: {
-      control: 'text',
-      description: 'Max width of the extend button',
-      table: { defaultValue: { summary: '24px' }, category: 'Button' },
-    },
     buttonBorderRadius: {
       control: 'text',
       description: 'Border radius of the extend button',
@@ -500,6 +365,11 @@ Container component that can toggle between collapsed and extended states.
       description: 'Toggle active state',
       table: { defaultValue: { summary: 'false' }, category: 'State' },
     },
+    hover: {
+      control: 'boolean',
+      description: 'Toggle hover style class',
+      table: { defaultValue: { summary: 'false' }, category: 'State' },
+    },
   },
 };
 
@@ -507,14 +377,7 @@ export default meta;
 
 export const Default: StoryFn<ExtendableContentProps> = (args) => html`
   <extendable-content
-    .compHeight=${args.compHeight}
-    .compWidth=${args.compWidth}
-    .contHeight=${args.contHeight}
     .contWidth=${args.contWidth}
-    .contMaxHeight=${args.contMaxHeight}
-    .contMaxWidth=${args.contMaxWidth}
-    .contOverflowX=${args.contOverflowX}
-    .contOverflowY=${args.contOverflowY}
     .contBorder=${args.contBorder}
     .contBorderRadius=${args.contBorderRadius}
     .contColor=${args.contColor}
@@ -524,27 +387,19 @@ export const Default: StoryFn<ExtendableContentProps> = (args) => html`
     .contHoverColor=${args.contHoverColor}
     .contActiveBorder=${args.contActiveBorder}
     .contActiveColor=${args.contActiveColor}
-    .contExtendedHeight=${args.contExtendedHeight}
-    .contExtendedMaxHeight=${args.contExtendedMaxHeight}
     .topBottomGap=${args.topBottomGap}
     .topHeight=${args.topHeight}
     .topWidth=${args.topWidth}
-    .topMaxHeight=${args.topMaxHeight}
-    .topMaxWidth=${args.topMaxWidth}
-    .topJustifyC=${args.topJustifyC}
-    .topAlignI=${args.topAlignI}
-    .topOverflowX=${args.topOverflowX}
-    .topOverflowY=${args.topOverflowY}
-    .topContentHeight=${args.topContentHeight}
-    .topContentWidth=${args.topContentWidth}
+    .topContentMinHeight=${args.topContentMinHeight}
+    .topContentMinWidth=${args.topContentMinWidth}
     .topContentMaxHeight=${args.topContentMaxHeight}
     .topContentMaxWidth=${args.topContentMaxWidth}
     .topContentJustifyC=${args.topContentJustifyC}
     .topContentAlignI=${args.topContentAlignI}
     .topContentOverflowX=${args.topContentOverflowX}
     .topContentOverflowY=${args.topContentOverflowY}
-    .extendContentHeight=${args.extendContentHeight}
-    .extendContentWidth=${args.extendContentWidth}
+    .extendContentMinHeight=${args.extendContentMinHeight}
+    .extendContentMinWidth=${args.extendContentMinWidth}
     .extendContentMaxHeight=${args.extendContentMaxHeight}
     .extendContentMaxWidth=${args.extendContentMaxWidth}
     .extendContentJustifyC=${args.extendContentJustifyC}
@@ -553,8 +408,6 @@ export const Default: StoryFn<ExtendableContentProps> = (args) => html`
     .extendContentOverflowY=${args.extendContentOverflowY}
     .buttonHeight=${args.buttonHeight}
     .buttonWidth=${args.buttonWidth}
-    .buttonMaxHeight=${args.buttonMaxHeight}
-    .buttonMaxWidth=${args.buttonMaxWidth}
     .buttonBorderRadius=${args.buttonBorderRadius}
     .buttonColor=${args.buttonColor}
     .buttonHoverColor=${args.buttonHoverColor}
@@ -563,23 +416,15 @@ export const Default: StoryFn<ExtendableContentProps> = (args) => html`
     .buttonIconWidth=${args.buttonIconWidth}
     .extended=${args.extended}
     .active=${args.active}
+    .hover=${args.hover}
   >
     <div slot="top-content">Top Content Area</div>
-    ${args.extended
-      ? html`<div slot="extended-content">Extended Content Area</div>`
-      : ''}
+    <div slot="extended-content">Extended Content Area</div>
   </extendable-content>
 `;
 
 Default.args = {
-  compHeight: 'fit-content',
-  compWidth: '500px',
-  contHeight: 'fit-content',
-  contWidth: '100%',
-  contMaxHeight: 'fit-content',
-  contMaxWidth: '100%',
-  contOverflowX: 'hidden',
-  contOverflowY: 'hidden',
+  contWidth: '500px',
   contBorder: '2px #fafafa solid',
   contBorderRadius: '8px',
   contColor: '#f5f5f5',
@@ -589,28 +434,20 @@ Default.args = {
   contHoverColor: '#f5f5f5',
   contActiveBorder: '2px #6a7ea5 solid',
   contActiveColor: '#add8e6',
-  contExtendedHeight: '200px',
-  contExtendedMaxHeight: '200px',
   topBottomGap: '5px',
   topHeight: '25px',
   topWidth: '100%',
-  topMaxHeight: '25px',
-  topMaxWidth: '100%',
-  topJustifyC: 'space-between',
-  topAlignI: 'center',
-  topOverflowX: 'hidden',
-  topOverflowY: 'hidden',
-  topContentHeight: '100%',
-  topContentWidth: 'calc(100% - 30px)',
+  topContentMinHeight: '100%',
+  topContentMinWidth: 'calc(100% - 30px)',
   topContentMaxHeight: '100%',
   topContentMaxWidth: 'calc(100% - 30px)',
   topContentJustifyC: 'space-between',
   topContentAlignI: 'center',
   topContentOverflowX: 'hidden',
   topContentOverflowY: 'hidden',
-  extendContentHeight: 'calc(100% - 30px)',
-  extendContentWidth: '100%',
-  extendContentMaxHeight: 'calc(100% - 30px)',
+  extendContentMinHeight: '0px',
+  extendContentMinWidth: '100%',
+  extendContentMaxHeight: 'fit-content',
   extendContentMaxWidth: '100%',
   extendContentJustifyC: 'start',
   extendContentAlignI: 'center',
@@ -618,8 +455,6 @@ Default.args = {
   extendContentOverflowY: 'hidden',
   buttonHeight: '24px',
   buttonWidth: '24px',
-  buttonMaxHeight: '24px',
-  buttonMaxWidth: '24px',
   buttonBorderRadius: '24px',
   buttonColor: '#eceff1',
   buttonHoverColor: '#b0bec5',
@@ -628,4 +463,5 @@ Default.args = {
   buttonIconWidth: '12px',
   extended: false,
   active: false,
+  hover: false,
 };
