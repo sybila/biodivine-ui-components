@@ -112,8 +112,8 @@ export class ExtendableContent extends LitElement {
       height: fit-content;
       width: var(--extendable-content-cont-width, 500px);
 
-      overflow-x: hidden;
-      overflow-y: hidden;
+      overflow-x: visible;
+      overflow-y: visible;
 
       border: var(--extendable-content-cont-border, 2px #fafafa solid);
       border-radius: var(--extendable-content-cont-border-radius, 8px);
@@ -145,8 +145,8 @@ export class ExtendableContent extends LitElement {
       height: var(--extendable-content-top-height, 25px);
       width: var(--extendable-content-top-width, 100%);
 
-      overflow-x: hidden;
-      overflow-y: hidden;
+      overflow-x: visible;
+      overflow-y: visible;
     }
 
     #top-content {
