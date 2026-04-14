@@ -21,19 +21,15 @@ type ExtendableContentProps = {
   topHeight?: string;
   topWidth?: string;
 
-  topContentMinHeight?: string;
-  topContentMinWidth?: string;
-  topContentMaxHeight?: string;
-  topContentMaxWidth?: string;
+  topContentHeight?: string;
+  topContentWidth?: string;
   topContentJustifyC?: string;
   topContentAlignI?: string;
   topContentOverflowX?: string;
   topContentOverflowY?: string;
 
-  extendContentMinHeight?: string;
-  extendContentMinWidth?: string;
-  extendContentMaxHeight?: string;
-  extendContentMaxWidth?: string;
+  extendContentHeight?: string;
+  extendContentWidth?: string;
   extendContentJustifyC?: string;
   extendContentAlignI?: string;
   extendContentOverflowX?: string;
@@ -81,18 +77,14 @@ Container component that can toggle between collapsed and extended states.
 | \`--extendable-content-top-bottom-gap\`   | Gap between top container and extended content         |
 | \`--extendable-content-top-height\`       | Height of top container                       |
 | \`--extendable-content-top-width\`        | Width of top container                        |
-| \`--extendable-content-top-content-min-height\` | Min height of top-content slot         |
-| \`--extendable-content-top-content-min-width\` | Min width of top-content slot           |
-| \`--extendable-content-top-content-max-height\` | Max height of top-content slot         |
-| \`--extendable-content-top-content-max-width\` | Max width of top-content slot           |
+| \`--extendable-content-top-content-height\` | Height of top-content slot               |
+| \`--extendable-content-top-content-width\` | Width of top-content slot                 |
 | \`--extendable-content-top-content-justify-content\` | Justify content for top-content slot |
 | \`--extendable-content-top-content-align-items\` | Align items for top-content slot       |
 | \`--extendable-content-top-content-overflow-x\` | Horizontal overflow of top-content slot |
 | \`--extendable-content-top-content-overflow-y\` | Vertical overflow of top-content slot   |
-| \`--extendable-content-extended-content-min-height\` | Min height of extended-content slot |
-| \`--extendable-content-extended-content-min-width\` | Min width of extended-content slot   |
-| \`--extendable-content-extended-content-max-height\` | Max height of extended-content slot |
-| \`--extendable-content-extended-content-max-width\` | Max width of extended-content slot   |
+| \`--extendable-content-extended-content-height\` | Height of extended-content slot     |
+| \`--extendable-content-extended-content-width\` | Width of extended-content slot       |
 | \`--extendable-content-extended-content-justify-content\` | Justify content for extended-content slot |
 | \`--extendable-content-extended-content-align-items\` | Align items for extended-content slot |
 | \`--extendable-content-extended-content-overflow-x\` | Horizontal overflow of extended-content slot |
@@ -202,27 +194,14 @@ Container component that can toggle between collapsed and extended states.
       description: 'Width of the top container',
       table: { defaultValue: { summary: '100%' }, category: 'Top Container' },
     },
-    topContentMinHeight: {
+    topContentHeight: {
       control: 'text',
-      description: 'Min height of the top content',
+      description: 'Height of the top content',
       table: { defaultValue: { summary: '100%' }, category: 'Top Content' },
     },
-    topContentMinWidth: {
+    topContentWidth: {
       control: 'text',
-      description: 'Min width of the top content',
-      table: {
-        defaultValue: { summary: 'calc(100% - 30px)' },
-        category: 'Top Content',
-      },
-    },
-    topContentMaxHeight: {
-      control: 'text',
-      description: 'Max height of the top content',
-      table: { defaultValue: { summary: '100%' }, category: 'Top Content' },
-    },
-    topContentMaxWidth: {
-      control: 'text',
-      description: 'Max width of the top content',
+      description: 'Width of the top content',
       table: {
         defaultValue: { summary: 'calc(100% - 30px)' },
         category: 'Top Content',
@@ -251,33 +230,17 @@ Container component that can toggle between collapsed and extended states.
       description: 'Overflow-y of the top content',
       table: { defaultValue: { summary: 'hidden' }, category: 'Top Content' },
     },
-    extendContentMinHeight: {
+    extendContentHeight: {
       control: 'text',
-      description: 'Min height of the extended content',
-      table: {
-        defaultValue: { summary: '0px' },
-        category: 'Extended Content',
-      },
-    },
-    extendContentMinWidth: {
-      control: 'text',
-      description: 'Min width of the extended content',
-      table: {
-        defaultValue: { summary: '100%' },
-        category: 'Extended Content',
-      },
-    },
-    extendContentMaxHeight: {
-      control: 'text',
-      description: 'Max height of the extended content',
+      description: 'Height of the extended content',
       table: {
         defaultValue: { summary: 'fit-content' },
         category: 'Extended Content',
       },
     },
-    extendContentMaxWidth: {
+    extendContentWidth: {
       control: 'text',
-      description: 'Max width of the extended content',
+      description: 'Width of the extended content',
       table: {
         defaultValue: { summary: '100%' },
         category: 'Extended Content',
@@ -390,18 +353,14 @@ export const Default: StoryFn<ExtendableContentProps> = (args) => html`
     .topBottomGap=${args.topBottomGap}
     .topHeight=${args.topHeight}
     .topWidth=${args.topWidth}
-    .topContentMinHeight=${args.topContentMinHeight}
-    .topContentMinWidth=${args.topContentMinWidth}
-    .topContentMaxHeight=${args.topContentMaxHeight}
-    .topContentMaxWidth=${args.topContentMaxWidth}
+    .topContentHeight=${args.topContentHeight}
+    .topContentWidth=${args.topContentWidth}
     .topContentJustifyC=${args.topContentJustifyC}
     .topContentAlignI=${args.topContentAlignI}
     .topContentOverflowX=${args.topContentOverflowX}
     .topContentOverflowY=${args.topContentOverflowY}
-    .extendContentMinHeight=${args.extendContentMinHeight}
-    .extendContentMinWidth=${args.extendContentMinWidth}
-    .extendContentMaxHeight=${args.extendContentMaxHeight}
-    .extendContentMaxWidth=${args.extendContentMaxWidth}
+    .extendContentHeight=${args.extendContentHeight}
+    .extendContentWidth=${args.extendContentWidth}
     .extendContentJustifyC=${args.extendContentJustifyC}
     .extendContentAlignI=${args.extendContentAlignI}
     .extendContentOverflowX=${args.extendContentOverflowX}
@@ -437,18 +396,14 @@ Default.args = {
   topBottomGap: '5px',
   topHeight: '25px',
   topWidth: '100%',
-  topContentMinHeight: '100%',
-  topContentMinWidth: 'calc(100% - 30px)',
-  topContentMaxHeight: '100%',
-  topContentMaxWidth: 'calc(100% - 30px)',
+  topContentHeight: '100%',
+  topContentWidth: 'calc(100% - 30px)',
   topContentJustifyC: 'space-between',
   topContentAlignI: 'center',
   topContentOverflowX: 'hidden',
   topContentOverflowY: 'hidden',
-  extendContentMinHeight: '0px',
-  extendContentMinWidth: '100%',
-  extendContentMaxHeight: 'fit-content',
-  extendContentMaxWidth: '100%',
+  extendContentHeight: 'fit-content',
+  extendContentWidth: '100%',
   extendContentJustifyC: 'start',
   extendContentAlignI: 'center',
   extendContentOverflowX: 'hidden',

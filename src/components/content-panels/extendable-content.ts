@@ -15,18 +15,14 @@ type StyleProperty =
   | 'topBottomGap'
   | 'topHeight'
   | 'topWidth'
-  | 'topContentMinHeight'
-  | 'topContentMinWidth'
-  | 'topContentMaxHeight'
-  | 'topContentMaxWidth'
+  | 'topContentHeight'
+  | 'topContentWidth'
   | 'topContentJustifyC'
   | 'topContentAlignI'
   | 'topContentOverflowX'
   | 'topContentOverflowY'
-  | 'extendContentMinHeight'
-  | 'extendContentMinWidth'
-  | 'extendContentMaxHeight'
-  | 'extendContentMaxWidth'
+  | 'extendContentHeight'
+  | 'extendContentWidth'
   | 'extendContentJustifyC'
   | 'extendContentAlignI'
   | 'extendContentOverflowX'
@@ -60,19 +56,15 @@ export class ExtendableContent extends LitElement {
   @property({ type: String }) declare topHeight?: string;
   @property({ type: String }) declare topWidth?: string;
 
-  @property({ type: String }) declare topContentMinHeight?: string;
-  @property({ type: String }) declare topContentMinWidth?: string;
-  @property({ type: String }) declare topContentMaxHeight?: string;
-  @property({ type: String }) declare topContentMaxWidth?: string;
+  @property({ type: String }) declare topContentHeight?: string;
+  @property({ type: String }) declare topContentWidth?: string;
   @property({ type: String }) declare topContentJustifyC?: string;
   @property({ type: String }) declare topContentAlignI?: string;
   @property({ type: String }) declare topContentOverflowX?: string;
   @property({ type: String }) declare topContentOverflowY?: string;
 
-  @property({ type: String }) declare extendContentMinHeight?: string;
-  @property({ type: String }) declare extendContentMinWidth?: string;
-  @property({ type: String }) declare extendContentMaxHeight?: string;
-  @property({ type: String }) declare extendContentMaxWidth?: string;
+  @property({ type: String }) declare extendContentHeight?: string;
+  @property({ type: String }) declare extendContentWidth?: string;
   @property({ type: String }) declare extendContentJustifyC?: string;
   @property({ type: String }) declare extendContentAlignI?: string;
   @property({ type: String }) declare extendContentOverflowX?: string;
@@ -158,16 +150,8 @@ export class ExtendableContent extends LitElement {
       );
       align-items: var(--extendable-content-top-content-align-items, center);
 
-      min-height: var(--extendable-content-top-content-min-height, 100%);
-      min-width: var(
-        --extendable-content-top-content-min-width,
-        calc(100% - 30px)
-      );
-      max-height: var(--extendable-content-top-content-max-height, 100%);
-      max-width: var(
-        --extendable-content-top-content-max-width,
-        calc(100% - 30px)
-      );
+      height: var(--extendable-content-top-content-height, 100%);
+      width: var(--extendable-content-top-content-width, calc(100% - 30px));
 
       overflow-x: var(--extendable-content-top-content-overflow-x, hidden);
       overflow-y: var(--extendable-content-top-content-overflow-y, hidden);
@@ -186,16 +170,8 @@ export class ExtendableContent extends LitElement {
         center
       );
 
-      min-height: var(
-        --extendable-content-extended-content-min-height,
-        fit-content
-      );
-      min-width: var(--extendable-content-extended-content-min-width, 100%);
-      max-height: var(
-        --extendable-content-extended-content-max-height,
-        fit-content
-      );
-      max-width: var(--extendable-content-extended-content-max-width, 100%);
+      height: var(--extendable-content-extended-content-height, fit-content);
+      width: var(--extendable-content-extended-content-width, 100%);
 
       overflow-x: var(--extendable-content-extended-content-overflow-x, hidden);
       overflow-y: var(--extendable-content-extended-content-overflow-y, hidden);
@@ -296,23 +272,13 @@ export class ExtendableContent extends LitElement {
     update('topWidth', '--extendable-content-top-width', '100%');
 
     update(
-      'topContentMinHeight',
-      '--extendable-content-top-content-min-height',
+      'topContentHeight',
+      '--extendable-content-top-content-height',
       '100%'
     );
     update(
-      'topContentMinWidth',
-      '--extendable-content-top-content-min-width',
-      'calc(100% - 30px)'
-    );
-    update(
-      'topContentMaxHeight',
-      '--extendable-content-top-content-max-height',
-      '100%'
-    );
-    update(
-      'topContentMaxWidth',
-      '--extendable-content-top-content-max-width',
+      'topContentWidth',
+      '--extendable-content-top-content-width',
       'calc(100% - 30px)'
     );
     update(
@@ -337,23 +303,13 @@ export class ExtendableContent extends LitElement {
     );
 
     update(
-      'extendContentMinHeight',
-      '--extendable-content-extended-content-min-height',
-      '0px'
-    );
-    update(
-      'extendContentMinWidth',
-      '--extendable-content-extended-content-min-width',
-      '100%'
-    );
-    update(
-      'extendContentMaxHeight',
-      '--extendable-content-extended-content-max-height',
+      'extendContentHeight',
+      '--extendable-content-extended-content-height',
       'fit-content'
     );
     update(
-      'extendContentMaxWidth',
-      '--extendable-content-extended-content-max-width',
+      'extendContentWidth',
+      '--extendable-content-extended-content-width',
       '100%'
     );
     update(
