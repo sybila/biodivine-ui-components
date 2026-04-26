@@ -72,10 +72,10 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
 
 | Variable | Description |
 |----------|------------|
-| '--invisible-input-cont-min-height' | Minimum container height |
-| '--invisible-input-cont-min-width' | Minimum container width |
-| '--invisible-input-cont-max-height' | Maximum container height |
-| '--invisible-input-cont-max-width' | Maximum container width |
+| '--invisible-input-cont-min-height' | Minimum container height - supports only fixed values like px,em... (for example not %) |
+| '--invisible-input-cont-min-width' | Minimum container width - supports only fixed values like px,em... (for example not %) |
+| '--invisible-input-cont-max-height' | Maximum container height - supports only fixed values like px,em... (for example not %) |
+| '--invisible-input-cont-max-width' | Maximum container width - supports only fixed values like px,em... (for example not %) |
 | '--invisible-input-cont-padx' | Horizontal padding |
 | '--invisible-input-cont-pady' | Vertical padding |
 | '--invisible-input-border-radius' | Container border radius |
@@ -90,10 +90,10 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
 
 | Variable | Description |
 |----------|------------|
-| '--invisible-input-textbox-min-height' | Minimum height |
-| '--invisible-input-textbox-min-width' | Minimum width |
-| '--invisible-input-textbox-max-height' | Maximum height |
-| '--invisible-input-textbox-max-width' | Maximum width |
+| '--invisible-input-textbox-min-height' | Minimum height - supports only px (in some browser in multiline mode may be overwritten by the browser and set to higher value) |
+| '--invisible-input-textbox-min-width' | Minimum width - supports only px |
+| '--invisible-input-textbox-max-height' | Maximum height - supports only px |
+| '--invisible-input-textbox-max-width' | Maximum width - supports only px |
 | '--invisible-input-text-line-height' | Line height |
 
 ---
@@ -161,22 +161,26 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
     // Container
     contMinHeight: {
       control: 'text',
-      description: 'Minimum container height',
+      description:
+        'Minimum container height - supports only fixed values like px,em... (for example not %)',
       table: { category: 'Container', defaultValue: { summary: '28px' } },
     },
     contMinWidth: {
       control: 'text',
-      description: 'Minimum container width',
+      description:
+        'Minimum container width - supports only fixed values like px,em... (for example not %)',
       table: { category: 'Container', defaultValue: { summary: '400px' } },
     },
     contMaxHeight: {
       control: 'text',
-      description: 'Maximum container height',
+      description:
+        'Maximum container height - supports only fixed values like px,em... (for example not %)',
       table: { category: 'Container', defaultValue: { summary: '28px' } },
     },
     contMaxWidth: {
       control: 'text',
-      description: 'Maximum container width',
+      description:
+        'Maximum container width - supports only fixed values like px,em... (for example not %)',
       table: { category: 'Container', defaultValue: { summary: '400px' } },
     },
     contPadX: {
@@ -224,22 +228,23 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
     // Text Box
     textBoxMinHeight: {
       control: 'text',
-      description: 'Minimum textbox height',
+      description:
+        'Minimum textbox height - supports only px (in some browser in multiline mode may be overwritten by the browser and set to higher value)',
       table: { category: 'Text Box', defaultValue: { summary: '28px' } },
     },
     textBoxMinWidth: {
       control: 'text',
-      description: 'Minimum textbox width',
+      description: 'Minimum textbox width - supports only px',
       table: { category: 'Text Box', defaultValue: { summary: '400px' } },
     },
     textBoxMaxHeight: {
       control: 'text',
-      description: 'Maximum textbox height',
+      description: 'Maximum textbox height - supports only px',
       table: { category: 'Text Box', defaultValue: { summary: '28px' } },
     },
     textBoxMaxWidth: {
       control: 'text',
-      description: 'Maximum textbox width',
+      description: 'Maximum textbox width - supports only px',
       table: { category: 'Text Box', defaultValue: { summary: '400px' } },
     },
     textLineHeight: {
