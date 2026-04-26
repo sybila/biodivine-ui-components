@@ -3,62 +3,44 @@ import { html } from 'lit';
 import type { Meta, StoryFn } from '@storybook/web-components-vite';
 
 type InvisibleInputProps = {
-  compHeight?: string;
-  compWidth?: string;
+  contMinHeight?: string;
+  contMinWidth?: string;
+  contMaxHeight?: string;
+  contMaxWidth?: string;
 
-  contHeight?: string;
-  contWidth?: string;
   contPadX?: string;
   contPadY?: string;
   contBorderRadius?: string;
   contOverflowX?: string;
   contOverflowY?: string;
 
-  singleHeight?: string;
-  singleWidth?: string;
-  singleMaxHeight?: string;
-  singleMaxWidth?: string;
-  singleLineHeight?: string;
-  singleOverflowX?: string;
-  singleOverflowY?: string;
-  singleFontFamily?: string;
-  singleFontWeight?: string;
-  singleFontSize?: string;
-  singleTextColor?: string;
-  singleTextAlign?: string;
-  singleFocusFontFamily?: string;
-  singleFocusFontWeight?: string;
-  singleFocusBgColor?: string;
-  singlePlaceholderColor?: string;
-  singlePlaceholderFontStyle?: string;
-  singlePlaceholderFontFamily?: string;
+  textBoxMinHeight?: string;
+  textBoxMinWidth?: string;
+  textBoxMaxHeight?: string;
+  textBoxMaxWidth?: string;
+  textLineHeight?: string;
+
+  fontFamily?: string;
+  fontWeight?: string;
+  fontSize?: string;
+  textColor?: string;
+  textAlign?: string;
+
+  focusFontFamily?: string;
+  focusFontWeight?: string;
+
+  placeholderColor?: string;
+  placeholderFontStyle?: string;
+  placeholderFontFamily?: string;
+
+  contFocusBgColor?: string;
+  contErrorBgColor?: string;
 
   multiLine?: boolean;
-
-  multiHeight?: string;
-  multiWidth?: string;
-  multiMaxHeight?: string;
-  multiMaxWidth?: string;
-  multiLineHeight?: string;
-  multiOverflowX?: string;
-  multiOverflowY?: string;
-  multiFontFamily?: string;
-  multiFontWeight?: string;
-  multiFontSize?: string;
-  multiTextColor?: string;
-  multiTextAlign?: string;
-  multiFocusFontFamily?: string;
-  multiFocusFontWeight?: string;
-  multiFocusBgColor?: string;
-  multiPlaceholderColor?: string;
-  multiPlaceholderFontStyle?: string;
-  multiPlaceholderFontFamily?: string;
 
   hoverIconSrc?: string;
   hoverIconHeight?: string;
   hoverIconWidth?: string;
-
-  errorBgColor?: string;
 
   value?: string;
   error?: boolean;
@@ -76,94 +58,126 @@ const meta: Meta<InvisibleInputProps> = {
     docs: {
       description: {
         component: `
-### \`<invisible-input>\`
+### '<invisible-input>'
 
-Input field supporting both single-line and multi-line modes.
+A flexible input component that supports both **single-line** and **multi-line** modes using a unified styling system.
 
-#### CSS Custom Properties
+Set 'multiLine' to 'true' to render a textarea html element, otherwise a standard input html element is used.
 
-| Variable                                             | Description                                 |
-|------------------------------------------------------|---------------------------------------------|
-| \`--invisible-input-comp-height\`                    | Component height                            |
-| \`--invisible-input-comp-width\`                     | Component width                             |
-| \`--invisible-input-cont-height\`                    | Container height                            |
-| \`--invisible-input-cont-width\`                     | Container width                             |
-| \`--invisible-input-cont-padx\`                      | Horizontal container padding                |
-| \`--invisible-input-cont-pady\`                      | Vertical container padding                  |
-| \`--invisible-input-border-radius\`                  | Border radius of container                  |
-| \`--invisible-input-cont-overflow-x\`                | Container horizontal overflow               |
-| \`--invisible-input-cont-overflow-y\`                | Container vertical overflow                 |
-| \`--invisible-input-singleline-height\`              | Single-line input height                    |
-| \`--invisible-input-singleline-width\`               | Single-line input width                     |
-| \`--invisible-input-single-max-height\`              | Single-line input max height                |
-| \`--invisible-input-single-max-width\`               | Single-line input max width                 |
-| \`--invisible-input-singleline-line-height\`         | Single-line input line height               |
-| \`--invisible-input-singleline-font-family\`         | Single-line input font family               |
-| \`--invisible-input-singleline-font-weight\`         | Single-line input font weight               |
-| \`--invisible-input-singleline-font-size\`           | Single-line input font size                 |
-| \`--invisible-input-singleline-text-color\`          | Single-line input text color                |
-| \`--invisible-input-singleline-text-align\`          | Single-line input text alignment            |
-| \`--invisible-input-singleline-focus-font-family\`   | Single-line input font family on focus      |
-| \`--invisible-input-singleline-focus-font-weight\`   | Single-line input font weight on focus      |
-| \`--invisible-input-singleline-focus-bg-color\`      | Single-line input background on focus       |
-| \`--invisible-input-singleline-placeholder-color\`   | Single-line input placeholder color         |
-| \`--invisible-input-singleline-placeholder-font-style\` | Single-line input placeholder font style |
-| \`--invisible-input-singleline-placeholder-font-family\` | Single-line input placeholder font family |
-| \`--invisible-input-multiline-height\`               | Multi-line input height                     |
-| \`--invisible-input-multiline-width\`                | Multi-line input width                      |
-| \`--invisible-input-multiline-max-height\`           | Multi-line input max height                 |
-| \`--invisible-input-multiline-max-width\`            | Multi-line input max width                  |
-| \`--invisible-input-multiline-line-height\`          | Multi-line input line height                |
-| \`--invisible-input-multiline-font-family\`          | Multi-line input font family                |
-| \`--invisible-input-multiline-font-weight\`          | Multi-line input font weight                |
-| \`--invisible-input-multiline-font-size\`            | Multi-line input font size                  |
-| \`--invisible-input-multiline-text-color\`           | Multi-line input text color                 |
-| \`--invisible-input-multiline-text-align\`           | Multi-line input text alignment             |
-| \`--invisible-input-multiline-focus-font-family\`    | Multi-line input font family on focus       |
-| \`--invisible-input-multiline-focus-font-weight\`    | Multi-line input font weight on focus       |
-| \`--invisible-input-multiline-focus-bg-color\`       | Multi-line input background on focus        |
-| \`--invisible-input-multiline-placeholder-color\`    | Multi-line input placeholder color          |
-| \`--invisible-input-multiline-placeholder-font-style\` | Multi-line input placeholder font style  |
-| \`--invisible-input-multiline-placeholder-font-family\` | Multi-line input placeholder font family |
-| \`--invisible-input-hover-icon-width\`               | Hover icon width                            |
-| \`--invisible-input-hover-icon-height\`              | Hover icon height                           |
-| \`--invisible-input-error-bg-color\`                 | Error background color                      |
+---
 
-#### Shadow DOM Parts
+### CSS Custom Properties
 
-| Part Name              | Description                        |
-|------------------------|------------------------------------|
-| \`container\`          | The main container                 |
-| \`singleline-text-input\` | The single-line input element   |
-| \`multiline-text-input\`  | The multi-line textarea element |
-| \`hover-icon\`         | The hover icon image               |
-        `,
+#### Container
+
+| Variable | Description |
+|----------|------------|
+| '--invisible-input-cont-min-height' | Minimum container height |
+| '--invisible-input-cont-min-width' | Minimum container width |
+| '--invisible-input-cont-max-height' | Maximum container height |
+| '--invisible-input-cont-max-width' | Maximum container width |
+| '--invisible-input-cont-padx' | Horizontal padding |
+| '--invisible-input-cont-pady' | Vertical padding |
+| '--invisible-input-border-radius' | Container border radius |
+| '--invisible-input-cont-overflow-x' | Horizontal overflow behavior |
+| '--invisible-input-cont-overflow-y' | Vertical overflow behavior |
+| '--invisible-input-cont-focus-bg-color' | Background color on focus |
+| '--invisible-input-cont-error-bg-color' | Background color in error state |
+
+---
+
+#### Text Box (applies to both input & textarea)
+
+| Variable | Description |
+|----------|------------|
+| '--invisible-input-textbox-min-height' | Minimum height |
+| '--invisible-input-textbox-min-width' | Minimum width |
+| '--invisible-input-textbox-max-height' | Maximum height |
+| '--invisible-input-textbox-max-width' | Maximum width |
+| '--invisible-input-text-line-height' | Line height |
+
+---
+
+#### Typography
+
+| Variable | Description |
+|----------|------------|
+| '--invisible-input-font-family' | Font family |
+| '--invisible-input-font-weight' | Font weight |
+| '--invisible-input-font-size' | Font size |
+| '--invisible-input-text-color' | Text color |
+| '--invisible-input-text-align' | Text alignment |
+
+---
+
+#### Focus Typography
+
+| Variable | Description |
+|----------|------------|
+| '--invisible-input-focus-font-family' | Font family on focus |
+| '--invisible-input-focus-font-weight' | Font weight on focus |
+
+---
+
+#### Placeholder
+
+| Variable | Description |
+|----------|------------|
+| '--invisible-input-placeholder-color' | Placeholder text color |
+| '--invisible-input-placeholder-font-style' | Placeholder font style |
+| '--invisible-input-placeholder-font-family' | Placeholder font family |
+
+---
+
+#### Hover Icon
+
+| Variable | Description |
+|----------|------------|
+| '--invisible-input-hover-icon-width' | Hover icon width |
+| '--invisible-input-hover-icon-height' | Hover icon height |
+
+---
+
+### Shadow DOM Parts
+
+| Part Name | Description |
+|-----------|------------|
+| 'container' | Wrapper element |
+| 'singleline-text-input' | input html element (single-line mode) |
+| 'multiline-text-input' | textarea html element (multi-line mode) |
+| 'hover-icon' | Hover icon image |
+
+---
+
+### Notes
+
+- All styling is shared between single-line and multi-line modes.
+- Use 'multiLine' to switch rendering behavior.
+- Error state is controlled via the 'error' property.`,
       },
     },
   },
   argTypes: {
-    // Component
-    compHeight: {
-      control: 'text',
-      description: 'Component height',
-      table: { category: 'Component', defaultValue: { summary: '200px' } },
-    },
-    compWidth: {
-      control: 'text',
-      description: 'Component width',
-      table: { category: 'Component', defaultValue: { summary: '400px' } },
-    },
-
     // Container
-    contHeight: {
+    contMinHeight: {
       control: 'text',
-      description: 'Container height',
-      table: { category: 'Container', defaultValue: { summary: '100%' } },
+      description: 'Minimum container height',
+      table: { category: 'Container', defaultValue: { summary: '28px' } },
     },
-    contWidth: {
+    contMinWidth: {
       control: 'text',
-      description: 'Container width',
-      table: { category: 'Container', defaultValue: { summary: '100%' } },
+      description: 'Minimum container width',
+      table: { category: 'Container', defaultValue: { summary: '400px' } },
+    },
+    contMaxHeight: {
+      control: 'text',
+      description: 'Maximum container height',
+      table: { category: 'Container', defaultValue: { summary: '28px' } },
+    },
+    contMaxWidth: {
+      control: 'text',
+      description: 'Maximum container width',
+      table: { category: 'Container', defaultValue: { summary: '400px' } },
     },
     contPadX: {
       control: 'text',
@@ -177,294 +191,150 @@ Input field supporting both single-line and multi-line modes.
     },
     contBorderRadius: {
       control: 'text',
-      description: 'Border radius of container',
+      description: 'Border radius',
       table: { category: 'Container', defaultValue: { summary: '4px' } },
     },
     contOverflowX: {
       control: 'text',
-      description: 'Container horizontal overflow',
+      description: 'Horizontal overflow',
       table: { category: 'Container', defaultValue: { summary: 'auto' } },
     },
     contOverflowY: {
       control: 'text',
-      description: 'Container vertical overflow',
+      description: 'Vertical overflow',
       table: { category: 'Container', defaultValue: { summary: 'auto' } },
     },
-
-    // Single Line Mode
-    singleHeight: {
-      control: 'text',
-      description: 'Single-line input height',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: '100%' },
-      },
-    },
-    singleWidth: {
-      control: 'text',
-      description: 'Single-line input width',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: '100%' },
-      },
-    },
-    singleMaxHeight: {
-      control: 'text',
-      description: 'Max height for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: '100%' },
-      },
-    },
-    singleMaxWidth: {
-      control: 'text',
-      description: 'Max width for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: '100%' },
-      },
-    },
-    singleLineHeight: {
-      control: 'text',
-      description: 'Line height for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: '100%' },
-      },
-    },
-    singleFontFamily: {
-      control: 'text',
-      description: 'Font family for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: "'FiraMono', monospace" },
-      },
-    },
-    singleFontWeight: {
-      control: 'text',
-      description: 'Font weight for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: 'normal' },
-      },
-    },
-    singleFontSize: {
-      control: 'text',
-      description: 'Font size for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: '18px' },
-      },
-    },
-    singleTextColor: {
+    contFocusBgColor: {
       control: 'color',
-      description: 'Text color for single-line input',
+      description: 'Background color on focus',
       table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: 'black' },
-      },
-    },
-    singleTextAlign: {
-      control: 'text',
-      description: 'Text alignment for single-line input',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: 'start' },
-      },
-    },
-    singleFocusFontFamily: {
-      control: 'text',
-      description: 'Font family on focus (single-line)',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: "'FiraMonoBold', monospace" },
-      },
-    },
-    singleFocusFontWeight: {
-      control: 'text',
-      description: 'Font weight on focus (single-line)',
-      table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: 'bold' },
-      },
-    },
-    singleFocusBgColor: {
-      control: 'color',
-      description: 'Background color on focus (single-line)',
-      table: {
-        category: 'Single Line Mode',
+        category: 'Container',
         defaultValue: { summary: 'transparent' },
       },
     },
-    singlePlaceholderColor: {
+    contErrorBgColor: {
       control: 'color',
-      description: 'Placeholder color (single-line)',
+      description: 'Background color in error state',
       table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: 'black' },
+        category: 'Container',
+        defaultValue: { summary: 'rgba(200, 40, 40, 0.4)' },
       },
     },
-    singlePlaceholderFontStyle: {
+
+    // Text Box
+    textBoxMinHeight: {
       control: 'text',
-      description: 'Placeholder font style (single-line)',
+      description: 'Minimum textbox height',
+      table: { category: 'Text Box', defaultValue: { summary: '28px' } },
+    },
+    textBoxMinWidth: {
+      control: 'text',
+      description: 'Minimum textbox width',
+      table: { category: 'Text Box', defaultValue: { summary: '400px' } },
+    },
+    textBoxMaxHeight: {
+      control: 'text',
+      description: 'Maximum textbox height',
+      table: { category: 'Text Box', defaultValue: { summary: '28px' } },
+    },
+    textBoxMaxWidth: {
+      control: 'text',
+      description: 'Maximum textbox width',
+      table: { category: 'Text Box', defaultValue: { summary: '400px' } },
+    },
+    textLineHeight: {
+      control: 'text',
+      description: 'Line height',
+      table: { category: 'Text Box', defaultValue: { summary: '27px' } },
+    },
+
+    // Typography
+    fontFamily: {
+      control: 'text',
+      description: 'Font family',
       table: {
-        category: 'Single Line Mode',
-        defaultValue: { summary: 'normal' },
+        category: 'Typography',
+        defaultValue: { summary: "'FiraMono', monospace" },
       },
     },
-    singlePlaceholderFontFamily: {
+    fontWeight: {
       control: 'text',
-      description: 'Placeholder font family (single-line)',
+      description: 'Font weight',
+      table: { category: 'Typography', defaultValue: { summary: 'normal' } },
+    },
+    fontSize: {
+      control: 'text',
+      description: 'Font size',
+      table: { category: 'Typography', defaultValue: { summary: '20px' } },
+    },
+    textColor: {
+      control: 'color',
+      description: 'Text color',
+      table: { category: 'Typography', defaultValue: { summary: 'black' } },
+    },
+    textAlign: {
+      control: 'text',
+      description: 'Text alignment',
+      table: { category: 'Typography', defaultValue: { summary: 'start' } },
+    },
+
+    // Focus
+    focusFontFamily: {
+      control: 'text',
+      description: 'Font family on focus',
       table: {
-        category: 'Single Line Mode',
+        category: 'Focus',
+        defaultValue: { summary: "'FiraMonoBold', monospace" },
+      },
+    },
+    focusFontWeight: {
+      control: 'text',
+      description: 'Font weight on focus',
+      table: { category: 'Focus', defaultValue: { summary: 'bold' } },
+    },
+
+    // Placeholder
+    placeholderColor: {
+      control: 'color',
+      description: 'Placeholder color',
+      table: { category: 'Placeholder', defaultValue: { summary: 'gray' } },
+    },
+    placeholderFontStyle: {
+      control: 'text',
+      description: 'Placeholder font style',
+      table: { category: 'Placeholder', defaultValue: { summary: 'normal' } },
+    },
+    placeholderFontFamily: {
+      control: 'text',
+      description: 'Placeholder font family',
+      table: {
+        category: 'Placeholder',
         defaultValue: { summary: "'FiraMono', monospace" },
       },
     },
 
-    // Multi-Line Mode
+    // Mode
     multiLine: {
       control: 'boolean',
-      description: 'Enable multi-line input',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: 'false' },
-      },
-    },
-    multiHeight: {
-      control: 'text',
-      description: 'Height for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: '100%' } },
-    },
-    multiWidth: {
-      control: 'text',
-      description: 'Width for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: '100%' } },
-    },
-    multiMaxHeight: {
-      control: 'text',
-      description: 'Max height for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: '100%' } },
-    },
-    multiMaxWidth: {
-      control: 'text',
-      description: 'Max width for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: '100%' } },
-    },
-    multiLineHeight: {
-      control: 'text',
-      description: 'Line height for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: '21px' } },
-    },
-    multiFontFamily: {
-      control: 'text',
-      description: 'Font family for multi-line input',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: "'FiraMono', monospace" },
-      },
-    },
-    multiFontWeight: {
-      control: 'text',
-      description: 'Font weight for multi-line input',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: 'normal' },
-      },
-    },
-    multiFontSize: {
-      control: 'text',
-      description: 'Font size for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: '20px' } },
-    },
-    multiTextColor: {
-      control: 'color',
-      description: 'Text color for multi-line input',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: 'gray' } },
-    },
-    multiTextAlign: {
-      control: 'text',
-      description: 'Text alignment for multi-line input',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: 'center' },
-      },
-    },
-    multiFocusFontFamily: {
-      control: 'text',
-      description: 'Font family on focus (multi-line)',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: "'FiraMono', monospace" },
-      },
-    },
-    multiFocusFontWeight: {
-      control: 'text',
-      description: 'Font weight on focus (multi-line)',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: 'normal' },
-      },
-    },
-    multiFocusBgColor: {
-      control: 'color',
-      description: 'Background color on focus (multi-line)',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: '#eceff1' },
-      },
-    },
-    multiPlaceholderColor: {
-      control: 'color',
-      description: 'Placeholder color (multi-line)',
-      table: { category: 'Multi-Line Mode', defaultValue: { summary: 'gray' } },
-    },
-    multiPlaceholderFontStyle: {
-      control: 'text',
-      description: 'Placeholder font style (multi-line)',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: 'italic' },
-      },
-    },
-    multiPlaceholderFontFamily: {
-      control: 'text',
-      description: 'Placeholder font family (multi-line)',
-      table: {
-        category: 'Multi-Line Mode',
-        defaultValue: { summary: 'sans-serif' },
-      },
+      description: 'Enable multi-line textarea',
+      table: { category: 'Mode', defaultValue: { summary: 'false' } },
     },
 
     // Hover Icon
     hoverIconSrc: {
       control: 'text',
-      description: 'Image source URL for hover icon',
+      description: 'Hover icon source',
       table: { category: 'Hover Icon' },
     },
     hoverIconHeight: {
       control: 'text',
-      description: 'Height of the hover icon',
+      description: 'Hover icon height',
       table: { category: 'Hover Icon', defaultValue: { summary: '24px' } },
     },
     hoverIconWidth: {
       control: 'text',
-      description: 'Width of the hover icon',
+      description: 'Hover icon width',
       table: { category: 'Hover Icon', defaultValue: { summary: '24px' } },
-    },
-
-    // Error
-    errorBgColor: {
-      control: 'color',
-      description: 'Background color for error state',
-      table: {
-        category: 'Error',
-        defaultValue: { summary: 'rgba(200, 40, 40, 0.4)' },
-      },
-    },
-    error: {
-      control: 'boolean',
-      description: 'Error state',
-      table: { category: 'Error', defaultValue: { summary: 'false' } },
     },
 
     // Content
@@ -479,20 +349,27 @@ Input field supporting both single-line and multi-line modes.
       table: { category: 'Content' },
     },
 
+    // State
+    error: {
+      control: 'boolean',
+      description: 'Error state',
+      table: { category: 'State', defaultValue: { summary: 'false' } },
+    },
+
     // Events
     handleChange: {
       control: false,
-      description: 'Callback for change event',
+      description: 'Change callback',
       table: { category: 'Events' },
     },
     handleBlur: {
       control: false,
-      description: 'Callback for blur event',
+      description: 'Blur callback',
       table: { category: 'Events' },
     },
     handleKeyUp: {
       control: false,
-      description: 'Callback for key up event',
+      description: 'Key up callback',
       table: { category: 'Events' },
     },
   },
@@ -502,52 +379,36 @@ export default meta;
 
 export const Default: StoryFn<InvisibleInputProps> = (args) => html`
   <invisible-input
-    .compHeight=${args.compHeight}
-    .compWidth=${args.compWidth}
-    .contHeight=${args.contHeight}
-    .contWidth=${args.contWidth}
+    .contMinHeight=${args.contMinHeight}
+    .contMinWidth=${args.contMinWidth}
+    .contMaxHeight=${args.contMaxHeight}
+    .contMaxWidth=${args.contMaxWidth}
     .contPadX=${args.contPadX}
     .contPadY=${args.contPadY}
     .contBorderRadius=${args.contBorderRadius}
     .contOverflowX=${args.contOverflowX}
     .contOverflowY=${args.contOverflowY}
-    .singleHeight=${args.singleHeight}
-    .singleWidth=${args.singleWidth}
-    .singleMaxHeight=${args.singleMaxHeight}
-    .singleMaxWidth=${args.singleMaxWidth}
-    .singleLineHeight=${args.singleLineHeight}
-    .singleFontFamily=${args.singleFontFamily}
-    .singleFontWeight=${args.singleFontWeight}
-    .singleFontSize=${args.singleFontSize}
-    .singleTextColor=${args.singleTextColor}
-    .singleTextAlign=${args.singleTextAlign}
-    .singleFocusFontFamily=${args.singleFocusFontFamily}
-    .singleFocusFontWeight=${args.singleFocusFontWeight}
-    .singleFocusBgColor=${args.singleFocusBgColor}
-    .singlePlaceholderColor=${args.singlePlaceholderColor}
-    .singlePlaceholderFontStyle=${args.singlePlaceholderFontStyle}
-    .singlePlaceholderFontFamily=${args.singlePlaceholderFontFamily}
+    .textBoxMinHeight=${args.textBoxMinHeight}
+    .textBoxMinWidth=${args.textBoxMinWidth}
+    .textBoxMaxHeight=${args.textBoxMaxHeight}
+    .textBoxMaxWidth=${args.textBoxMaxWidth}
+    .textLineHeight=${args.textLineHeight}
+    .fontFamily=${args.fontFamily}
+    .fontWeight=${args.fontWeight}
+    .fontSize=${args.fontSize}
+    .textColor=${args.textColor}
+    .textAlign=${args.textAlign}
+    .focusFontFamily=${args.focusFontFamily}
+    .focusFontWeight=${args.focusFontWeight}
+    .placeholderColor=${args.placeholderColor}
+    .placeholderFontStyle=${args.placeholderFontStyle}
+    .placeholderFontFamily=${args.placeholderFontFamily}
+    .contFocusBgColor=${args.contFocusBgColor}
+    .contErrorBgColor=${args.contErrorBgColor}
     .multiLine=${args.multiLine}
-    .multiHeight=${args.multiHeight}
-    .multiWidth=${args.multiWidth}
-    .multiMaxHeight=${args.multiMaxHeight}
-    .multiMaxWidth=${args.multiMaxWidth}
-    .multiLineHeight=${args.multiLineHeight}
-    .multiFontFamily=${args.multiFontFamily}
-    .multiFontWeight=${args.multiFontWeight}
-    .multiFontSize=${args.multiFontSize}
-    .multiTextColor=${args.multiTextColor}
-    .multiTextAlign=${args.multiTextAlign}
-    .multiFocusFontFamily=${args.multiFocusFontFamily}
-    .multiFocusFontWeight=${args.multiFocusFontWeight}
-    .multiFocusBgColor=${args.multiFocusBgColor}
-    .multiPlaceholderColor=${args.multiPlaceholderColor}
-    .multiPlaceholderFontStyle=${args.multiPlaceholderFontStyle}
-    .multiPlaceholderFontFamily=${args.multiPlaceholderFontFamily}
     .hoverIconSrc=${args.hoverIconSrc}
     .hoverIconHeight=${args.hoverIconHeight}
     .hoverIconWidth=${args.hoverIconWidth}
-    .errorBgColor=${args.errorBgColor}
     .value=${args.value}
     .placeholder=${args.placeholder}
     .error=${args.error}
@@ -558,61 +419,49 @@ export const Default: StoryFn<InvisibleInputProps> = (args) => html`
 `;
 
 Default.args = {
-  compHeight: '200px',
-  compWidth: '400px',
-  contHeight: '100%',
-  contWidth: '100%',
+  contMinHeight: '28px',
+  contMinWidth: '400px',
+  contMaxHeight: '28px',
+  contMaxWidth: '400px',
+
   contPadX: '8px',
   contPadY: '6px',
   contBorderRadius: '6px',
   contOverflowX: 'auto',
   contOverflowY: 'auto',
-  singleHeight: '100%',
-  singleWidth: '100%',
-  singleMaxHeight: '100%',
-  singleMaxWidth: '100%',
-  singleFontSize: '18px',
-  singleFontWeight: 'normal',
-  singleTextColor: 'black',
-  singleLineHeight: '21px',
-  singleFontFamily: "'FiraMono', monospace",
-  singleTextAlign: 'start',
-  singleFocusFontFamily: "'FiraMonoBold', monospace",
-  singleFocusFontWeight: 'bold',
-  singleFocusBgColor: 'transparent',
-  singlePlaceholderColor: 'black',
-  singlePlaceholderFontStyle: 'normal',
-  singlePlaceholderFontFamily: "'FiraMono', monospace",
+
+  textBoxMinHeight: '28px',
+  textBoxMinWidth: '400px',
+  textBoxMaxHeight: '28px',
+  textBoxMaxWidth: '400px',
+  textLineHeight: '27px',
+
+  fontFamily: "'FiraMono', monospace",
+  fontWeight: 'normal',
+  fontSize: '20px',
+  textColor: 'black',
+  textAlign: 'start',
+
+  focusFontFamily: "'FiraMonoBold', monospace",
+  focusFontWeight: 'bold',
+
+  placeholderColor: 'gray',
+  placeholderFontStyle: 'normal',
+  placeholderFontFamily: "'FiraMono', monospace",
+
+  contFocusBgColor: 'transparent',
+  contErrorBgColor: 'rgba(200, 40, 40, 0.4)',
+
   multiLine: false,
-  multiHeight: '100%',
-  multiWidth: '100%',
-  multiMaxHeight: '100%',
-  multiMaxWidth: '100%',
-  multiLineHeight: '21px',
-  multiFontFamily: "'FiraMono', monospace",
-  multiFontWeight: 'normal',
-  multiFontSize: '20px',
-  multiTextColor: 'gray',
-  multiTextAlign: 'center',
-  multiFocusFontFamily: "'FiraMono', monospace",
-  multiFocusFontWeight: 'normal',
-  multiFocusBgColor: '#eceff1',
-  multiPlaceholderColor: 'gray',
-  multiPlaceholderFontStyle: 'italic',
-  multiPlaceholderFontFamily: 'sans-serif',
+
   hoverIconHeight: '24px',
   hoverIconWidth: '24px',
-  errorBgColor: 'rgba(200, 40, 40, 0.4)',
+
   value: '',
   placeholder: 'Enter text here...',
   error: false,
-  handleBlur: (val: string) => {
-    console.log(`Blur: ${val}`);
-  },
-  handleChange: (val: string) => {
-    console.log(`Change: ${val}`);
-  },
-  handleKeyUp: (val: string) => {
-    console.log(`KeyUp: ${val}`);
-  },
+
+  handleBlur: (val: string) => console.log(`Blur: ${val}`),
+  handleChange: (val: string) => console.log(`Change: ${val}`),
+  handleKeyUp: (val: string) => console.log(`KeyUp: ${val}`),
 };
