@@ -47,6 +47,8 @@ type ExtendableContentProps = {
   extended?: boolean;
   active?: boolean;
   hover?: boolean;
+
+  exposeSetExtend?: (extendFunctionSetter: (extend: boolean) => void) => void;
 };
 
 const meta: Meta<ExtendableContentProps> = {
@@ -332,6 +334,11 @@ Container component that can toggle between collapsed and extended states.
       control: 'boolean',
       description: 'Toggle hover style class',
       table: { defaultValue: { summary: 'false' }, category: 'State' },
+    },
+    exposeSetExtend: {
+      description: 'Function to expose the setExtend function - you need to provide this property with setter function which is set to the setExtend function from the component to be able to toggle the extension state from outside the component',
+      table: { defaultValue: { summary: 'no function provided' }, category: 'Expose Functionalities' },
+      control: false,
     },
   },
 };
