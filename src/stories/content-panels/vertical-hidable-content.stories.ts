@@ -166,7 +166,7 @@ Container component with a button to toggle vertical content visibility.
     buttonDown: {
       control: 'boolean',
       description:
-        'If true, button is in down state. If is true then the button is moved to the bottom of the component and the icon is rotated 180 degrees.',
+        'If true, button is in down state. If is true then the button is moved to the bottom edge of the component and the icon is transformed the same way as if contentVisible is true.',
       table: { defaultValue: { summary: 'false' }, category: 'State' },
     },
     contentVisible: {

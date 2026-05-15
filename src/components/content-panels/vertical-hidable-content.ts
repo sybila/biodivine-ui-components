@@ -110,15 +110,16 @@ export class VerticalHidableContent extends LitElement {
       max-width: var(--hidable-content-button-icon-width, 12px);
     }
 
-    #visibility-icon.visible {
+    #visibility-icon.visible,
+    #visibility-icon.buttonDown {
       transform: var(
         --hidable-content-icon-visibility-transform,
         rotate(180deg)
       );
     }
 
-    #visibility-icon.buttonDown {
-      transform: rotate(180deg);
+    #visibility-icon.visible.buttonDown {
+      transform: rotate(0deg);
     }
   `;
 
