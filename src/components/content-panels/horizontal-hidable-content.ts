@@ -86,8 +86,8 @@ export class HorizontalHidableContent extends LitElement {
       justify-content: center;
       align-items: center;
 
-      height: var(--hidable-content-component-height, 20px);
-      width: var(--hidable-content-button-width, 200px);
+      height: var(--hidable-content-component-height, 200px);
+      width: var(--hidable-content-button-width, 20px);
 
       background-color: transparent;
 
