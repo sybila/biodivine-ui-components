@@ -31,6 +31,8 @@ type TextInputProps = {
   value?: string;
   /** Function to handle keyup event. Receives input value as string. */
   onWrite?: (value: string) => void;
+  /** Function to handle submit event (press of enter key). Receives input value as string. */
+  onSubmit?: (value: string) => void;
 };
 
 const meta: Meta<TextInputProps> = {
@@ -144,6 +146,12 @@ Basic text input component.
         'Function to handle keyup event. Receives input value as string.',
       table: { category: 'Events' },
     },
+    onSubmit: {
+      action: 'keydown',
+      description:
+        'Function to handle submit event (press of enter key). Receives input value as string.',
+      table: { category: 'Events' },
+    },
   },
 };
 
@@ -165,6 +173,7 @@ export const Default: StoryFn<TextInputProps> = (args) => html`
     .placeholder=${args.placeholder}
     .value=${args.value}
     .onWrite=${args.onWrite}
+    .onSubmit=${args.onSubmit}
   ></text-input>
 `;
 
@@ -183,4 +192,5 @@ Default.args = {
   placeholder: 'Enter text...',
   value: '',
   onWrite: (val: string) => console.log('Write:', val),
+  onSubmit: (val: string) => console.log('Submit:', val),
 };

@@ -25,6 +25,7 @@ export class TextInput extends LitElement {
   @property({ type: String }) declare inputBorderRadius?: string;
   @property({ type: String }) declare inputColor?: string;
   @property({ type: Function }) declare onWrite?: (value: string) => void;
+  @property({ type: Function }) declare onSubmit?: (value: string) => void;
 
   @property({ type: String }) declare textColor?: string;
   @property({ type: String }) declare textFontSize?: string;
@@ -69,6 +70,12 @@ export class TextInput extends LitElement {
     }
   }
 
+  private submitHandler(event: KeyboardEvent) {
+    if (event.key === 'Enter' && this.onSubmit) {
+      this.onSubmit((event.target as HTMLInputElement).value);
+    }
+  }
+
   private updateStyleVariable(
     propertyName: StyleProperty,
     cssVar: string,
@@ -103,6 +110,7 @@ export class TextInput extends LitElement {
 
   render() {
     return html`<input
+      @keydown=${(e: KeyboardEvent) => this.submitHandler(e)}
       @keyup=${(e: KeyboardEvent) => this.writeHandler(e)}
       type="text"
       placeholder=${this.placeholder ?? ''}
