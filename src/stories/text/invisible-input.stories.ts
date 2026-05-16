@@ -31,6 +31,7 @@ type InvisibleInputProps = {
   value?: string;
   error?: boolean;
   placeholder?: string;
+  handleSubmit?: (value: string) => void;
   handleChange?: (value: string) => void;
   handleBlur?: (value: string) => void;
   handleKeyUp?: (value: string) => void;
@@ -314,6 +315,12 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
     },
 
     // Events
+    handleSubmit: {
+      control: false,
+      description:
+        'Submit callback (Submits after pressing Enter) -> When multiLine is true, Shift + Enter creates a new line and Enter alone submits the form.',
+      table: { category: 'Events' },
+    },
     handleChange: {
       control: false,
       description: 'Change callback',
@@ -367,6 +374,10 @@ export const Default: StoryFn<InvisibleInputProps> = (args) => html`
     .handleBlur=${args.handleBlur}
     .handleChange=${args.handleChange}
     .handleKeyUp=${args.handleKeyUp}
+    .handleSubmit=${args.handleSubmit}
+    .handleChange=${args.handleChange}
+    .handleBlur=${args.handleBlur}
+    .handleKeyUp=${args.handleKeyUp}
   ></invisible-input>
 `;
 
@@ -399,6 +410,7 @@ Default.args = {
   value: '',
   placeholder: 'Enter text here...',
   error: false,
+  handleSubmit: (val: string) => console.log(`Submit: ${val}`),
   handleBlur: (val: string) => console.log(`Blur: ${val}`),
   handleChange: (val: string) => console.log(`Change: ${val}`),
   handleKeyUp: (val: string) => console.log(`KeyUp: ${val}`),
