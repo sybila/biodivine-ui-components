@@ -3,49 +3,34 @@ import { html } from 'lit';
 import type { Meta, StoryFn } from '@storybook/web-components-vite';
 
 type InvisibleInputProps = {
-  contMinHeight?: string;
-  contMinWidth?: string;
-  contMaxHeight?: string;
-  contMaxWidth?: string;
-
+  compHeight?: string;
+  compWidth?: string;
+  contBgColor?: string;
+  contFocusBgColor?: string;
+  contErrorBgColor?: string;
   contPadX?: string;
   contPadY?: string;
   contBorderRadius?: string;
   contOverflowX?: string;
   contOverflowY?: string;
-
-  textBoxMinHeight?: string;
-  textBoxMinWidth?: string;
-  textBoxMaxHeight?: string;
-  textBoxMaxWidth?: string;
   textLineHeight?: string;
-
   fontFamily?: string;
   fontWeight?: string;
   fontSize?: string;
   textColor?: string;
   textAlign?: string;
-
   focusFontFamily?: string;
   focusFontWeight?: string;
-
   placeholderColor?: string;
   placeholderFontStyle?: string;
   placeholderFontFamily?: string;
-
-  contFocusBgColor?: string;
-  contErrorBgColor?: string;
-
   multiLine?: boolean;
-
   hoverIconSrc?: string;
   hoverIconHeight?: string;
   hoverIconWidth?: string;
-
   value?: string;
   error?: boolean;
   placeholder?: string;
-
   handleChange?: (value: string) => void;
   handleBlur?: (value: string) => void;
   handleKeyUp?: (value: string) => void;
@@ -72,10 +57,8 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
 
 | Variable | Description |
 |----------|------------|
-| '--invisible-input-cont-min-height' | Minimum container height - supports only fixed values like px,em... (for example not %) |
-| '--invisible-input-cont-min-width' | Minimum container width - supports only fixed values like px,em... (for example not %) |
-| '--invisible-input-cont-max-height' | Maximum container height - supports only fixed values like px,em... (for example not %) |
-| '--invisible-input-cont-max-width' | Maximum container width - supports only fixed values like px,em... (for example not %) |
+| '--invisible-input-comp-height' | Component height (doesn't support fit-content) |
+| '--invisible-input-comp-width' | Component width (doesn't support fit-content) |
 | '--invisible-input-cont-padx' | Horizontal padding |
 | '--invisible-input-cont-pady' | Vertical padding |
 | '--invisible-input-border-radius' | Container border radius |
@@ -90,10 +73,6 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
 
 | Variable | Description |
 |----------|------------|
-| '--invisible-input-textbox-min-height' | Minimum height - supports only px (in some browser in multiline mode may be overwritten by the browser and set to higher value) |
-| '--invisible-input-textbox-min-width' | Minimum width - supports only px |
-| '--invisible-input-textbox-max-height' | Maximum height - supports only px |
-| '--invisible-input-textbox-max-width' | Maximum width - supports only px |
 | '--invisible-input-text-line-height' | Line height |
 
 ---
@@ -159,29 +138,15 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
   },
   argTypes: {
     // Container
-    contMinHeight: {
+    compHeight: {
       control: 'text',
-      description:
-        'Minimum container height - supports only fixed values like px,em... (for example not %)',
+      description: "Component height (doesn't support fit-content)",
       table: { category: 'Container', defaultValue: { summary: '28px' } },
     },
-    contMinWidth: {
+    compWidth: {
       control: 'text',
-      description:
-        'Minimum container width - supports only fixed values like px,em... (for example not %)',
-      table: { category: 'Container', defaultValue: { summary: '400px' } },
-    },
-    contMaxHeight: {
-      control: 'text',
-      description:
-        'Maximum container height - supports only fixed values like px,em... (for example not %)',
-      table: { category: 'Container', defaultValue: { summary: '28px' } },
-    },
-    contMaxWidth: {
-      control: 'text',
-      description:
-        'Maximum container width - supports only fixed values like px,em... (for example not %)',
-      table: { category: 'Container', defaultValue: { summary: '400px' } },
+      description: "Component width (doesn't support fit-content)",
+      table: { category: 'Container', defaultValue: { summary: '300px' } },
     },
     contPadX: {
       control: 'text',
@@ -208,6 +173,14 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
       description: 'Vertical overflow',
       table: { category: 'Container', defaultValue: { summary: 'auto' } },
     },
+    contBgColor: {
+      control: 'color',
+      description: 'Background color of the container',
+      table: {
+        category: 'Container',
+        defaultValue: { summary: 'transparent' },
+      },
+    },
     contFocusBgColor: {
       control: 'color',
       description: 'Background color on focus',
@@ -226,27 +199,6 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
     },
 
     // Text Box
-    textBoxMinHeight: {
-      control: 'text',
-      description:
-        'Minimum textbox height - supports only px (in some browser in multiline mode may be overwritten by the browser and set to higher value)',
-      table: { category: 'Text Box', defaultValue: { summary: '28px' } },
-    },
-    textBoxMinWidth: {
-      control: 'text',
-      description: 'Minimum textbox width - supports only px',
-      table: { category: 'Text Box', defaultValue: { summary: '400px' } },
-    },
-    textBoxMaxHeight: {
-      control: 'text',
-      description: 'Maximum textbox height - supports only px',
-      table: { category: 'Text Box', defaultValue: { summary: '28px' } },
-    },
-    textBoxMaxWidth: {
-      control: 'text',
-      description: 'Maximum textbox width - supports only px',
-      table: { category: 'Text Box', defaultValue: { summary: '400px' } },
-    },
     textLineHeight: {
       control: 'text',
       description: 'Line height',
@@ -384,19 +336,16 @@ export default meta;
 
 export const Default: StoryFn<InvisibleInputProps> = (args) => html`
   <invisible-input
-    .contMinHeight=${args.contMinHeight}
-    .contMinWidth=${args.contMinWidth}
-    .contMaxHeight=${args.contMaxHeight}
-    .contMaxWidth=${args.contMaxWidth}
+    .compHeight=${args.compHeight}
+    .compWidth=${args.compWidth}
+    .contBgColor=${args.contBgColor}
+    .contFocusBgColor=${args.contFocusBgColor}
+    .contErrorBgColor=${args.contErrorBgColor}
     .contPadX=${args.contPadX}
     .contPadY=${args.contPadY}
     .contBorderRadius=${args.contBorderRadius}
     .contOverflowX=${args.contOverflowX}
     .contOverflowY=${args.contOverflowY}
-    .textBoxMinHeight=${args.textBoxMinHeight}
-    .textBoxMinWidth=${args.textBoxMinWidth}
-    .textBoxMaxHeight=${args.textBoxMaxHeight}
-    .textBoxMaxWidth=${args.textBoxMaxWidth}
     .textLineHeight=${args.textLineHeight}
     .fontFamily=${args.fontFamily}
     .fontWeight=${args.fontWeight}
@@ -408,8 +357,6 @@ export const Default: StoryFn<InvisibleInputProps> = (args) => html`
     .placeholderColor=${args.placeholderColor}
     .placeholderFontStyle=${args.placeholderFontStyle}
     .placeholderFontFamily=${args.placeholderFontFamily}
-    .contFocusBgColor=${args.contFocusBgColor}
-    .contErrorBgColor=${args.contErrorBgColor}
     .multiLine=${args.multiLine}
     .hoverIconSrc=${args.hoverIconSrc}
     .hoverIconHeight=${args.hoverIconHeight}
@@ -424,48 +371,34 @@ export const Default: StoryFn<InvisibleInputProps> = (args) => html`
 `;
 
 Default.args = {
-  contMinHeight: '28px',
-  contMinWidth: '400px',
-  contMaxHeight: '28px',
-  contMaxWidth: '400px',
-
+  compHeight: '28px',
+  compWidth: '300px',
+  contBgColor: 'transparent',
+  contFocusBgColor: 'transparent',
+  contErrorBgColor: 'rgba(200, 40, 40, 0.4)',
   contPadX: '8px',
   contPadY: '6px',
   contBorderRadius: '6px',
   contOverflowX: 'auto',
   contOverflowY: 'auto',
-
-  textBoxMinHeight: '28px',
-  textBoxMinWidth: '400px',
-  textBoxMaxHeight: '28px',
-  textBoxMaxWidth: '400px',
   textLineHeight: '27px',
-
   fontFamily: "'FiraMono', monospace",
   fontWeight: 'normal',
   fontSize: '20px',
   textColor: 'black',
   textAlign: 'start',
-
   focusFontFamily: "'FiraMonoBold', monospace",
   focusFontWeight: 'bold',
-
   placeholderColor: 'gray',
   placeholderFontStyle: 'normal',
   placeholderFontFamily: "'FiraMono', monospace",
-
-  contFocusBgColor: 'transparent',
-  contErrorBgColor: 'rgba(200, 40, 40, 0.4)',
-
   multiLine: false,
-
+  hoverIconSrc: undefined,
   hoverIconHeight: '24px',
   hoverIconWidth: '24px',
-
   value: '',
   placeholder: 'Enter text here...',
   error: false,
-
   handleBlur: (val: string) => console.log(`Blur: ${val}`),
   handleChange: (val: string) => console.log(`Change: ${val}`),
   handleKeyUp: (val: string) => console.log(`KeyUp: ${val}`),
