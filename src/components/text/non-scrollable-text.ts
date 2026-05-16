@@ -38,6 +38,7 @@ export class NonScrollableText extends LitElement {
 
       height: var(--non-scrollable-text-comp-height, fit-content);
       width: var(--non-scrollable-text-comp-width, 200px);
+      line-height: var(--non-scrollable-text-comp-height, fit-content);
 
       color: var(--non-scrollable-text-color, black);
 
