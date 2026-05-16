@@ -74,12 +74,12 @@ A text component that does not scroll and truncates overflow with ellipsis.
     textJustify: {
       control: 'text',
       description: 'Justify text',
-      table: { defaultValue: { summary: 'start' }, category: 'Text' },
+      table: { defaultValue: { summary: 'center' }, category: 'Text' },
     },
     textAlign: {
       control: 'text',
       description: 'Align text',
-      table: { defaultValue: { summary: 'center' }, category: 'Text' },
+      table: { defaultValue: { summary: 'start' }, category: 'Text' },
     },
     textShadow: {
       control: 'text',
@@ -144,8 +144,8 @@ Default.args = {
   compWidth: '200px',
   userSelect: 'none',
   textColor: 'black',
-  textJustify: 'start',
-  textAlign: 'center',
+  textJustify: 'center',
+  textAlign: 'start',
   textShadow: 'none',
   textFontSize: '16px',
   textFontWeight: 'normal',

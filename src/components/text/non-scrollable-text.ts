@@ -41,8 +41,8 @@ export class NonScrollableText extends LitElement {
 
       color: var(--non-scrollable-text-color, black);
 
-      text-justify: var(--non-scrollable-text-justify, start);
-      text-align: var(--non-scrollable-text-align, center);
+      text-justify: var(--non-scrollable-text-justify, center);
+      text-align: var(--non-scrollable-text-align, start);
 
       user-select: var(--non-scrollable-text-user-select, none);
 
@@ -78,8 +78,8 @@ export class NonScrollableText extends LitElement {
     update('compHeight', '--non-scrollable-text-comp-height', 'fit-content');
     update('compWidth', '--non-scrollable-text-comp-width', '200px');
     update('textColor', '--non-scrollable-text-color', 'black');
-    update('textJustify', '--non-scrollable-text-justify', 'start');
-    update('textAlign', '--non-scrollable-text-align', 'center');
+    update('textJustify', '--non-scrollable-text-justify', 'center');
+    update('textAlign', '--non-scrollable-text-align', 'start');
     update('textShadow', '--non-scrollable-text-shadow', 'none');
     update('textFontSize', '--non-scrollable-text-font-size', '16px');
     update('textFontWeight', '--non-scrollable-text-font-weight', 'normal');
