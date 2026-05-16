@@ -19,6 +19,9 @@ type VerticalHidableContentProps = {
   buttonHeight?: string;
   buttonHoverColor?: string;
 
+  buttonOnMouseEnter?: (e: MouseEvent) => void;
+  buttonOnMouseLeave?: (e: MouseEvent) => void;
+
   iconHeight?: string;
   iconWidth?: string;
   iconSrc?: string;
@@ -138,6 +141,18 @@ Container component with a button to toggle vertical content visibility.
       description: 'Hover background color of button',
       table: { defaultValue: { summary: '#b0bec5' }, category: 'Button' },
     },
+    buttonOnMouseEnter: {
+      action: 'mouseenter',
+      description:
+        'Function to handle mouse enter event on the button. Function receives the mouse event as an argument. (e: MouseEvent) => void',
+      table: { category: 'Button Events' },
+    },
+    buttonOnMouseLeave: {
+      action: 'mouseleave',
+      description:
+        'Function to handle mouse leave event on the button. Function receives the mouse event as an argument. (e: MouseEvent) => void',
+      table: { category: 'Button Events' },
+    },
     iconHeight: {
       control: 'text',
       description: 'Height of the button icon',
@@ -194,6 +209,8 @@ export const Default: StoryFn<VerticalHidableContentProps> = (args) => html`
     .contentOverflowY=${args.contentOverflowY}
     .buttonHeight=${args.buttonHeight}
     .buttonHoverColor=${args.buttonHoverColor}
+    .buttonOnMouseEnter=${args.buttonOnMouseEnter}
+    .buttonOnMouseLeave=${args.buttonOnMouseLeave}
     .iconHeight=${args.iconHeight}
     .iconWidth=${args.iconWidth}
     .iconSrc=${args.iconSrc}
@@ -220,6 +237,8 @@ Default.args = {
   contentOverflowY: 'hidden',
   buttonHeight: '20px',
   buttonHoverColor: '#b0bec5',
+  buttonOnMouseEnter: (e: MouseEvent) => console.log('Button mouse enter', e),
+  buttonOnMouseLeave: (e: MouseEvent) => console.log('Button mouse leave', e),
   iconHeight: '12px',
   iconWidth: '12px',
   iconSrc: undefined,
