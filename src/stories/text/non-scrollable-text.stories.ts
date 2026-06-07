@@ -26,7 +26,7 @@ const meta: Meta<NonScrollableTextProps> = {
         component: `
 ### <non-scrollable-text>
 
-A text component that does not scroll and truncates overflow with ellipsis.
+Single line text component that does not scroll and truncates overflow with ellipsis.
 
 #### CSS Custom Properties
 
