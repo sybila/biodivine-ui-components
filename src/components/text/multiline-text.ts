@@ -1,9 +1,10 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 type StyleProperty =
   | 'compHeight'
   | 'compWidth'
+  | 'cursor'
   | 'overflowY'
   | 'userSelect'
   | 'textColor'
@@ -14,7 +15,6 @@ type StyleProperty =
   | 'textFontWeight'
   | 'textFontFamily'
   | 'textFontStyle'
-  | 'textOverflow'
   | 'placeholderColor'
   | 'placeholderFontFamily'
   | 'placeholderFontWeight'
@@ -35,7 +35,6 @@ export class MultilineText extends LitElement {
   @property({ type: String }) declare textFontWeight?: string;
   @property({ type: String }) declare textFontFamily?: string;
   @property({ type: String }) declare textFontStyle?: string;
-  @property({ type: String }) declare textOverflow?: string;
 
   @property({ type: String }) declare placeholderColor?: string;
   @property({ type: String }) declare placeholderFontFamily?: string;
@@ -43,20 +42,27 @@ export class MultilineText extends LitElement {
   @property({ type: String }) declare placeholderFontStyle?: string;
 
   @property({ type: String }) declare userSelect?: string;
+  @property({ type: String }) declare cursor?: string;
+
+  @property({ type: Function }) declare handleClick?: () => void;
 
   @property({ type: String }) declare text?: string;
   @property({ type: String }) declare placeholder?: string;
 
   static styles = css`
     :host {
-      display: inline-block;
+      display: block;
 
       height: var(--multiline-text-comp-height, 300px);
       width: var(--multiline-text-comp-width, 200px);
+
+      cursor: var(--multiline-text-cursor, default);
     }
 
     span {
-      display: inline-block;
+      display: block;
+
+      background-color: transparent;
 
       height: 100%;
       width: 100%;
@@ -81,7 +87,6 @@ export class MultilineText extends LitElement {
 
       overflow-x: hidden;
       overflow-y: var(--multiline-text-overflow-y, auto);
-      text-overflow: var(--multiline-text-overflow, ellipsis);
       white-space: normal;
       overflow-wrap: anywhere;
     }
@@ -116,6 +121,7 @@ export class MultilineText extends LitElement {
 
     update('compHeight', '--multiline-text-comp-height', '300px');
     update('compWidth', '--multiline-text-comp-width', '200px');
+    update('cursor', '--multiline-text-cursor', 'default');
     update('overflowY', '--multiline-text-overflow-y', 'auto');
 
     update('textColor', '--multiline-text-color', 'black');
@@ -129,7 +135,6 @@ export class MultilineText extends LitElement {
       '--multiline-text-font-family',
       "'Helvetica', 'Arial', sans-serif"
     );
-    update('textOverflow', '--multiline-text-overflow', 'ellipsis');
     update('textFontStyle', '--multiline-text-font-style', 'normal');
 
     update('placeholderColor', '--multiline-text-placeholder-color', 'gray');
@@ -155,7 +160,7 @@ export class MultilineText extends LitElement {
   render() {
     const placeholderClass: String = this.text ? '' : 'placeholder';
 
-    return html`<span class=${placeholderClass}
+    return html`<span class=${placeholderClass} @click=${this.handleClick}
       >${this.text || this.placeholder}</span
     >`;
   }

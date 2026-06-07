@@ -5,6 +5,7 @@ import '../../components/text/multiline-text';
 type MultilineTextProps = {
   compHeight?: string;
   compWidth?: string;
+  cursor?: string;
   overflowY?: string;
   userSelect?: string;
   textColor?: string;
@@ -21,6 +22,7 @@ type MultilineTextProps = {
   placeholderFontStyle?: string;
   text?: string;
   placeholder?: string;
+  handleClick?: () => void;
 };
 
 const meta: Meta<MultilineTextProps> = {
@@ -40,6 +42,7 @@ Multi-line text component that wraps and can show a placeholder when empty.
 |-------------------------------|-------------------------------|
 | --multiline-text-comp-height | Height of the component (does not support fit-content) |
 | --multiline-text-comp-width | Width of the component (does not support fit-content) |
+| --multiline-text-cursor | Cursor style for the component |
 | --multiline-text-overflow-y | Vertical overflow behavior |
 | --multiline-text-user-select | User select behavior |
 | --multiline-text-color | Text color |
@@ -122,6 +125,16 @@ Multi-line text component that wraps and can show a placeholder when empty.
       description: 'Font style',
       table: { defaultValue: { summary: 'normal' }, category: 'Text' },
     },
+    cursor: {
+      control: 'text',
+      description: 'Cursor style for the component',
+      table: { defaultValue: { summary: 'default' }, category: 'Component' },
+    },
+    handleClick: {
+      action: 'handleClick',
+      description: 'Click handler for the component (() => void function)',
+      table: { category: 'Events' },
+    },
     placeholderColor: {
       control: 'color',
       description: 'Placeholder color',
@@ -178,6 +191,8 @@ export const Default: StoryFn<MultilineTextProps> = (args) => html`
     .textFontWeight=${args.textFontWeight}
     .textFontFamily=${args.textFontFamily}
     .textFontStyle=${args.textFontStyle}
+    .cursor=${args.cursor}
+    .handleClick=${args.handleClick}
     .placeholderColor=${args.placeholderColor}
     .placeholderFontFamily=${args.placeholderFontFamily}
     .placeholderFontWeight=${args.placeholderFontWeight}
@@ -200,6 +215,8 @@ Default.args = {
   textFontWeight: 'normal',
   textFontFamily: "'Helvetica', 'Arial', sans-serif",
   textFontStyle: 'normal',
+  cursor: 'default',
+  handleClick: console.log.bind(console, 'Multiline text clicked'),
   placeholderColor: 'gray',
   placeholderFontFamily: "'FiraMono', monospace",
   placeholderFontWeight: 'normal',
