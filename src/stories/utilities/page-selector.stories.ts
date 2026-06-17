@@ -36,6 +36,13 @@ type PageSelectorProps = {
   initialPage?: number;
   nextPageExists?: boolean;
   handlePageChange?: (page: number) => void;
+
+  leftButtonOnMouseEnter?: () => void;
+  leftButtonOnMouseLeave?: () => void;
+  rightButtonOnMouseEnter?: () => void;
+  rightButtonOnMouseLeave?: () => void;
+  centerIndicatorOnMouseEnter?: () => void;
+  centerIndicatorOnMouseLeave?: () => void;
 };
 
 const meta: Meta<PageSelectorProps> = {
@@ -275,6 +282,66 @@ A component for selecting pages with left/right buttons and a center indicator.
       },
       control: false,
     },
+    leftButtonOnMouseEnter: {
+      action: 'leftButtonMouseEnter',
+      description:
+        'Function which runs when starts howering over the left button element.',
+      table: {
+        type: { summary: '() => void' },
+        category: 'Events',
+      },
+      control: false,
+    },
+    leftButtonOnMouseLeave: {
+      action: 'leftButtonMouseLeave',
+      description:
+        'Function which runs when stops howering over the left button element.',
+      table: {
+        type: { summary: '() => void' },
+        category: 'Events',
+      },
+      control: false,
+    },
+    rightButtonOnMouseEnter: {
+      action: 'rightButtonMouseEnter',
+      description:
+        'Function which runs when starts howering over the right button element.',
+      table: {
+        type: { summary: '() => void' },
+        category: 'Events',
+      },
+      control: false,
+    },
+    rightButtonOnMouseLeave: {
+      action: 'rightButtonMouseLeave',
+      description:
+        'Function which runs when stops howering over the right button element.',
+      table: {
+        type: { summary: '() => void' },
+        category: 'Events',
+      },
+      control: false,
+    },
+    centerIndicatorOnMouseEnter: {
+      action: 'centerIndicatorButtonMouseEnter',
+      description:
+        'Function which runs when starts howering over the center indicator element.',
+      table: {
+        type: { summary: '() => void' },
+        category: 'Events',
+      },
+      control: false,
+    },
+    centerIndicatorOnMouseLeave: {
+      action: 'centerIndicatorButtonMouseLeave',
+      description:
+        'Function which runs when stops howering over the center indicator element.',
+      table: {
+        type: { summary: '() => void' },
+        category: 'Events',
+      },
+      control: false,
+    },
   },
 };
 
@@ -315,6 +382,12 @@ export const Default: StoryFn<PageSelectorProps> = (args) => html`
     .initialPage=${args.initialPage}
     .nextPageExists=${args.nextPageExists}
     .handlePageChange=${args.handlePageChange}
+    .leftButtonOnMouseEnter=${args.leftButtonOnMouseEnter}
+    .leftButtonOnMouseLeave=${args.leftButtonOnMouseLeave}
+    .rightButtonOnMouseEnter=${args.rightButtonOnMouseEnter}
+    .rightButtonOnMouseLeave=${args.rightButtonOnMouseLeave}
+    .centerIndicatorOnMouseEnter=${args.centerIndicatorOnMouseEnter}
+    .centerIndicatorOnMouseLeave=${args.centerIndicatorOnMouseLeave}
   ></page-selector>
 `;
 
@@ -351,4 +424,12 @@ Default.args = {
   centerTextColor: '#000000',
   initialPage: undefined,
   nextPageExists: true,
+  leftButtonOnMouseEnter: () => console.log('Left Button Mouse Enter'),
+  leftButtonOnMouseLeave: () => console.log('Left Button Mouse Leave'),
+  rightButtonOnMouseEnter: () => console.log('Right Button Mouse Enter'),
+  rightButtonOnMouseLeave: () => console.log('Right Button Mouse Leave'),
+  centerIndicatorOnMouseEnter: () =>
+    console.log('Center Indicator Mouse Enter'),
+  centerIndicatorOnMouseLeave: () =>
+    console.log('Center Indicator Mouse Leave'),
 };
