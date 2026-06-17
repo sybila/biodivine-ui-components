@@ -287,7 +287,7 @@ A component for selecting pages with left/right buttons and a center indicator.
       description:
         'Function which runs when starts howering over the left button element.',
       table: {
-        type: { summary: '() => void' },
+        type: { summary: '(e: MouseEvent) => void' },
         category: 'Events',
       },
       control: false,
@@ -297,7 +297,7 @@ A component for selecting pages with left/right buttons and a center indicator.
       description:
         'Function which runs when stops howering over the left button element.',
       table: {
-        type: { summary: '() => void' },
+        type: { summary: '(e: MouseEvent) => void' },
         category: 'Events',
       },
       control: false,
@@ -307,7 +307,7 @@ A component for selecting pages with left/right buttons and a center indicator.
       description:
         'Function which runs when starts howering over the right button element.',
       table: {
-        type: { summary: '() => void' },
+        type: { summary: '(e: MouseEvent) => void' },
         category: 'Events',
       },
       control: false,
@@ -317,7 +317,7 @@ A component for selecting pages with left/right buttons and a center indicator.
       description:
         'Function which runs when stops howering over the right button element.',
       table: {
-        type: { summary: '() => void' },
+        type: { summary: '(e: MouseEvent) => void' },
         category: 'Events',
       },
       control: false,
@@ -327,7 +327,7 @@ A component for selecting pages with left/right buttons and a center indicator.
       description:
         'Function which runs when starts howering over the center indicator element.',
       table: {
-        type: { summary: '() => void' },
+        type: { summary: '(e: MouseEvent) => void' },
         category: 'Events',
       },
       control: false,
@@ -337,7 +337,7 @@ A component for selecting pages with left/right buttons and a center indicator.
       description:
         'Function which runs when stops howering over the center indicator element.',
       table: {
-        type: { summary: '() => void' },
+        type: { summary: '(e: MouseEvent) => void' },
         category: 'Events',
       },
       control: false,
