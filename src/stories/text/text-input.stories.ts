@@ -67,6 +67,12 @@ Basic text input component.
 | Part Name    | Element | Description           |
 |--------------|---------|-----------------------|
 | \`text-input\` | \`input\` | The input element        |
+
+#### Methods
+
+| Method | Description |
+|--------|-------------|
+| \`focus()\` | Focuses the internal input element |
         `,
       },
     },
