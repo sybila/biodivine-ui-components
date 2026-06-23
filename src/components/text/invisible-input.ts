@@ -227,6 +227,14 @@ export class InvisibleInput extends LitElement {
     this.style.setProperty(cssVar, value);
   }
 
+  public async focus() {
+    await this.updateComplete;
+    const input = this.renderRoot?.querySelector(
+      this.multiLine ? '#multiline-text-input' : '#text-input'
+    ) as HTMLInputElement | null;
+    input?.focus();
+  }
+
   updated(changed: Map<string, StyleProperty>) {
     const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);

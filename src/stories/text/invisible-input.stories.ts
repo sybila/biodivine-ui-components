@@ -129,6 +129,14 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
 
 ---
 
+### Methods
+
+| Method | Description |
+|--------|-------------|
+| \`focus()\` | Focuses the internal input element |
+
+---
+
 ### Notes
 
 - All styling is shared between single-line and multi-line modes.
