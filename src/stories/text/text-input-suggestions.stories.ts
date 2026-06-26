@@ -45,7 +45,7 @@ type TextInputSuggestionsProps = {
 
   /**
    * Custom predicate for filtering suggestions.
-   * Receives: (suggestion, inputTokens)
+   * Receives: (suggestion, currentInputStrings)
    */
   filterSuggPredicate?: (
     suggestion: string,
@@ -97,8 +97,21 @@ type TextInputSuggestionsProps = {
   // -------------------------
   /** Called whenever input value changes */
   onWrite?: (value: string) => void;
+
   /** Called when Enter is pressed */
   onSubmit?: (value: string) => void;
+
+  /** Mouse enters the input element */
+  onInputMouseEnter?: (event: MouseEvent) => void;
+
+  /** Mouse leaves the input element */
+  onInputMouseLeave?: (event: MouseEvent) => void;
+
+  /** Mouse enters a suggestion item */
+  onSuggestionMouseEnter?: (event: MouseEvent, suggestion: string) => void;
+
+  /** Mouse leaves a suggestion item */
+  onSuggestionMouseLeave?: (event: MouseEvent, suggestion: string) => void;
 };
 
 const meta: Meta<TextInputSuggestionsProps> = {
@@ -114,34 +127,55 @@ Text input component with suggestion list.
 
 #### CSS Custom Properties
 
+### Layout & Component
+
 | Variable | Description |
 |----------|-------------|
-| \`--text-input-suggestions-comp-height\` | Height of outer wrapper |
-| \`--text-input-suggestions-comp-width\` | Width of outer wrapper |
-| \`--text-input-suggestions-gap\` | Gap between input and suggestion list |
-| \`--text-input-suggestions-z-index\` | Z-index of the whole component |
-| \`--text-input-suggestions-height\` | Input field height |
-| \`--text-input-suggestions-width\` | Input field width |
-| \`--text-input-suggestions-border-color\` | Input border color |
-| \`--text-input-suggestions-border-radius\` | Input border radius |
-| \`--text-input-suggestions-background-color\` | Input background color |
-| \`--text-input-suggestions-text-color\` | Text color inside input |
+| \`--text-input-suggestions-height\` | Height of the input field and host wrapper (Accepts only explicit length values (e.g. px). Relative or intrinsic values such as % or fit-content are not supported.) |
+| \`--text-input-suggestions-width\` | Width of the input field and host wrapper (Accepts only explicit length values (e.g. px). Relative or intrinsic values such as % or fit-content are not supported.)|
+| \`--text-input-suggestions-z-index\` | Z-index of the entire component |
+| \`--text-input-suggestions-gap\` | Gap between input field and suggestion list |
+
+---
+
+### Input field styles
+
+| Variable | Description |
+|----------|-------------|
+| \`--text-input-suggestions-border-color\` | Border color of the input field |
+| \`--text-input-suggestions-border-radius\` | Border radius of the input field |
+| \`--text-input-suggestions-background-color\` | Background color of the input field |
+| \`--text-input-suggestions-text-color\` | Text color inside the input field |
 | \`--text-input-suggestions-input-font-size\` | Font size of input text |
 | \`--text-input-suggestions-input-font-weight\` | Font weight of input text |
-| \`--text-input-suggestions-input-font-family\` | Font family for input text |
-| \`--text-input-suggestions-sugg-list-min-height\` | Minimum height of suggestion list |
-| \`--text-input-suggestions-sugg-list-max-height\` | Maximum height of suggestion list |
-| \`--text-input-suggestions-sugg-list-width\` | Width of suggestion list |
-| \`--text-input-suggestions-sugg-list-border-radius\` | Border radius of suggestion list |
-| \`--text-input-suggestions-sugg-list-bg-color\` | Background color of suggestion list |
-| \`--text-input-suggestions-sugg-list-overflow-y\` | Vertical overflow behavior |
-| \`--text-input-suggestions-sugg-line-height\` | Line height of suggestion items |
+| \`--text-input-suggestions-input-font-family\` | Font family of input text |
+
+---
+
+### Suggestion list styles
+
+| Variable | Description |
+|----------|-------------|
+| \`--text-input-suggestions-sugg-list-min-height\` | Minimum height of the suggestion list (Accepts only explicit length values (e.g. px). Relative or intrinsic values such as % or fit-content are not supported.) |
+| \`--text-input-suggestions-sugg-list-max-height\` | Maximum height of the suggestion list (Accepts only explicit length values (e.g. px). Relative or intrinsic values such as % or fit-content are not supported.) |
+| \`--text-input-suggestions-sugg-list-width\` | Width of the suggestion list (Accepts only explicit length values (e.g. px). Relative or intrinsic values such as % or fit-content are not supported.) |
+| \`--text-input-suggestions-sugg-list-border-radius\` | Border radius of the suggestion list |
+| \`--text-input-suggestions-sugg-list-bg-color\` | Background color of the suggestion list |
+| \`--text-input-suggestions-sugg-list-overflow-y\` | Vertical overflow behavior of the suggestion list |
+
+---
+
+### Suggestion item styles
+
+| Variable | Description |
+|----------|-------------|
+| \`--text-input-suggestions-sugg-line-height\` | Line height of each suggestion item |
 | \`--text-input-suggestions-sugg-font-size\` | Font size of suggestion items |
 | \`--text-input-suggestions-sugg-font-weight\` | Font weight of suggestion items |
 | \`--text-input-suggestions-sugg-font-family\` | Font family of suggestion items |
 | \`--text-input-suggestions-sugg-border-radius\` | Border radius of suggestion items |
 | \`--text-input-suggestions-sugg-padding\` | Padding inside suggestion items |
-| \`--text-input-suggestions-sugg-hover-bg-color\` | Hover background color of suggestion items |
+| \`--text-input-suggestions-sugg-hover-bg-color\` | Background color when hovering a suggestion item |
 
 #### Shadow DOM Parts
 
@@ -388,6 +422,57 @@ Text input component with suggestion list.
     // Events (IMPORTANT FIX)
     // -------------------------
 
+    onInputMouseEnter: {
+      control: false,
+      description:
+        'Callback fired when the mouse enters the text-input element. Receives the native MouseEvent.',
+      table: {
+        category: 'Events',
+        type: {
+          summary: '(event: MouseEvent) => void',
+        },
+      },
+      action: 'input mouse enter',
+    },
+
+    onInputMouseLeave: {
+      control: false,
+      description:
+        'Callback fired when the mouse leaves the text-input element. Receives the native MouseEvent.',
+      table: {
+        category: 'Events',
+        type: {
+          summary: '(event: MouseEvent) => void',
+        },
+      },
+      action: 'input mouse leave',
+    },
+
+    onSuggestionMouseEnter: {
+      control: false,
+      description:
+        'Callback fired when the mouse enters a suggestion item. Receives the MouseEvent and the suggestion string being hovered.',
+      table: {
+        category: 'Events',
+        type: {
+          summary: '(event: MouseEvent, suggestion: string) => void',
+        },
+      },
+      action: 'suggestion mouse enter',
+    },
+
+    onSuggestionMouseLeave: {
+      control: false,
+      description:
+        'Callback fired when the mouse leaves a suggestion item. Receives the MouseEvent and the suggestion string being left.',
+      table: {
+        category: 'Events',
+        type: {
+          summary: '(event: MouseEvent, suggestion: string) => void',
+        },
+      },
+      action: 'suggestion mouse leave',
+    },
     onWrite: {
       action: 'write',
       description:
@@ -450,6 +535,10 @@ export const Default: StoryFn<TextInputSuggestionsProps> = (args) => html`
     .suggHoverBgColor=${args.suggHoverBgColor}
     .onWrite=${args.onWrite}
     .onSubmit=${args.onSubmit}
+    .onInputMouseEnter=${args.onInputMouseEnter}
+    .onInputMouseLeave=${args.onInputMouseLeave}
+    .onSuggestionMouseEnter=${args.onSuggestionMouseEnter}
+    .onSuggestionMouseLeave=${args.onSuggestionMouseLeave}
   ></text-input-suggestions>
 `;
 
@@ -474,10 +563,10 @@ Default.args = {
   // suggestions
   suggestionStrings: ['suggestion 1', 'suggestion 2'],
 
-  // filtering (defaults match your component logic)
+  // filtering
   filterSuggTextTransform: (s: string) => s.toLowerCase(),
 
-  isSeparator: undefined, // or: (c: string) => c === ','
+  isSeparator: undefined,
 
   // layout
   componentZIndex: '100',
@@ -503,4 +592,14 @@ Default.args = {
   // events
   onWrite: (val: string) => console.log('Write:', val),
   onSubmit: (val: string) => console.log('Submit:', val),
+
+  onInputMouseEnter: (e: MouseEvent) => console.log('Input enter:', e),
+
+  onInputMouseLeave: (e: MouseEvent) => console.log('Input leave:', e),
+
+  onSuggestionMouseEnter: (e: MouseEvent, suggestion: string) =>
+    console.log('Suggestion enter:', suggestion, e),
+
+  onSuggestionMouseLeave: (e: MouseEvent, suggestion: string) =>
+    console.log('Suggestion leave:', suggestion, e),
 };
