@@ -236,35 +236,65 @@ Text input component with suggestion list.
     // -------------------------
     suggestionStrings: {
       control: 'object',
-      description: 'List of suggestion strings shown under the input',
-      table: { category: 'Suggestions' },
+      description:
+        'Array of available suggestion strings. Suggestions are filtered according to the current input and filtering configuration.',
+      table: {
+        category: 'Suggestions',
+        type: {
+          summary: 'string[]',
+        },
+      },
     },
-
     filterSuggPredicate: {
       control: false,
       description:
-        'Custom predicate to filter suggestions (suggestion: string, inputTokens: Array<string>) => boolean, where inputTokens is input of the text-input split by separator. If not set suggestion is filtered out if doesnt include any of the inputTokens.',
-      defaultValue: {
-        summary:
-          '(s: string) => { for (const inputedString of v) { if (s.includes(inputedString)) { return true; }} return false; };',
+        'Custom filtering function for suggestions.\n\n' +
+        'inputTokens is the user input split by isSeparator into an array of tokens.\n' +
+        'All tokens except the last represent committed input (already "accepted" parts).\n' +
+        'The last token represents the currently typed (active) fragment used for matching suggestions.\n\n' +
+        'selectedSuggestions contains only confirmed selections (e.g. chosen chips/tags) and never includes the currently typed last token.\n\n' +
+        'Return true to display a suggestion, false to hide it.',
+      table: {
+        category: 'Suggestions',
+        type: {
+          summary:
+            '(suggestion: string, inputTokens: string[], selectedSuggestions: Set<string>) => boolean',
+        },
+        defaultValue: {
+          summary:
+            '(suggestion, inputTokens, selectedSuggestions) => !selectedSuggestions.has(suggestion) && suggestion.includes(inputTokens[inputTokens.length - 1])',
+        },
       },
-      table: { category: 'Suggestions' },
     },
 
     filterSuggTextTransform: {
+      control: false,
       description:
-        'Function (s: string) => string which transforms text before filtering (e.g. toLowerCase, normalize)',
+        'Transforms text before filtering is applied.\n\n' +
+        'This is used to normalize both suggestions and input tokens (e.g. lowercasing, trimming whitespace) so matching is consistent and case-insensitive.',
       table: {
         category: 'Suggestions',
-        defaultValue: { summary: '(s) => s.toLowerCase()' },
+        type: {
+          summary: '(text: string) => string',
+        },
+        defaultValue: {
+          summary: '(text) => text.toLowerCase().trim()',
+        },
       },
     },
 
     isSeparator: {
       control: false,
       description:
-        'Function to determine separator characters for multi-token input. Used to split the text input into multiple tokens. If not set, the component treats the input as a single continuous string.',
-      table: { category: 'Suggestions' },
+        'Function that determines which characters split the input into tokens.\n\n' +
+        'When a separator is encountered, the input is divided into multiple tokens.\n' +
+        'Filtering logic always uses only the last token (the active typing fragment).',
+      table: {
+        category: 'Suggestions',
+        type: {
+          summary: '(char: string) => boolean',
+        },
+      },
     },
 
     // -------------------------
@@ -357,17 +387,29 @@ Text input component with suggestion list.
     // -------------------------
     // Events (IMPORTANT FIX)
     // -------------------------
+
     onWrite: {
       action: 'write',
       description:
-        'Called whenever input value changes. Receives (value: string)',
-      table: { category: 'Events' },
+        'Called whenever the input value changes, including when a suggestion is selected. Receives the current value.',
+      table: {
+        category: 'Events',
+        type: {
+          summary: '(value: string) => void',
+        },
+      },
     },
 
     onSubmit: {
       action: 'submit',
-      description: 'Called when Enter key is pressed. Receives (value: string)',
-      table: { category: 'Events' },
+      description:
+        'Called when Enter is pressed. Receives the current input value.',
+      table: {
+        category: 'Events',
+        type: {
+          summary: '(value: string) => void',
+        },
+      },
     },
   },
 };

@@ -277,13 +277,20 @@ export class TextInputSuggestions extends LitElement {
 
     const filterFunction = this.filterSuggPredicate
       ? this.filterSuggPredicate
-      : (s: string) => {
+      : (
+          suggestion: string,
+          inputedTextArray: Array<string>,
+          alreadySearchedStrings: Set<string>
+        ) => {
           // Do not include the suggestion if the suggestion is already in search or doesnt match text after the last separator.
-          return !suggSelectedSuggSet.has(s) && s.includes(v[v.length - 1]);
+          return (
+            !alreadySearchedStrings.has(suggestion) &&
+            suggestion.includes(inputedTextArray[inputedTextArray.length - 1])
+          );
         };
 
     return this.suggestionStrings.filter((s) =>
-      filterFunction(textTransform(s), v)
+      filterFunction(textTransform(s), v, suggSelectedSuggSet)
     );
   }
 
