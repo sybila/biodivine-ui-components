@@ -37,8 +37,12 @@ export class HorizontalHidableContent extends LitElement {
   @property({ type: String }) declare buttonWidth?: string;
   @property({ type: String }) declare buttonHoverColor?: string;
 
-  @property({ type: Function }) declare buttonOnMouseEnter?: (e: MouseEvent) => void;
-  @property({ type: Function }) declare buttonOnMouseLeave?: (e: MouseEvent) => void;
+  @property({ type: Function }) declare buttonOnMouseEnter?: (
+    e: MouseEvent
+  ) => void;
+  @property({ type: Function }) declare buttonOnMouseLeave?: (
+    e: MouseEvent
+  ) => void;
 
   @property({ type: String }) declare iconHeight?: string;
   @property({ type: String }) declare iconWidth?: string;
