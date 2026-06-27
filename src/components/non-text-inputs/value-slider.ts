@@ -159,12 +159,17 @@ export class ValueSlider extends LitElement {
   }
 
   render() {
+    const safeValue = Math.min(
+      this.maxValue ?? 100,
+      Math.max(this.minValue ?? 0, this.value ?? 0)
+    );
+
     return html`
       <input
         id="slider"
         part="slider"
         type="range"
-        .value=${this.value ?? 0}
+        .value=${safeValue}
         .min=${this.minValue ?? 0}
         .max=${this.maxValue ?? 100}
         .step=${this.step ?? 1}
