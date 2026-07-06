@@ -5,29 +5,21 @@ import '../../components/content-panels/overlay-window';
 type OverlayWindowProps = {
   compHeight?: string;
   compWidth?: string;
-  compMaxHeight?: string;
-  compMaxWidth?: string;
   compZIndex?: string;
 
   compBackgroundColor?: string;
-  compBackgroundWidth?: string;
-  compBackgroundHeight?: string;
   handleBackgroundClick?: () => void;
 
-  windHeight?: string;
-  windWidth?: string;
+  windMinHeight?: string;
+  windMinWidth?: string;
   windMaxHeight?: string;
   windMaxWidth?: string;
   windPad?: string;
   windColor?: string;
   windShadow?: string;
-  windOverflowX?: string;
-  windOverflowY?: string;
-  windResize?: string;
 
   showHeader?: boolean;
   headerHeight?: string;
-  headerWidth?: string;
   headerGap?: string;
   headerText?: string;
   headerTextFontSize?: string;
@@ -46,13 +38,11 @@ type OverlayWindowProps = {
   closeIconHeight?: string;
   closeIconWidth?: string;
 
-  contentHeight?: string;
-  contentWidth?: string;
-  contentMaxHeight?: string;
-  contentMaxWidth?: string;
   contentJustifyC?: string;
   contentAlignI?: string;
   contentGap?: string;
+  contentOverflowX?: string;
+  contentOverflowY?: string;
 
   gapSize?: string;
 };
@@ -68,20 +58,20 @@ const meta: Meta<OverlayWindowProps> = {
 
 A flexible overlay/modal window component.
 
+The window consists of a header area and a content area. The content area automatically expands to fill all remaining available space within the window. As the window grows, the content stretches to occupy the available width and height.
+
+When the window reaches its maximum height, additional vertical content no longer increases the window size. Instead, the content area becomes vertically scrollable while the header remains visible. Horizontal scrolling is disabled, and content is expected to fit within the available width or handle overflow internally.
+
 #### CSS Custom Properties
 
 | Variable | Description |
 |----------|-------------|
-| \`--overlay-window-comp-height\` | Height of the overlay window component |
-| \`--overlay-window-comp-width\` | Width of the overlay window component |
-| \`--overlay-window-comp-max-height\` | Max height of the overlay window component |
-| \`--overlay-window-comp-max-width\` | Max width of the overlay window component |
+| \`--overlay-window-comp-height\` | Height of the overlay window component (doesn't support fit-content or auto)|
+| \`--overlay-window-comp-width\` | Width of the overlay window component (doesn't support fit-content or auto)|
 | \`--overlay-window-comp-z-index\` | Z-index of the overlay window |
 | \`--overlay-window-background-color\` | Background color of the overlay |
-| \`--overlay-window-background-width\` | Width of the overlay background |
-| \`--overlay-window-background-height\` | Height of the overlay background |
-| \`--overlay-window-height\` | Height of the window panel |
-| \`--overlay-window-width\` | Width of the window panel |
+| \`--overlay-window-min-height\` | Min height of the window panel |
+| \`--overlay-window-min-width\` | Min width of the window panel |
 | \`--overlay-window-max-height\` | Max height of the window panel |
 | \`--overlay-window-max-width\` | Max width of the window panel |
 | \`--overlay-window-padding\` | Padding of the window panel |
@@ -90,7 +80,6 @@ A flexible overlay/modal window component.
 | \`--overlay-window-shadow\` | Box shadow of the window panel |
 | \`--overlay-window-overflow-x\` | Overflow-x of the window panel |
 | \`--overlay-window-overflow-y\` | Overflow-y of the window panel |
-| \`--overlay-window-resize\` | Resize property of the window panel |
 | \`--overlay-window-header-height\` | Height of the header |
 | \`--overlay-window-header-width\` | Width of the header |
 | \`--overlay-window-header-gap\` | Gap in the header |
@@ -105,12 +94,9 @@ A flexible overlay/modal window component.
 | \`--overlay-window-close-hover-color\` | Hover color of the close button |
 | \`--overlay-window-close-icon-height\` | Height of the close icon |
 | \`--overlay-window-close-icon-width\` | Width of the close icon |
-| \`--overlay-window-content-height\` | Height of the content area |
-| \`--overlay-window-content-width\` | Width of the content area |
-| \`--overlay-window-content-max-height\` | Max height of the content area |
-| \`--overlay-window-content-max-width\` | Max width of the content area |
 | \`--overlay-window-content-justify-content\` | Justify content in the content area |
 | \`--overlay-window-content-align-items\` | Align items in the content area |
+| \`--overlay-window-content-overflow-y\` | Overflow-y of the content area |
 | \`--overlay-window-content-gap\` | Gap in the content area |
 
 #### Shadow DOM Parts
@@ -139,16 +125,6 @@ A flexible overlay/modal window component.
       description: 'Width of the overlay window component',
       table: { defaultValue: { summary: '100vw' }, category: 'Layout' },
     },
-    compMaxHeight: {
-      control: 'text',
-      description: 'Max height of the overlay window component',
-      table: { defaultValue: { summary: '100vh' }, category: 'Layout' },
-    },
-    compMaxWidth: {
-      control: 'text',
-      description: 'Max width of the overlay window component',
-      table: { defaultValue: { summary: '100vw' }, category: 'Layout' },
-    },
     compZIndex: {
       control: 'text',
       description: 'Z-index of the overlay window',
@@ -162,40 +138,30 @@ A flexible overlay/modal window component.
         category: 'Background',
       },
     },
-    compBackgroundWidth: {
-      control: 'text',
-      description: 'Width of the overlay background',
-      table: { defaultValue: { summary: '100%' }, category: 'Background' },
-    },
-    compBackgroundHeight: {
-      control: 'text',
-      description: 'Height of the overlay background',
-      table: { defaultValue: { summary: '100%' }, category: 'Background' },
-    },
     handleBackgroundClick: {
       action: 'backgroundClick',
       description: 'Function to handle background click',
       table: { category: 'Events' },
     },
-    windHeight: {
+    windMinHeight: {
       control: 'text',
-      description: 'Height of the window panel',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Window' },
+      description: 'Min height of the window panel ',
+      table: { defaultValue: { summary: '1vh' }, category: 'Window' },
     },
-    windWidth: {
+    windMinWidth: {
       control: 'text',
-      description: 'Width of the window panel',
-      table: { defaultValue: { summary: '400px' }, category: 'Window' },
+      description: 'Min width of the window panel',
+      table: { defaultValue: { summary: '1vw' }, category: 'Window' },
     },
     windMaxHeight: {
       control: 'text',
       description: 'Max height of the window panel',
-      table: { defaultValue: { summary: '100%' }, category: 'Window' },
+      table: { defaultValue: { summary: '90vh' }, category: 'Window' },
     },
     windMaxWidth: {
       control: 'text',
       description: 'Max width of the window panel',
-      table: { defaultValue: { summary: '400px' }, category: 'Window' },
+      table: { defaultValue: { summary: '90vw' }, category: 'Window' },
     },
     windPad: {
       control: 'text',
@@ -215,21 +181,6 @@ A flexible overlay/modal window component.
         category: 'Window',
       },
     },
-    windOverflowX: {
-      control: 'text',
-      description: 'Overflow-x of the window panel',
-      table: { defaultValue: { summary: 'auto' }, category: 'Window' },
-    },
-    windOverflowY: {
-      control: 'text',
-      description: 'Overflow-y of the window panel',
-      table: { defaultValue: { summary: 'auto' }, category: 'Window' },
-    },
-    windResize: {
-      control: 'text',
-      description: 'Resize property of the window panel',
-      table: { defaultValue: { summary: 'none' }, category: 'Window' },
-    },
     showHeader: {
       control: 'boolean',
       description: 'Show the header section',
@@ -239,11 +190,6 @@ A flexible overlay/modal window component.
       control: 'text',
       description: 'Height of the header',
       table: { defaultValue: { summary: 'fit-content' }, category: 'Header' },
-    },
-    headerWidth: {
-      control: 'text',
-      description: 'Width of the header',
-      table: { defaultValue: { summary: '100%' }, category: 'Header' },
     },
     headerGap: {
       control: 'text',
@@ -331,26 +277,6 @@ A flexible overlay/modal window component.
       description: 'Width of the close icon',
       table: { defaultValue: { summary: 'fit-content' }, category: 'Header' },
     },
-    contentHeight: {
-      control: 'text',
-      description: 'Height of the content area',
-      table: { defaultValue: { summary: 'fit-content' }, category: 'Content' },
-    },
-    contentWidth: {
-      control: 'text',
-      description: 'Width of the content area',
-      table: { defaultValue: { summary: '100%' }, category: 'Content' },
-    },
-    contentMaxHeight: {
-      control: 'text',
-      description: 'Max height of the content area',
-      table: { defaultValue: { summary: '100%' }, category: 'Content' },
-    },
-    contentMaxWidth: {
-      control: 'text',
-      description: 'Max width of the content area',
-      table: { defaultValue: { summary: '100%' }, category: 'Content' },
-    },
     contentJustifyC: {
       control: 'text',
       description: 'Justify content in the content area',
@@ -365,6 +291,11 @@ A flexible overlay/modal window component.
       control: 'text',
       description: 'Gap in the content area',
       table: { defaultValue: { summary: '5px' }, category: 'Content' },
+    },
+    contentOverflowY: {
+      control: 'text',
+      description: 'Overflow-y of the content area',
+      table: { defaultValue: { summary: 'auto' }, category: 'Content' },
     },
     gapSize: {
       control: 'text',
@@ -381,26 +312,18 @@ export const Default: StoryFn<OverlayWindowProps> = (args) => html`
     <overlay-window
       .compHeight=${args.compHeight}
       .compWidth=${args.compWidth}
-      .compMaxHeight=${args.compMaxHeight}
-      .compMaxWidth=${args.compMaxWidth}
       .compZIndex=${args.compZIndex}
       .compBackgroundColor=${args.compBackgroundColor}
-      .compBackgroundWidth=${args.compBackgroundWidth}
-      .compBackgroundHeight=${args.compBackgroundHeight}
       .handleBackgroundClick=${args.handleBackgroundClick}
-      .windHeight=${args.windHeight}
-      .windWidth=${args.windWidth}
+      .windMinHeight=${args.windMinHeight}
+      .windMinWidth=${args.windMinWidth}
       .windMaxHeight=${args.windMaxHeight}
       .windMaxWidth=${args.windMaxWidth}
       .windPad=${args.windPad}
       .windColor=${args.windColor}
       .windShadow=${args.windShadow}
-      .windOverflowX=${args.windOverflowX}
-      .windOverflowY=${args.windOverflowY}
-      .windResize=${args.windResize}
       .showHeader=${args.showHeader}
       .headerHeight=${args.headerHeight}
-      .headerWidth=${args.headerWidth}
       .headerGap=${args.headerGap}
       .headerText=${args.headerText}
       .headerTextFontSize=${args.headerTextFontSize}
@@ -417,14 +340,11 @@ export const Default: StoryFn<OverlayWindowProps> = (args) => html`
       .closeHoverColor=${args.closeHoverColor}
       .closeIconHeight=${args.closeIconHeight}
       .closeIconWidth=${args.closeIconWidth}
-      .contentHeight=${args.contentHeight}
-      .contentWidth=${args.contentWidth}
-      .contentMaxHeight=${args.contentMaxHeight}
-      .contentMaxWidth=${args.contentMaxWidth}
       .contentJustifyC=${args.contentJustifyC}
       .contentAlignI=${args.contentAlignI}
       .contentGap=${args.contentGap}
       .gapSize=${args.gapSize}
+      .contentOverflowY=${args.contentOverflowY}
     >
       <div>Overlay window content goes here.</div>
     </overlay-window>
@@ -434,25 +354,17 @@ export const Default: StoryFn<OverlayWindowProps> = (args) => html`
 Default.args = {
   compHeight: '100vh',
   compWidth: '100vw',
-  compMaxHeight: '100vh',
-  compMaxWidth: '100vw',
   compZIndex: '999999990',
   compBackgroundColor: 'rgba(0, 0, 0, 0.3)',
-  compBackgroundWidth: '100%',
-  compBackgroundHeight: '100%',
-  windHeight: 'fit-content',
-  windWidth: '400px',
-  windMaxHeight: '100%',
-  windMaxWidth: '400px',
+  windMinHeight: '1vh',
+  windMinWidth: '1vw',
+  windMaxHeight: '90vh',
+  windMaxWidth: '90vw',
   windPad: '8px',
   windColor: '#f5f5f5',
   windShadow: '0px 2px 5px #d0d0d0',
-  windOverflowX: 'auto',
-  windOverflowY: 'auto',
-  windResize: 'none',
   showHeader: true,
   headerHeight: 'fit-content',
-  headerWidth: '100%',
   headerGap: '5px',
   headerText: 'Overlay Window',
   headerTextFontSize: '24px',
@@ -468,13 +380,10 @@ Default.args = {
   closeHoverColor: '#cfd8dc',
   closeIconHeight: 'fit-content',
   closeIconWidth: 'fit-content',
-  contentHeight: 'fit-content',
-  contentWidth: '100%',
-  contentMaxHeight: '100%',
-  contentMaxWidth: '100%',
   contentJustifyC: 'start',
   contentAlignI: 'center',
   contentGap: '5px',
+  contentOverflowY: 'auto',
   gapSize: '5px',
   handleBackgroundClick: () => console.log('Background clicked'),
   handleCloseClick: () => console.log('Close clicked'),
