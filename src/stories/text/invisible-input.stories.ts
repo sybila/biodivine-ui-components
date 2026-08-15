@@ -29,6 +29,7 @@ type InvisibleInputProps = {
   hoverIconHeight?: string;
   hoverIconWidth?: string;
   value?: string;
+  editable?: boolean;
   error?: boolean;
   placeholder?: string;
   handleSubmit?: (value: string) => void;
@@ -285,6 +286,12 @@ Set 'multiLine' to 'true' to render a textarea html element, otherwise a standar
       description: 'Enable multi-line textarea',
       table: { category: 'Mode', defaultValue: { summary: 'false' } },
     },
+    editable: {
+      control: 'boolean',
+      description:
+        'Determines if the input is editable. If false, pointer-events are disabled and the hover icon is hidden.',
+      table: { category: 'State', defaultValue: { summary: 'true' } },
+    },
 
     // Hover Icon
     hoverIconSrc: {
@@ -373,6 +380,7 @@ export const Default: StoryFn<InvisibleInputProps> = (args) => html`
     .placeholderFontStyle=${args.placeholderFontStyle}
     .placeholderFontFamily=${args.placeholderFontFamily}
     .multiLine=${args.multiLine}
+    .editable=${args.editable}
     .hoverIconSrc=${args.hoverIconSrc}
     .hoverIconHeight=${args.hoverIconHeight}
     .hoverIconWidth=${args.hoverIconWidth}
@@ -383,9 +391,6 @@ export const Default: StoryFn<InvisibleInputProps> = (args) => html`
     .handleChange=${args.handleChange}
     .handleKeyUp=${args.handleKeyUp}
     .handleSubmit=${args.handleSubmit}
-    .handleChange=${args.handleChange}
-    .handleBlur=${args.handleBlur}
-    .handleKeyUp=${args.handleKeyUp}
   ></invisible-input>
 `;
 
@@ -412,6 +417,7 @@ Default.args = {
   placeholderFontStyle: 'normal',
   placeholderFontFamily: "'FiraMono', monospace",
   multiLine: false,
+  editable: true,
   hoverIconSrc: undefined,
   hoverIconHeight: '24px',
   hoverIconWidth: '24px',
