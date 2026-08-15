@@ -1,25 +1,5 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-
-type StyleProperty =
-  | 'compHeight'
-  | 'compWidth'
-  | 'buttonHeight'
-  | 'buttonWidth'
-  | 'buttonColor'
-  | 'buttonHoverColor'
-  | 'buttonActiveColor'
-  | 'buttonShadow'
-  | 'textFontSize'
-  | 'textFontWeight'
-  | 'textFontFamily'
-  | 'textColor'
-  | 'textShadow'
-  | 'textTransform'
-  | 'textAlign'
-  | 'textLineHeight'
-  | 'textContainerHeight'
-  | 'textContainerWidth';
 
 @customElement('text-button')
 export class TextButton extends LitElement {
@@ -51,7 +31,6 @@ export class TextButton extends LitElement {
 
   static styles = css`
     :host {
-      display: inline-block;
       height: var(--text-button-comp-height, 30px);
       width: var(--text-button-comp-width, 60px);
       max-height: var(--text-button-comp-height, 30px);
@@ -62,11 +41,12 @@ export class TextButton extends LitElement {
       display: flex;
       justify-content: center;
       align-items: center;
+      box-sizing: border-box;
       height: var(--text-button-height, 100%);
       width: var(--text-button-width, 100%);
       border: none;
       border-radius: 10px;
-      box-shadow: 0px 2px 5px #d0d0d0;
+      box-shadow: var(--text-button-shadow, 0px 2px 5px #d0d0d0);
       background-color: var(--text-button-bg-color, #eceff1);
       transition: background-color 0.3s;
       cursor: pointer;
@@ -106,16 +86,16 @@ export class TextButton extends LitElement {
   `;
 
   private updateStyleVariable(
-    propertyName: StyleProperty,
+    propertyName: string,
     cssVar: string,
     fallback: string
   ) {
-    const value = this[propertyName] ?? fallback;
+    const value = (this as any)[propertyName] ?? fallback;
     this.style.setProperty(cssVar, value);
   }
 
-  updated(changed: Map<string, StyleProperty>) {
-    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
+  updated(changed: Map<string, any>) {
+    const update = (prop: string, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--text-button-comp-height', '30px');
