@@ -10,7 +10,6 @@ type StyleProperty =
   | 'buttonHoverColor'
   | 'buttonActiveColor'
   | 'buttonShadow'
-  | 'text'
   | 'textContainerHeight'
   | 'textContainerWidth'
   | 'textFontSize'
@@ -52,10 +51,10 @@ export class TextButton extends LitElement {
 
   static styles = css`
     :host {
+      display: block;
+      box-sizing: border-box;
       height: var(--text-button-comp-height, 30px);
       width: var(--text-button-comp-width, 60px);
-      max-height: var(--text-button-comp-height, 30px);
-      max-width: var(--text-button-comp-width, 60px);
     }
 
     button {
