@@ -10,8 +10,7 @@ type StyleProperty =
   | 'buttonHoverColor'
   | 'buttonActiveColor'
   | 'buttonShadow'
-  | 'buttonJustifyContent'
-  | 'buttonAlignItems'
+  | 'text'
   | 'textContainerHeight'
   | 'textContainerWidth'
   | 'textFontSize'
@@ -21,11 +20,7 @@ type StyleProperty =
   | 'textShadow'
   | 'textTransform'
   | 'textAlign'
-  | 'textLineHeight'
-  | 'iconSrc'
-  | 'iconAlt'
-  | 'iconHeight'
-  | 'iconWidth';
+  | 'textLineHeight';
 
 @customElement('text-button')
 export class TextButton extends LitElement {
@@ -121,7 +116,7 @@ export class TextButton extends LitElement {
   }
 
   updated(changed: Map<string, StyleProperty>) {
-    const update = (prop: string, cssVar: string, fallback: string) =>
+    const update = (prop: StyleProperty, cssVar: string, fallback: string) =>
       changed.has(prop) && this.updateStyleVariable(prop, cssVar, fallback);
 
     update('compHeight', '--text-button-comp-height', '30px');
