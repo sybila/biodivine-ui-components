@@ -282,9 +282,9 @@ export class OverlayWindow extends LitElement {
         }}
       >
         <div id="window" part="window">
-          ${this.showHeader
+          ${this.showHeader != false
             ? html`<div id="header" part="header">
-                ${this.showCloseButton
+                ${this.showCloseButton != false
                   ? html`<div id="close-button" part="close-button" @click=${
                       this.handleCloseClick
                     }>
