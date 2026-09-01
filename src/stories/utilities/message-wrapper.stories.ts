@@ -34,6 +34,8 @@ type MessageWrapperProps = {
   contentHeight?: string;
   contentWidth?: string;
   contentZindex?: string;
+  floodedQueueLength?: number;
+  maxQueueSize?: number;
 };
 
 const meta: Meta<MessageWrapperProps> = {
@@ -97,21 +99,34 @@ Use the global \`Message\` handler to display messages anywhere in your app:
 
 \`\`\`ts
 // Show an info message
-Message.showInfo('Your info message', 3000);
+Message.showInfo('Your info message');
+
+// Show an info message with a custom duration of 5 seconds
+Message.showInfo('Your info message', 5000);
+
+// Show an info message with a duration of 5 seconds and flooding duration of 2 seconds
+Message.showInfo('Your info message', 5000, 2000);
 
 // Show a success message
-Message.showSuccess('Success!', 3000);
+Message.showSuccess('Success!');
+
+// Show a success message with a duration of 2 seconds
+Message.showSuccess('Success!', 2000);
 
 // Show an error message
-Message.showError('Something went wrong', 3000);
+Message.showError('Something went wrong');
+
+// Show an error message with both duration and flooding duration of 5 seconds
+Message.showError('Something went wrong', 5000, 5000);
 \`\`\`
 
 Message handler function type:
 \`\`\`ts
-Message.showFunction(message: string, duration?: number)\`
+Message.showFunction(message: string, duration?: number, floodedDuration?: number)\`
 \`\`\`
 - \`message\`: The text to display.
 - \`duration\` (optional): How long to show the message (in milliseconds, default is 3000).
+- \`floodedDuration\` (optional): How long to show the message if message queue exceeds the flooded limit (in milliseconds, default is 1000 for info and success messages, 3000 for errors).
 
 Just call one of these functions and the message will appear in the overlay.
         `,
@@ -272,6 +287,31 @@ Just call one of these functions and the message will appear in the overlay.
       description: 'Z-index of the content area',
       table: { category: 'Content', defaultValue: { summary: '1' } },
     },
+
+    // Message Queue
+    floodedQueueLength: {
+      control: 'number',
+      description:
+        'Queue length at which messages switch to "flooded" display duration.\n\n' +
+        'When the number of pending messages in the queue reaches or exceeds this value, the ' +
+        'component enters "flooded" mode. In this mode each message is shown for the shorter of ' +
+        'its normal duration and its floodedDuration, and the gap between messages is reduced ' +
+        'from 400ms to 200ms. This is designed for bursts of rapid notifications (e.g. multiple ' +
+        "errors fired at once) so the queue drains quickly and messages don't pile up.\n\n" +
+        'Set to 0 to effectively always flood, or a very high value to effectively never flood.',
+      table: { category: 'Message Queue', defaultValue: { summary: '3' } },
+    },
+    maxQueueSize: {
+      control: 'number',
+      description:
+        'Maximum number of queued messages; excess messages are trimmed (errors are kept first).\n\n' +
+        'This caps how many messages can wait in the queue before new ones are discarded. When the ' +
+        'queue exceeds this size, non-error messages are dropped first, oldest first, so that newer ' +
+        'messages can still be shown. Only if the queue is still over the limit are error messages ' +
+        'dropped. This prevents a runaway flood of notifications from overwhelming the UI.\n\n' +
+        'Default is 10.',
+      table: { category: 'Message Queue', defaultValue: { summary: '10' } },
+    },
   },
 };
 
@@ -310,6 +350,8 @@ export const Default: StoryFn<MessageWrapperProps> = (args) => html`
       .contentHeight=${args.contentHeight}
       .contentWidth=${args.contentWidth}
       .contentZindex=${args.contentZindex}
+      .floodedQueueLength=${args.floodedQueueLength}
+      .maxQueueSize=${args.maxQueueSize}
     >
       <div
         style="
@@ -374,4 +416,6 @@ Default.args = {
   contentHeight: '100%',
   contentWidth: '100%',
   contentZindex: '1',
+  floodedQueueLength: 3,
+  maxQueueSize: 10,
 };
