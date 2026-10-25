@@ -41,7 +41,7 @@ export class TextIconButton extends LitElement {
   @property({ type: String }) declare buttonJustifyContent?: string;
   @property({ type: String }) declare buttonAlignItems?: string;
 
-  @property({ type: Function }) declare handleClick?: () => void;
+  @property({ type: Function }) declare handleClick?: (e: MouseEvent) => void;
 
   @property({ type: String }) declare text?: string;
   @property({ type: String }) declare textContainerHeight?: string;

@@ -14,7 +14,7 @@ type TextIconButtonProps = {
   buttonShadow?: string;
   buttonJustifyContent?: string;
   buttonAlignItems?: string;
-  handleClick?: () => void;
+  handleClick?: (e: MouseEvent) => void;
 
   text?: string;
   textContainerHeight?: string;
@@ -146,7 +146,7 @@ A button with customizable text and icon content.
     handleClick: {
       action: 'clicked',
       description: 'Click event handler',
-      table: { type: { summary: '() => void' }, category: 'Events' },
+      table: { type: { summary: '(event: MouseEvent) => void' }, category: 'Events' },
       control: false,
     },
 
