@@ -146,7 +146,10 @@ A button with customizable text and icon content.
     handleClick: {
       action: 'clicked',
       description: 'Click event handler',
-      table: { type: { summary: '(event: MouseEvent) => void' }, category: 'Events' },
+      table: {
+        type: { summary: '(event: MouseEvent) => void' },
+        category: 'Events',
+      },
       control: false,
     },
 
